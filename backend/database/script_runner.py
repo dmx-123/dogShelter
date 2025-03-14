@@ -599,10 +599,9 @@ def expense_analysis():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     query = """
-                SELECT  mv.vendor_name, COALESCE(SUM(e.amount), 0) AS total_expense
-                FROM MicrochipVendor mv
-                LEFT JOIN Expense e ON mv.vendor_name = e.vendor_name
-                GROUP BY mv.vendor_name
+                SELECT e.vendor_name, COALESCE(SUM(e.amount), 0) AS total_expense
+                FROM Expense e ON e.vendor_name = e.vendor_name
+                GROUP BY e.vendor_name
                 ORDER BY total_expense DESC;
             """
     cursor.execute(query)
