@@ -1,6 +1,6 @@
 from flask import Flask
 from dotenv import load_dotenv
-from data.api import user_blueprint, dog_blueprint, util_blueprint
+from data.api import user_blueprint, dog_blueprint, util_blueprint, report_blueprint
 import os
 
 # Load config
@@ -19,6 +19,7 @@ app = Flask(__name__)
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(dog_blueprint, url_prefix='/dog')
 app.register_blueprint(util_blueprint, url_prefix='/util')
+app.register_blueprint(report_blueprint, url_prefix='/report')
 
 if __name__ == "__main__":
     app.run(port=8080, debug=True)

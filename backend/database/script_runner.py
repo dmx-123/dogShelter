@@ -421,7 +421,7 @@ def animal_control_surrender_drilldown_report(month: str):
     conn.close()
     return res
  
-def sixty_more_drilldown_report(month: str):
+def sixty_days_or_more_drilldown_report(month: str):
     """
     Retrieve drill down report for dogs which in shelter 60+ days adopted in the month (YYYY-mm).
     Returns a list of dictionaries containing report records.

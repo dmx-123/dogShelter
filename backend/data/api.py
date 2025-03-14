@@ -53,7 +53,7 @@ dog_blueprint = Blueprint('dog', __name__)
 @token_required
 def view_dogs():
     dogs = db.get_dogs()
-    return jsonify({ "data": dogs}), 200
+    return jsonify({"data": dogs}), 200
 
 @dog_blueprint.route('/availability', methods=['GET'])
 @token_required
@@ -65,21 +65,117 @@ def view_shelter_availability():
 
 
 util_blueprint = Blueprint('util', __name__)
-@token_required
+
 @util_blueprint.route('/breedList', methods=['GET'])
 @token_required
 def get_breeds_list():
     breeds = db.get_breeds()
-    return jsonify({ "data": breeds}), 200
+    return jsonify({"data": breeds}), 200
 
 @util_blueprint.route('/expenseCategoryList', methods=['GET'])
 @token_required
 def get_categories_list():
     categories = db.get_expense_categories()
-    return jsonify({ "data": categories}), 200
+    return jsonify({"data": categories}), 200
 
 @util_blueprint.route('/microchipVendorList', methods=['GET'])
 @token_required
 def get_vendors_list():
     vendors = db.get_microchip_vendors()
-    return jsonify({ "data": vendors}), 200
+    return jsonify({"data": vendors}), 200
+
+
+
+report_blueprint = Blueprint('report', __name__)
+
+@report_blueprint.route('/volunteerLookup', methods=['POST'])
+@token_required
+def volunteer_lookkup():
+    data = request.json
+    input = data.get('input')
+    
+    res = db.volunteer_lookup( input)
+    return jsonify({ "data": res}), 200
+
+@report_blueprint.route('/volunteerBirthdayReport', methods=['POST'])
+@token_required
+def volunteer_birthday_report():
+    data = request.json
+    month = int(data.get('month'))
+    year = int(data.get('year'))
+    if (month < 1 or month > 12):
+        return jsonify({"error": "Invalid month"}), 400
+    if (year < 1900 or year > 2100):    
+        return jsonify({"error": "Invalid year"}), 400
+    
+    res = db.volunteer_birthday_report(month, year)
+    return jsonify({"data": res}), 200
+
+@report_blueprint.route('/animalControlReport', methods=['GET'])
+@token_required
+def animal_control_report():
+    res = db.animal_control_report()
+    return jsonify({"data": res}), 200
+
+@report_blueprint.route('/animalControlReport/animalControlSurrender', methods=['POST'])
+@token_required
+def animal_control_surrender_report():
+    data = request.json
+    month = int(data.get('month'))
+    year = int(data.get('year'))
+    if not year or not month:
+        return jsonify({"error": "Both year and month is required"}), 400
+    
+    if (month < 1 or month > 12):
+        return jsonify({"error": "Invalid month"}), 400
+    if (year < 1900 or year > 2100):    
+        return jsonify({"error": "Invalid year"}), 400
+    
+    res = db.animal_control_surrender_drilldown_report(f"{year}-{int(month):02d}")
+    return jsonify({"data": res}), 200
+
+@report_blueprint.route('/animalControlReport/sixtyDaysOrMore', methods=['POST'])
+@token_required
+def sixty_days_or_more_drilldown_report():
+    data = request.json
+    month = int(data.get('month'))
+    year = int(data.get('year'))
+    if not year or not month:
+        return jsonify({"error": "Both year and month is required"}), 400
+    
+    if (month < 1 or month > 12):
+        return jsonify({"error": "Invalid month"}), 400
+    if (year < 1900 or year > 2100):    
+        return jsonify({"error": "Invalid year"}), 400
+    
+    res = db.sixty_days_or_more_drilldown_report(f"{year}-{int(month):02d}")
+    return jsonify({"data": res}), 200
+
+@report_blueprint.route('/animalControlReport/expense', methods=['POST'])
+@token_required
+def expense_drilldown_report():
+    data = request.json
+    month = int(data.get('month'))
+    year = int(data.get('year'))
+    if not year or not month:
+        return jsonify({"error": "Both year and month is required"}), 400
+    
+    if (month < 1 or month > 12):
+        return jsonify({"error": "Invalid month"}), 400
+    if (year < 1900 or year > 2100):    
+        return jsonify({"error": "Invalid year"}), 400
+    
+    res = db.total_expense_drilldown_report(f"{year}-{int(month):02d}")
+    return jsonify({"data": res}), 200
+
+@report_blueprint.route('/monthlyAdoptionReport', methods=['GET'])
+@token_required
+def monthly_adoption_report():
+    res = db.monthly_adoption_report()
+    return jsonify({"data": res}), 200
+
+@report_blueprint.route('/expenseAnalysis', methods=['GET'])
+@token_required
+def expense_analysis():
+    res = db.expense_analysis()
+    return jsonify({"data": res}), 200
