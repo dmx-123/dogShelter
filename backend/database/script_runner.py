@@ -274,6 +274,41 @@ def expense_exist(id: str, vendor_name: str, date: date):
     conn.close()
     return res['exist'] > 1
 
+def get_expense_by_category(id: str):
+    """
+    Retrieve expenses by category
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                SELECT category_name, SUM(amount) AS expense
+                FROM Expense
+                WHERE dogID = %s
+                GROUP BY category_name;
+            """
+    cursor.execute(query, (id, ))
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return res
+
+def get_all_expense(id: str):
+    """
+    Retrieve all expenses
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                SELECT SUM(amount) AS expense
+                FROM Expense
+                WHERE dogID = %s;
+            """
+    cursor.execute(query, (id, ))
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return res
+
 def add_expense(id: str, vendor_name: str, date: date, amount: float, category_name: str):
     """
     Add an expense record to the Expense table.
@@ -409,7 +444,6 @@ def animal_control_surrender_drilldown_report(month: str):
                     '/')  FROM DogBreed db WHERE db.dogID = d.dogID)  AS breed_label
                 FROM Dog d
                 LEFT JOIN Microchip m ON m.dogID = d.dogID
-                LEFT JOIN ApprovedApplication a ON a.dogID = d.dogID
                 WHERE 
                     d.surrendered_by_animal_control = TRUE
                     AND DATE_FORMAT(d.surrender_date, '%Y-%m') = %s
