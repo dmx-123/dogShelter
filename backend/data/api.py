@@ -62,7 +62,90 @@ def view_shelter_availability():
     space = int(os.getenv('SPACE'))
     return jsonify({"data": {"availability": space - count}}), 200
 
+@dog_blueprint.route('/<int:dogID>', methods=['GET'])
+@token_required
+def view_dog(dogID):
+    dog = db.get_dog(dogID)
+    expenses = db.get_expense_by_category(dogID)
+    return jsonify({"data": {"dog": dog, "expense": expenses}}), 200
 
+@dog_blueprint.route('/<int:dogID>', methods=['POST'])
+@token_required
+def edit_dogs(dogID):
+    data = request.json
+    
+    sex = data.get('sex')
+    if (sex != 'Unknown' or sex != 'Female' or sex != 'Male'):
+        return jsonify({"error": "Invalid sex"}), 400
+    alteration_status = data.get('alteration_status')
+    db.update_dog(id=dogID, sex=sex, alteration_status=alteration_status)
+    
+    microchipID = data.get('microchipID')
+    if microchipID:
+        vendor = data.get('vendor')
+        if not vendor:
+            return jsonify({"error": "Vendor required"}), 400
+        db.add_dog_microchip(dogID, microchipID, vendor)
+        
+    breeds = data.get('breeds')
+    if breeds:
+        db.delete_dog_breeds(dogID)
+        db.add_dog_breeds(dogID, breeds)
+        
+    return jsonify(), 200
+
+@dog_blueprint.route('', methods=['POST'])
+@token_required
+def add_dogs():
+    data = request.json
+    
+    name = data.get('name')
+    sex = data.get('sex')
+    age = data.get('age')
+    alteration_status = data.get('alteration_status')
+    description = data.get('description')
+    surrender_date = data.get('surrender_date')
+    surrenderer_phone = data.get('surrenderer_phone')
+    surrenderer_by_animal_control = data.get('surrenderer_by_animal_control')
+    microchipID = data.get('microchipID')
+    mircrochip_vendor = data.get('mircrochip_vendor')
+    breeds = data.get('breeds')
+    email = data.get('email')
+    
+    if microchipID:
+        if not mircrochip_vendor:
+            return jsonify({"error": "Vendor required"}), 400
+        if db.microchip_exist(microchipID):
+            return jsonify({"error": "Microchip already exist"}), 400
+        
+    if name == 'Uga' and breeds.contains('Bulldog'):
+        return jsonify({"error": "Bulldog named Uga could not be accepted to shelter."}), 400
+    
+    if surrenderer_by_animal_control == True and not surrenderer_phone:
+        return jsonify({"error": "Surrenderer phone is required if surrendered by animal control"}), 400
+    
+    new_dogID = db.add_dog(name, sex, description, alteration_status, age, surrender_date, surrenderer_phone, surrenderer_by_animal_control, email)
+    db.add_dog_microchip(new_dogID, microchipID, mircrochip_vendor)
+    db.add_dog_breeds(new_dogID, breeds)
+        
+    return jsonify(), 200
+
+@dog_blueprint.route('/addExpense', methods=['POST'])
+@token_required
+def add_expense():
+    data = request.json
+    dogID = data.get('dogID')
+    vendor_name = data.get('vendor_name')
+    category_name = data.get('category_name')
+    amount = data.get('amount')
+    date = data.get('date')
+    
+    check = db.expense_exist(dogID, vendor_name, date)
+    if check:
+        return jsonify({"error": "Expense already exist"}), 400
+    else:
+        db.add_expense(dogID, vendor_name, date, amount, category_name)
+    return jsonify(), 200
 
 util_blueprint = Blueprint('util', __name__)
 
@@ -83,8 +166,6 @@ def get_categories_list():
 def get_vendors_list():
     vendors = db.get_microchip_vendors()
     return jsonify({"data": vendors}), 200
-
-
 
 report_blueprint = Blueprint('report', __name__)
 
