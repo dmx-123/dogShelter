@@ -1,0 +1,181 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Dog } from '../model/Dog';
+import { DogService } from '../services/dog-service.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-dog-details',
+  templateUrl: './dog-details.component.html',
+  styleUrl: './dog-details.component.css'
+})
+export class DogDetailComponent implements OnInit {
+  isAdmin: boolean = false;
+  age!: number;
+  dogForm: FormGroup;
+  dog!: Dog;
+  dogID: string | null = null;
+  vendorList: string[] = [];
+  breedsList: string[] = [];
+  isMixedOrUnknownSelected: boolean = false;
+  selectedMixed: boolean = false;
+  selectedUnknown: boolean = false;
+
+
+  constructor(private fb: FormBuilder, private service: DogService, private route: ActivatedRoute, private router: Router
+  ) {
+    this.dogForm = this.fb.group({
+      dogID: [{ value: null, disabled: true }], // Auto-increment field, not editable
+      name: [{ value: '', disabled: true }],
+      sex: ['Unknown', Validators.required],
+      description: [{ value: '', disabled: true }],
+      alteration_status: [false, Validators.required],
+      age: [null, [Validators.required]],
+      surrender_date: [null, Validators.required],
+      surrenderer_phone: ['', Validators.pattern(/^\d{0,15}$/)], // Allows up to 15 digits
+      surrendered_by_animal_control: [false, Validators.required],
+      add_by: ['', Validators.required]
+    });
+  }
+
+  ngOnInit(): void {
+
+    this.dogID = this.route.snapshot.paramMap.get('dogID');
+    this.isAdmin = JSON.parse(localStorage.getItem('isAdmin') || 'false');
+    this.age = JSON.parse(localStorage.getItem('userAge') || '0');
+
+    this.dogForm = this.fb.group({
+      dogID: [{ value: null, disabled: true }],
+      name: [{ value: '', disabled: true }],
+      sex: [{ value: 'Unknown', disabled: true }],
+      description: [{ value: '', disabled: true }],
+      alteration_status: [{ value: false, disabled: true }],
+      age: [{ value: '', disabled: true }],
+      microchipID: [{ value: '', disabled: true }],
+      vendor_name: [{ value: '', disabled: true }],
+      breeds: [{ value: [], disabled: true }],
+      surrender_date: [{ value: '', disabled: true }],
+      surrenderer_phone: [{ value: '', disabled: true }],
+      surrendered_by_animal_control: [{ value: false, disabled: true }],
+    });
+
+    this.getBreedsList();
+
+    if (this.dogID) {
+      this.service.getDog(this.dogID).subscribe({
+        next: dog => {
+          if (dog) {
+            const breedsArray = Array.isArray(dog.breeds) ? dog.breeds : dog.breeds.split('/'); // Ensure array format
+            this.validateBreedsSelection(breedsArray);
+
+            this.dogForm.patchValue({
+              ...dog,
+              breeds: breedsArray
+            });
+            this.setFieldAccessibility(dog);
+          }
+        },
+        error: err => console.error('Failed to fetch dog details', err)
+      });
+    }
+
+    this.dogForm.get('microchipID')?.valueChanges.subscribe(value => {
+      if (value) {
+        this.getVendorsList();
+        this.dogForm.get('vendor_name')?.enable();
+      } else {
+        this.dogForm.get('vendor_name')?.disable();
+      }
+    });
+
+  }
+
+  get sexControl() {
+    return this.dogForm.get('sex');
+  }
+
+  get breedControl() {
+    return this.dogForm.get('breeds');
+  }
+
+  get alterationStatusControl() {
+    return this.dogForm.get('alteration_status');
+  }
+
+  get microchipIDControl() {
+    return this.dogForm.get('microchipID');
+  }
+
+  setFieldAccessibility(dog: Dog): void {
+    if (dog.sex === 'Unknown') {
+      this.dogForm.get('sex')?.enable();
+    }
+    if (!dog.alteration_status) {
+      this.dogForm.get('alteration_status')?.enable();
+    }
+    if (this.age > 18 && !dog.microchipID) {
+      this.dogForm.get('microchipID')?.enable();
+    }
+    if (['Unknown', 'Mixed'].includes(dog.breeds)) {
+      this.dogForm.get('breeds')?.enable();
+    }
+  }
+
+  onBreedsChange(event: any): void {
+    const selectedBreeds: string[] = event.value;
+    this.validateBreedsSelection(selectedBreeds);
+  }
+
+  validateBreedsSelection(selectedBreeds: string[]): void {
+    const hasMixed = selectedBreeds.includes('Mixed');
+    const hasUnknown = selectedBreeds.includes('Unknown');
+
+    if (hasMixed && hasUnknown) {
+      selectedBreeds = [hasMixed ? 'Mixed' : 'Unknown']; 
+    }
+  
+    if (hasMixed || hasUnknown) {
+      selectedBreeds = [hasMixed ? 'Mixed' : 'Unknown']; 
+    }
+    this.dogForm.get('breeds')?.setValue(selectedBreeds, { emitEvent: false });
+
+    // If "Mixed" or "Unknown" is selected, disable other breeds
+    this.isMixedOrUnknownSelected = hasMixed || hasUnknown;
+
+    this.selectedMixed = hasMixed;
+    this.selectedUnknown = hasUnknown;
+  }
+  getVendorsList(): void {
+    this.service.getVendorsList().subscribe({
+      next: (data: string[]) => {
+        this.vendorList = data;
+      },
+      error: (err) => console.error('Failed to fetch vendors', err)
+    });
+  }
+
+  getBreedsList(): void {
+    this.service.getBreedList().subscribe(breeds => {
+      this.breedsList = breeds;
+    });
+  }
+
+  addAdoption(): void {
+    this.router.navigate(['/add-adoption-application', { dogID: this.dogID }]);
+  }
+
+  addExpense(): void {
+    this.router.navigate(['/add-expense', { dogID: this.dog.dogID }]);
+  }
+
+  onSubmit(): void {
+    if (this.dogForm.valid) {
+      console.log('Form Data:', this.dogForm.value);
+    }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/dog-dashboard']);
+  }
+
+}

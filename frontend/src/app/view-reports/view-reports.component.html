@@ -1,0 +1,25 @@
+<app-header></app-header>
+
+<div class="report-container">
+    <h2>Select a Report</h2>
+
+    <button mat-raised-button (click)="navigateToReport('/animal-control-report')">
+        Animal Control Report and Drill Down
+    </button>
+
+    <button mat-raised-button (click)="navigateToReport('/monthly-adoption-report')">
+        Monthly Adoption Report
+    </button>
+
+    <button mat-raised-button (click)="navigateToReport('/expense-analysis')">
+        Expense Analysis
+    </button>
+
+    <button mat-raised-button (click)="navigateToReport('/volunteer-lookup')">
+        Volunteer Lookup
+    </button>
+
+    <button mat-raised-button (click)="navigateToReport('/volunteer-birthdays')">
+        Volunteer Birthdays Report
+    </button>
+</div>

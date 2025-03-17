@@ -1,0 +1,91 @@
+<form [formGroup]="dogForm" (ngSubmit)="onSubmit()">
+    <div>
+        <span class="page-name">Dog Details</span>
+        <hr>
+        <button class="button" class="button" mat-raised-button aria-label="Add Adoption" (click)="addAdoption()"
+            *ngIf="this.isAdmin && alterationStatusControl?.value && microchipIDControl?.value">
+            <mat-icon>add</mat-icon>Add Adoption
+        </button>
+    </div>
+    <div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-4 field">
+                <mat-label>Dog ID</mat-label>
+                <input matInput formControlName="dogID" readonly>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-sm-4 field">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" readonly>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-2 field">
+                <mat-label>Sex</mat-label>
+                <mat-select formControlName="sex">
+                    <mat-option value="Male" class="option">Male</mat-option>
+                    <mat-option value="Female" class="option">Female</mat-option>
+                    <mat-option value="Unknown" class="option">Unknown</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="col-sm-2 field">
+                <mat-label>Age</mat-label>
+                <input matInput type="number" formControlName="age" readonly>
+            </mat-form-field>
+            <mat-checkbox color="primary" formControlName="alteration_status" class="col-sm-4">
+                Alteration Status
+            </mat-checkbox>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill">
+                <mat-label>Breeds</mat-label>
+                <mat-select formControlName="breeds" multiple (selectionChange)="onBreedsChange($event)">
+                    <mat-option *ngFor="let breed of breedsList" [value]="breed" [disabled]="
+                      (isMixedOrUnknownSelected && !['Mixed', 'Unknown'].includes(breed)) || 
+                      (selectedMixed && breed === 'Unknown') || 
+                      (selectedUnknown && breed === 'Mixed')">
+                        {{ breed }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-8 field">
+                <mat-label>Microchip ID</mat-label>
+                <input matInput formControlName="microchipID">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-sm-4 field" *ngIf="microchipIDControl?.value">
+                <mat-label>Vendor Name</mat-label>
+                <mat-select formControlName="vendor_name">
+                    <mat-option *ngFor="let vendor of vendorList" [value]="vendor" class="option">
+                        {{ vendor }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-8 field">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" readonly></textarea>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-6 field">
+                <mat-label>Surrender Date</mat-label>
+                <input matInput formControlName="surrender_date" readonly>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-sm-4 field" *ngIf="this.isAdmin">
+                <mat-label>Surrenderer Phone</mat-label>
+                <input matInput formControlName="surrenderer_phone" readonly>
+            </mat-form-field>
+            <mat-checkbox formControlName="surrendered_by_animal_control">
+                Surrendered by Animal Control
+            </mat-checkbox>
+        </div>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!dogForm.valid">
+        <mat-icon>check</mat-icon> Save</button>
+    <button mat-raised-button color="primary" type="button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon> Go Back
+    </button>
+</form>
