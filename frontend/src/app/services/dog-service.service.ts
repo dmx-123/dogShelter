@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { Dog } from '../model/Dog';
 import { DogDashboard } from '../model/DogDashboard';
+import { DogDetails } from '../model/DogDetails';
+import { Expense } from '../model/Expense';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,14 @@ import { DogDashboard } from '../model/DogDashboard';
 export class DogService {
 
   private dogs: Dog[] = [
-    new Dog(1, 'Rex', 'Male', 'Very active and friendly.', true, 5, '1234567890', new Date(), '555-1234', false, 'John Doe', 'Vendor A', 'German Shepherd'),
-    new Dog(2, 'Bella', 'Female', 'Calm and loving.', false, 3, null, new Date(), '555-5678', true, 'Jane Doe', null, 'Unknown')
+    new Dog(1, 'Buddy', 'Male', 'Friendly Golden Retriever', true, 3, new Date('2024-02-15'), '555-1234', false, 'AdminUser',null,null,'Golden Retriever'),
+    new Dog(2, 'Bella', 'Female', 'Calm Labrador Retriever', false, 4.5, new Date('2024-01-10'), '123456897', true, 'RescueCenter',null,null,'Mixed')
+  ];
+
+  private expenses: Expense[] = [
+    new Expense(1, new Date('2024-03-10'), 'Pet Food Store', 50, 'Food'),
+    new Expense(1, new Date('2024-03-12'), 'Vet Clinic', 120, 'Vet'),
+    new Expense(2, new Date('2024-03-15'), 'Trainer', 80, 'Training')
   ];
 
   private dogDashboards: DogDashboard[] = this.dogs.map(dog => new DogDashboard(
@@ -37,16 +45,20 @@ export class DogService {
   //   return this.http.get<DogDashboard[]>(`${this.apiUrl}/list`);
   // }
 
-  // getDog(dogID: string): Observable<Dog> {
-  //   return this.http.get<Dog>(`${this.apiUrl}/dog=${dogID}`);
+  // getDog(dogID: string): Observable<DogDetails> {
+  //   return this.http.get<DogDetails>(`${this.apiUrl}/dog=${dogID}`);
   // }
   getDogs(): Dog[] {
     return this.dogs;
   }
   
-  getDog(dogID: string): Observable<Dog | undefined> {
-    const dog = this.dogs.find(d => d.dogID === Number(dogID));
-    return of(dog);
+  getDog(dogID: number): Observable<DogDetails | undefined> {
+    const dog = this.dogs.find(d => d.dogID === dogID);
+    if (!dog) {
+      return of(undefined); // If dog not found, return undefined
+    }
+    const dogExpenses = this.expenses.filter(exp => exp.dogID === dogID);
+    return of(new DogDetails(dog, dogExpenses));
   }
   getVendorsList(): Observable<string[]> {
     return of(['Vendor A', 'Vendor B', 'Vendor C']);

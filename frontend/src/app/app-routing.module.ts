@@ -12,6 +12,7 @@ import { VolunteerBirthdaysComponent } from './volunteer-birthdays/volunteer-bir
 import { VolunteerLookupComponent } from './volunteer-lookup/volunteer-lookup.component';
 import { DogDashboardComponent } from './dog-dashboard/dog-dashboard.component';
 import { DogDetailComponent } from './dog-detaila/dog-details.component';
+import { AddExpenseComponent } from './add-expense/add-expense.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent  },
@@ -19,6 +20,7 @@ const routes: Routes = [
   
   { path: 'dog-dashboard', component: DogDashboardComponent },
   { path: 'dog-details/:dogID', component: DogDetailComponent },
+  { path: 'add-expense/:dogID', component: AddExpenseComponent },
   { path: 'view-reports', component: ViewReportsComponent },
   { path: 'add-dog', component: AddDogComponent },
   { path: 'add-adoption-application', component: AddAdoptionApplicationComponent },

@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 
 import { MessagesModule } from 'primeng/messages';
@@ -63,6 +64,7 @@ import { DogDetailComponent } from './dog-detaila/dog-details.component';
     MatButtonModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatTabsModule,
     MatTableModule,
     ReactiveFormsModule,
     MessagesModule,

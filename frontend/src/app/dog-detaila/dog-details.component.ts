@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Dog } from '../model/Dog';
 import { DogService } from '../services/dog-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DogDetails } from '../model/DogDetails';
+import { Expense } from '../model/Expense';
 
 @Component({
   selector: 'app-dog-details',
@@ -13,8 +15,11 @@ export class DogDetailComponent implements OnInit {
   isAdmin: boolean = false;
   age!: number;
   dogForm: FormGroup;
+  displayedColumns: string[] = ['category_name', 'amount'];
+  dogDetails?:DogDetails;
   dog!: Dog;
-  dogID: string | null = null;
+  expenses:Expense[] = [];
+  dogID: number | null = null;
   vendorList: string[] = [];
   breedsList: string[] = [];
   isMixedOrUnknownSelected: boolean = false;
@@ -40,7 +45,7 @@ export class DogDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.dogID = this.route.snapshot.paramMap.get('dogID');
+    this.dogID = Number(this.route.snapshot.paramMap.get('dogID'));
     this.isAdmin = JSON.parse(localStorage.getItem('isAdmin') || 'false');
     this.age = JSON.parse(localStorage.getItem('userAge') || '0');
 
@@ -63,16 +68,19 @@ export class DogDetailComponent implements OnInit {
 
     if (this.dogID) {
       this.service.getDog(this.dogID).subscribe({
-        next: dog => {
-          if (dog) {
-            const breedsArray = Array.isArray(dog.breeds) ? dog.breeds : dog.breeds.split('/'); // Ensure array format
+        next: data => {
+          if (data) {
+            this.dogDetails = data;
+            this.dog = data.dog;
+            this.expenses = data.expenses;
+            const breedsArray = Array.isArray(this.dog.breeds) ? this.dog.breeds : this.dog.breeds.split('/'); // Ensure array format
             this.validateBreedsSelection(breedsArray);
 
             this.dogForm.patchValue({
-              ...dog,
+              ...this.dog,
               breeds: breedsArray
             });
-            this.setFieldAccessibility(dog);
+            this.setFieldAccessibility(this.dog);
           }
         },
         error: err => console.error('Failed to fetch dog details', err)
@@ -82,10 +90,13 @@ export class DogDetailComponent implements OnInit {
     this.dogForm.get('microchipID')?.valueChanges.subscribe(value => {
       if (value) {
         this.getVendorsList();
-        this.dogForm.get('vendor_name')?.enable();
+        this.vendorNameControl?.enable();
+        this.vendorNameControl?.setValidators([Validators.required]);
       } else {
-        this.dogForm.get('vendor_name')?.disable();
+        this.vendorNameControl?.disable();
+        this.vendorNameControl?.clearValidators();
       }
+      this.vendorNameControl?.updateValueAndValidity();
     });
 
   }
@@ -106,18 +117,23 @@ export class DogDetailComponent implements OnInit {
     return this.dogForm.get('microchipID');
   }
 
+  get vendorNameControl(){
+    return this.dogForm.get('vendor_name');
+
+  }
+
   setFieldAccessibility(dog: Dog): void {
     if (dog.sex === 'Unknown') {
-      this.dogForm.get('sex')?.enable();
+      this.sexControl?.enable();
     }
     if (!dog.alteration_status) {
-      this.dogForm.get('alteration_status')?.enable();
+      this.alterationStatusControl?.enable();
     }
     if (this.age > 18 && !dog.microchipID) {
       this.dogForm.get('microchipID')?.enable();
     }
     if (['Unknown', 'Mixed'].includes(dog.breeds)) {
-      this.dogForm.get('breeds')?.enable();
+      this.breedControl?.enable();
     }
   }
 
@@ -160,12 +176,16 @@ export class DogDetailComponent implements OnInit {
     });
   }
 
+  getTotalExpenses(): number {
+    return this.expenses.map(t => t.amount).reduce((acc, value) => acc + value, 0);
+  }
+
   addAdoption(): void {
     this.router.navigate(['/add-adoption-application', { dogID: this.dogID }]);
   }
 
   addExpense(): void {
-    this.router.navigate(['/add-expense', { dogID: this.dog.dogID }]);
+    this.router.navigate(['/add-expense', this.dogID ]);
   }
 
   onSubmit(): void {

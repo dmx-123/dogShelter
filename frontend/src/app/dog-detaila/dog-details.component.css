@@ -17,4 +17,11 @@
 .option {
     min-height: 30px;
     font-size: smaller;
-  }
+}
+
+tr.mat-mdc-footer-row td {
+    font-weight: bold;
+}
+.buttoncontainer{
+    text-align: center;
+}
