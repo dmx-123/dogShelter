@@ -324,7 +324,6 @@ def add_expense(id: str, vendor_name: str, date: date, amount: float, category_n
     conn.close()
 
 # -------------------------------- Adoption Related ---------------------------------------
-## todo: add more functions here
 ## from "Search Eligible Adopter" to "Approve/Reject Adoption Application" in the phase-2 report
 def search_eligible_adopter(last_name:str):
     """

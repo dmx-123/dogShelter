@@ -263,7 +263,6 @@ def expense_analysis():
 
 
 # Adding functionalities about adoption
-# todo: Add more functions here
 # range from "Search Eligible Adopter" to "Approve/Reject Adoption Application"
 adoption_blueprint = Blueprint('adoption', __name__)
 
