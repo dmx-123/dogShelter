@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AddAdoptionApplicationComponent } from './add-adoption-application/add-adoption-application.component';
 import { AddDogComponent } from './add-dog/add-dog.component';
-import { AdoptionApplicationReviewComponent } from './adoption-application-review/adoption-application-review.component';
 import { AnimalControlReportComponent } from './animal-control-report/animal-control-report.component';
 import { ExpenseAnalysisComponent } from './expense-analysis/expense-analysis.component';
 import { MonthlyAdoptionReportComponent } from './monthly-adoption-report/monthly-adoption-report.component';
@@ -13,6 +12,7 @@ import { VolunteerLookupComponent } from './volunteer-lookup/volunteer-lookup.co
 import { DogDashboardComponent } from './dog-dashboard/dog-dashboard.component';
 import { DogDetailComponent } from './dog-detaila/dog-details.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
+import { AdoptionApplicationReviewComponent } from './adoption-application-review/adoption-application-review.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent  },

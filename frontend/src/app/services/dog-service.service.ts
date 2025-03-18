@@ -5,6 +5,8 @@ import { Dog } from '../model/Dog';
 import { DogDashboard } from '../model/DogDashboard';
 import { DogDetails } from '../model/DogDetails';
 import { Expense } from '../model/Expense';
+import { AdoptionApplication } from '../model/AdoptionApplication';
+import { ApprovedApplication } from '../model/ApprovedApplication';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +71,7 @@ export class DogService {
     const dogExpenses = this.expenses.filter(exp => exp.dogID === dogID);
     return of(new DogDetails(dog, dogExpenses));
   }
+
   getVendorsList(): Observable<string[]> {
     return of(['Vendor A', 'Vendor B', 'Vendor C']);
   }
@@ -97,6 +100,80 @@ export class DogService {
   //   return this.http.get<string[]>(`${this.apiUrl}/microchipVendorList`);
   // }
 
+  // getPendingApplications(): Observable<AdoptionApplication[]> {
+  //   return this.http.get<AdoptionApplication[]>(`${this.apiUrl}/pendingApplicationList`);
+  // }
+  getPendingApplications(): AdoptionApplication[] {
+    return MOCK_ADOPTION_APPLICATIONS;
+  }
+  approveApplication(submit_date: string, email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/pendingApplicationList/approve`, { submit_date, email });
+  }
 
+  rejectApplication(submit_date: string, email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/pendingApplicationList/reject`, { submit_date, email });
+  }
 
 }
+const MOCK_ADOPTION_APPLICATIONS: AdoptionApplication[] = [
+  new AdoptionApplication(
+    'alice.smith@example.com',
+    new Date('2024-02-10'),
+    'Alice',
+    'Smith',
+    '555-9876',
+    3,
+    '123 Oak Street',
+    'Springfield',
+    'IL',
+    '62704'
+  ),
+  new AdoptionApplication(
+    'bob.johnson@example.com',
+    new Date('2024-02-15'),
+    'Bob',
+    'Johnson',
+    '555-4567',
+    2,
+    '456 Pine Avenue',
+    'Columbus',
+    'OH',
+    '43215'
+  ),
+  new AdoptionApplication(
+    'charlie.wilson@example.com',
+    new Date('2024-02-20'),
+    'Charlie',
+    'Wilson',
+    '555-7890',
+    5,
+    '789 Maple Lane',
+    'Denver',
+    'CO',
+    '80203'
+  ),
+  new AdoptionApplication(
+    'dana.miller@example.com',
+    new Date('2024-03-01'),
+    'Dana',
+    'Miller',
+    '555-1122',
+    4,
+    '159 Birch Road',
+    'Austin',
+    'TX',
+    '73301'
+  ),
+  new AdoptionApplication(
+    'eve.brown@example.com',
+    new Date('2024-03-05'),
+    'Eve',
+    'Brown',
+    '555-2233',
+    1,
+    '753 Cedar Drive',
+    'Seattle',
+    'WA',
+    '98101'
+  )
+];

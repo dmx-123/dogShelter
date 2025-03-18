@@ -1,5 +1,5 @@
 <form [formGroup]="dogForm" (ngSubmit)="onSubmit()">
-    <div>
+    <div class="gap-bottom">
         <span class="page-name">Dog Details</span>
         <button class="button" mat-raised-button color="primary" type="button" (click)="goBack()">
             <mat-icon>arrow_back</mat-icon> Go Back
@@ -10,9 +10,8 @@
             *ngIf="this.isAdmin && alterationStatusControl?.value && microchipIDControl?.value">
             <mat-icon>add</mat-icon>Add Adoption
         </button>
-        <hr>
     </div>
-    <br>
+    <hr>
     <div>
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-4 field">
@@ -45,7 +44,8 @@
         <div class="row">
             <mat-form-field appearance="fill">
                 <mat-label>Breeds</mat-label>
-                <mat-select formControlName="breeds" multiple (selectionChange)="onBreedsChange($event)" required="true">
+                <mat-select formControlName="breeds" multiple (selectionChange)="onBreedsChange($event)"
+                    required="true">
                     <mat-option *ngFor="let breed of breedsList" [value]="breed" [disabled]="
                       (isMixedOrUnknownSelected && !['Mixed', 'Unknown'].includes(breed)) || 
                       (selectedMixed && breed === 'Unknown') || 
@@ -81,7 +81,7 @@
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-6 field">
                 <mat-label>Surrender Date</mat-label>
-                <input matInput formControlName="surrender_date" readonly required="true">
+                <input matInput formControlName="surrender_date" readonly>
             </mat-form-field>
             <mat-form-field appearance="fill" class="col-sm-4 field" *ngIf="this.isAdmin">
                 <mat-label>Surrenderer Phone</mat-label>
@@ -93,15 +93,13 @@
         </div>
     </div>
     <br>
-    <div>
+    <div class="gap-bottom">
         <span class="page-name">Expenses</span>
         <button class="button" mat-raised-button aria-label="Add Expense" (click)="addExpense()" *ngIf="this.age > 18">
             <mat-icon>add</mat-icon>Add Expense
         </button>
-
-        <hr>
     </div>
-    <br>
+    <hr>
     <div>
         <table mat-table [dataSource]="this.expenses" class="mat-elevation-z0">
             <ng-container matColumnDef="category_name">

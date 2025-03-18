@@ -1,3 +1,16 @@
+.shelter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.field {
+    font-size: small;
+    padding-bottom: 0%;
+    height: 70px;
+}
+
 .data-row:nth-child(even) {
     background-color: whitesmoke;
 }
@@ -14,22 +27,9 @@
 
 .data-row {
     cursor: pointer;
-    height: 25px;
 }
 
 .head-row {
     width: auto;
-    border-bottom: 0.15em solid #233435 !important;
-    height: 20px;
-}
-
-.shelter-info {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.field {
-    font-size: small;
-    padding-bottom: 0%;
-    height: 70px;
+    border-bottom: 0.15em solid;
 }

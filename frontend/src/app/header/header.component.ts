@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DogService } from '../services/dog-service.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,13 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+  isAdmin = false;
+
+  constructor(private router: Router, private service: DogService) { }
+
+  ngOnInit(): void {
+    this.isAdmin = JSON.parse(localStorage.getItem('isAdmin') || 'false');
+  }
 
   navigateTo(route: string) {
     this.router.navigate([route]);

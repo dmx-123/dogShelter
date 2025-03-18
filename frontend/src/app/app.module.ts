@@ -13,9 +13,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -65,9 +67,11 @@ import { AddExpenseComponent } from './add-expense/add-expense.component';
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatMenuModule,
     MatSelectModule,
     MatTabsModule,
     MatTableModule,
+    MatToolbarModule,
     ReactiveFormsModule,
     MessagesModule,
     MessageModule,

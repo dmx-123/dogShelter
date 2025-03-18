@@ -1,0 +1,29 @@
+.button {
+    display: flex;
+    float: right !important;
+    margin-bottom: 20px;
+}
+
+.data-row:nth-child(even) {
+    background-color: whitesmoke;
+}
+
+.data-row:nth-child(odd) {
+    background-color: white;
+}
+
+.data-row:hover {
+    width: auto;
+    text-decoration: none;
+    background: lightgray !important;
+}
+
+.data-row {
+    cursor: pointer;
+    height: 25px;
+}
+
+.head-row {
+    width: auto;
+    border-bottom: 0.15em solid #233435 !important;
+}

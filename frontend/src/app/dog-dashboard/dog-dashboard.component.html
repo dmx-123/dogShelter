@@ -1,20 +1,19 @@
 <app-header></app-header>
-
-
-<form [formGroup]="filterForm" >
-    <h1>Dog Dashboard</h1>
-    <div class="shelter-info">
-        Shelter Availability Count: {{ count }}
-        <button *ngIf="count > 0" (click)="addDog()">Add Dog</button>
+<form [formGroup]="filterForm">
+    <div class="shelter-container">
+        <mat-form-field appearance="fill" class="col-sm-3 field">
+            <mat-label>Adoptability Status</mat-label>
+            <mat-select formControlName="adoptabilityFilter">
+                <mat-option value="All">All</mat-option>
+                <mat-option value="Ready for adoption">Ready for adoption</mat-option>
+                <mat-option value="Not ready for adoption">Not ready for adoption</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div>
+            Shelter Availability Count: {{ count }}
+            <button *ngIf="count > 0" (click)="addDog()">Add Dog</button>
+        </div>
     </div>
-    <mat-form-field appearance="fill" class="col-sm-4 field">
-        <mat-label>Adoptability Status</mat-label>
-        <mat-select formControlName="adoptabilityFilter">
-            <mat-option value="All">All</mat-option>
-            <mat-option value="Ready for adoption">Ready for adoption</mat-option>
-            <mat-option value="Not ready for adoption">Not ready for adoption</mat-option>
-        </mat-select>
-    </mat-form-field>
     <br>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
         <ng-container matColumnDef="name">
