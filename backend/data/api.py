@@ -2,8 +2,8 @@ from datetime import date, datetime, timedelta
 import os
 from flask import Blueprint, request, jsonify
 import jwt
-from data.token import token_required  
-import database.script_runner as db
+from backend.data.token import token_required
+import backend.database.script_runner as db
 
 user_blueprint = Blueprint('user', __name__)
 
@@ -260,3 +260,15 @@ def monthly_adoption_report():
 def expense_analysis():
     res = db.expense_analysis()
     return jsonify({"data": res}), 200
+
+
+# Adding functionalities about adoption
+# todo: Add more functions here
+# range from "Search Eligible Adopter" to "Approve/Reject Adoption Application"
+adoption_blueprint = Blueprint('adoption', __name__)
+
+@adoption_blueprint.route('adoption/searchEligibleAdopter', methods=['GET'])
+@token_required
+def search_eligible_adopter():
+    pass
+
