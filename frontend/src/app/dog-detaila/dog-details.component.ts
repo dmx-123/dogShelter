@@ -31,26 +31,6 @@ export class DogDetailComponent implements OnInit {
   constructor(private fb: FormBuilder, private service: DogService, private route: ActivatedRoute, private router: Router, private messageService: MessageService
   ) {
     this.dogForm = this.fb.group({
-      dogID: [{ value: null, disabled: true }], // Auto-increment field, not editable
-      name: [{ value: '', disabled: true }],
-      sex: ['Unknown', Validators.required],
-      description: [{ value: '', disabled: true }],
-      alteration_status: [false, Validators.required],
-      age: [null, [Validators.required]],
-      surrender_date: [null, Validators.required],
-      surrenderer_phone: ['', Validators.pattern(/^\d{0,15}$/)], // Allows up to 15 digits
-      surrendered_by_animal_control: [false, Validators.required],
-      add_by: ['', Validators.required]
-    });
-  }
-
-  ngOnInit(): void {
-
-    this.dogID = Number(this.route.snapshot.paramMap.get('dogID'));
-    this.isAdmin = JSON.parse(localStorage.getItem('isAdmin') || 'false');
-    this.age = JSON.parse(localStorage.getItem('userAge') || '0');
-
-    this.dogForm = this.fb.group({
       dogID: [{ value: null, disabled: true }],
       name: [{ value: '', disabled: true }],
       sex: [{ value: 'Unknown', disabled: true }],
@@ -64,6 +44,13 @@ export class DogDetailComponent implements OnInit {
       surrenderer_phone: [{ value: '', disabled: true }],
       surrendered_by_animal_control: [{ value: false, disabled: true }],
     });
+  }
+
+  ngOnInit(): void {
+
+    this.dogID = Number(this.route.snapshot.paramMap.get('dogID'));
+    this.isAdmin = JSON.parse(localStorage.getItem('isAdmin') || 'false');
+    this.age = JSON.parse(localStorage.getItem('userAge') || '0');
 
     this.getBreedsList();
 
@@ -162,6 +149,7 @@ export class DogDetailComponent implements OnInit {
     this.selectedMixed = hasMixed;
     this.selectedUnknown = hasUnknown;
   }
+
   getVendorsList(): void {
     this.service.getVendorsList().subscribe({
       next: (data: string[]) => {
@@ -182,7 +170,7 @@ export class DogDetailComponent implements OnInit {
   }
 
   addAdoption(): void {
-    this.router.navigate(['/add-adoption-application', { dogID: this.dogID }]);
+    this.router.navigate(['/add-adoption-application'], { state: { dog: this.dog } });
   }
 
   addExpense(): void {

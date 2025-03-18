@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -27,7 +28,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ViewReportsComponent } from './view-reports/view-reports.component';
 import { AddDogComponent } from './add-dog/add-dog.component';
 import { DogDashboardComponent } from './dog-dashboard/dog-dashboard.component';
-import { AddAdoptionApplicationComponent } from './add-adoption-application/add-adoption-application.component';
 import { AdoptionApplicationReviewComponent } from './adoption-application-review/adoption-application-review.component';
 import { AnimalControlReportComponent } from './animal-control-report/animal-control-report.component';
 import { MonthlyAdoptionReportComponent } from './monthly-adoption-report/monthly-adoption-report.component';
@@ -37,6 +37,9 @@ import { VolunteerBirthdaysComponent } from './volunteer-birthdays/volunteer-bir
 import { HttpClientModule } from '@angular/common/http';
 import { DogDetailComponent } from './dog-detaila/dog-details.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
+import { ApprovedApplicationDialogComponent } from './approved-application-dialog/approved-application-dialog.component';
+import { AddAdoptionComponent } from './add-adoption/add-adoption.component';
+import { AdoptionConfirmationDialogComponent } from './adoption-confirmation-dialog/adoption-confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,6 @@ import { AddExpenseComponent } from './add-expense/add-expense.component';
     AddDogComponent,
     AddExpenseComponent,
     DogDashboardComponent,
-    AddAdoptionApplicationComponent,
     AdoptionApplicationReviewComponent,
     AnimalControlReportComponent,
     MonthlyAdoptionReportComponent,
@@ -57,6 +59,9 @@ import { AddExpenseComponent } from './add-expense/add-expense.component';
     VolunteerLookupComponent,
     VolunteerBirthdaysComponent,
     DogDetailComponent,
+    AddAdoptionComponent,
+    ApprovedApplicationDialogComponent,
+    AdoptionConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +72,8 @@ import { AddExpenseComponent } from './add-expense/add-expense.component';
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
     MatMenuModule,
     MatSelectModule,
     MatTabsModule,

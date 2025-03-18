@@ -7,6 +7,8 @@ import { DogDetails } from '../model/DogDetails';
 import { Expense } from '../model/Expense';
 import { AdoptionApplication } from '../model/AdoptionApplication';
 import { ApprovedApplication } from '../model/ApprovedApplication';
+import { Adopter } from '../model/Adopter';
+import { ApplicationExpense } from '../model/ApplicationExpense';
 
 @Injectable({
   providedIn: 'root'
@@ -112,6 +114,16 @@ export class DogService {
 
   rejectApplication(submit_date: string, email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/pendingApplicationList/reject`, { submit_date, email });
+  }
+
+  getEligibleAdopters(lastname:string):Observable<Adopter[]>{
+    return this.http.get<Adopter[]>(`${this.apiUrl}/adoptersList`);
+  }
+  getLatestApplication(email:string):Observable<ApplicationExpense>{
+    return this.http.post<ApplicationExpense>(`${this.apiUrl}/approvedApplication`,{email});
+  }
+  addAdoption(application:ApprovedApplication): Observable<Object> {
+    return this.http.post<Object>(`${this.apiUrl}/adoption`, {application});
   }
 
 }

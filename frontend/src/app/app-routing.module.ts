@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { AddAdoptionApplicationComponent } from './add-adoption-application/add-adoption-application.component';
 import { AddDogComponent } from './add-dog/add-dog.component';
 import { AnimalControlReportComponent } from './animal-control-report/animal-control-report.component';
 import { ExpenseAnalysisComponent } from './expense-analysis/expense-analysis.component';
@@ -13,6 +12,7 @@ import { DogDashboardComponent } from './dog-dashboard/dog-dashboard.component';
 import { DogDetailComponent } from './dog-detaila/dog-details.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { AdoptionApplicationReviewComponent } from './adoption-application-review/adoption-application-review.component';
+import { AddAdoptionComponent } from './add-adoption/add-adoption.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent  },
@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'add-expense/:dogID', component: AddExpenseComponent },
   { path: 'view-reports', component: ViewReportsComponent },
   { path: 'add-dog', component: AddDogComponent },
-  { path: 'add-adoption-application', component: AddAdoptionApplicationComponent },
+  { path: 'add-adoption', component: AddAdoptionComponent },
   { path: 'adoption-application-review', component: AdoptionApplicationReviewComponent },
 
   { path: 'animal-control-report', component: AnimalControlReportComponent },
