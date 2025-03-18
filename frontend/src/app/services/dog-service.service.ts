@@ -12,8 +12,8 @@ import { Expense } from '../model/Expense';
 export class DogService {
 
   private dogs: Dog[] = [
-    new Dog(1, 'Buddy', 'Male', 'Friendly Golden Retriever', true, 3, new Date('2024-02-15'), '555-1234', false, 'AdminUser',null,null,'Golden Retriever'),
-    new Dog(2, 'Bella', 'Female', 'Calm Labrador Retriever', false, 4.5, new Date('2024-01-10'), '123456897', true, 'RescueCenter',null,null,'Mixed')
+    new Dog(1, 'Buddy', 'Male', 'Friendly Golden Retriever', true, 3, new Date('2024-02-15'), '555-1234', false, 'AdminUser', null, null, 'Golden Retriever'),
+    new Dog(2, 'Bella', 'Female', 'Calm Labrador Retriever', false, 4.5, new Date('2024-01-10'), '123456897', true, 'RescueCenter', null, null, 'Mixed')
   ];
 
   private expenses: Expense[] = [
@@ -46,12 +46,21 @@ export class DogService {
   // }
 
   // getDog(dogID: string): Observable<DogDetails> {
-  //   return this.http.get<DogDetails>(`${this.apiUrl}/dog=${dogID}`);
+  //   return this.http.get<DogDetails>(`${this.apiUrl}/${dogID}`);
   // }
+
+  updateDog(dogID: number, requestBody: any): Observable<Object> {
+    return this.http.post(`${this.apiUrl}/${dogID}`, requestBody)
+  }
+
+  saveExpense(expenseData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/addExpense`, expenseData);
+  }
+
   getDogs(): Dog[] {
     return this.dogs;
   }
-  
+
   getDog(dogID: number): Observable<DogDetails | undefined> {
     const dog = this.dogs.find(d => d.dogID === dogID);
     if (!dog) {

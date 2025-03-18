@@ -5,6 +5,7 @@ import { DogService } from '../services/dog-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DogDetails } from '../model/DogDetails';
 import { Expense } from '../model/Expense';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dog-details',
@@ -16,10 +17,10 @@ export class DogDetailComponent implements OnInit {
   age!: number;
   dogForm: FormGroup;
   displayedColumns: string[] = ['category_name', 'amount'];
-  dogDetails?:DogDetails;
+  dogDetails?: DogDetails;
   dog!: Dog;
-  expenses:Expense[] = [];
-  dogID: number | null = null;
+  expenses: Expense[] = [];
+  dogID!: number;
   vendorList: string[] = [];
   breedsList: string[] = [];
   isMixedOrUnknownSelected: boolean = false;
@@ -27,7 +28,7 @@ export class DogDetailComponent implements OnInit {
   selectedUnknown: boolean = false;
 
 
-  constructor(private fb: FormBuilder, private service: DogService, private route: ActivatedRoute, private router: Router
+  constructor(private fb: FormBuilder, private service: DogService, private route: ActivatedRoute, private router: Router, private messageService: MessageService
   ) {
     this.dogForm = this.fb.group({
       dogID: [{ value: null, disabled: true }], // Auto-increment field, not editable
@@ -117,7 +118,7 @@ export class DogDetailComponent implements OnInit {
     return this.dogForm.get('microchipID');
   }
 
-  get vendorNameControl(){
+  get vendorNameControl() {
     return this.dogForm.get('vendor_name');
 
   }
@@ -147,11 +148,11 @@ export class DogDetailComponent implements OnInit {
     const hasUnknown = selectedBreeds.includes('Unknown');
 
     if (hasMixed && hasUnknown) {
-      selectedBreeds = [hasMixed ? 'Mixed' : 'Unknown']; 
+      selectedBreeds = [hasMixed ? 'Mixed' : 'Unknown'];
     }
-  
+
     if (hasMixed || hasUnknown) {
-      selectedBreeds = [hasMixed ? 'Mixed' : 'Unknown']; 
+      selectedBreeds = [hasMixed ? 'Mixed' : 'Unknown'];
     }
     this.dogForm.get('breeds')?.setValue(selectedBreeds, { emitEvent: false });
 
@@ -185,12 +186,28 @@ export class DogDetailComponent implements OnInit {
   }
 
   addExpense(): void {
-    this.router.navigate(['/add-expense', this.dogID ]);
+    this.router.navigate(['/add-expense', this.dogID]);
   }
 
   onSubmit(): void {
     if (this.dogForm.valid) {
-      console.log('Form Data:', this.dogForm.value);
+      const requestBody = {
+        sex: this.dogForm.value.sex,
+        alteration_status: this.dogForm.value.alteration_status,
+        microchipID: this.dogForm.value.microchipID || null,
+        vendor: this.dogForm.value.vendor_name || null,
+        breeds: this.dogForm.value.breeds.length ? this.dogForm.value.breeds : null,
+      };
+      this.service.updateDog(this.dogID, requestBody).subscribe({
+        next: response => {
+          console.log('Dog Updated:', response);
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Dog details saved successfully' });
+        },
+        error: error => {
+          console.error('Error saving dog:', error);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error saving dog. Try again.', sticky: true });
+        }
+      });
     }
   }
 

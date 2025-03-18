@@ -34,6 +34,7 @@ import { VolunteerLookupComponent } from './volunteer-lookup/volunteer-lookup.co
 import { VolunteerBirthdaysComponent } from './volunteer-birthdays/volunteer-birthdays.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DogDetailComponent } from './dog-detaila/dog-details.component';
+import { AddExpenseComponent } from './add-expense/add-expense.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DogDetailComponent } from './dog-detaila/dog-details.component';
     DogDashboardComponent,
     ViewReportsComponent,
     AddDogComponent,
+    AddExpenseComponent,
     DogDashboardComponent,
     AddAdoptionApplicationComponent,
     AdoptionApplicationReviewComponent,
