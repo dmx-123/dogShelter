@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { Dog } from '../model/Dog';
 import { DogDashboard } from '../model/DogDashboard';
 import { DogDetails } from '../model/DogDetails';
@@ -16,7 +16,7 @@ import { ApplicationExpense } from '../model/ApplicationExpense';
 export class DogService {
 
   private dogs: Dog[] = [
-    new Dog(1, 'Buddy', 'Male', 'Friendly Golden Retriever', true, 3, new Date('2024-02-15'), '555-1234', false, 'AdminUser', null, null, 'Golden Retriever'),
+    new Dog(1, 'Buddy', 'Male', 'Friendly Golden Retriever', true, 3, new Date('2024-02-15'), '555-1234', false, 'AdminUser', "asd", null, 'Golden Retriever'),
     new Dog(2, 'Bella', 'Female', 'Calm Labrador Retriever', false, 4.5, new Date('2024-01-10'), '123456897', true, 'RescueCenter', null, null, 'Mixed')
   ];
 
@@ -34,10 +34,12 @@ export class DogService {
     dog.alteration_status && dog.microchipID != null
   ));
 
+  private dogSource = new BehaviorSubject<any>(null);
+  currentDog = this.dogSource.asObservable();
+
   private apiUrl = "http://localhost:8080";
 
   constructor(private http: HttpClient) { }
-
 
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
@@ -52,6 +54,10 @@ export class DogService {
   // getDog(dogID: string): Observable<DogDetails> {
   //   return this.http.get<DogDetails>(`${this.apiUrl}/${dogID}`);
   // }
+
+  changeDog(dog: any) {
+    this.dogSource.next(dog);
+  }
 
   updateDog(dogID: number, requestBody: any): Observable<Object> {
     return this.http.post(`${this.apiUrl}/${dogID}`, requestBody)
@@ -73,12 +79,16 @@ export class DogService {
     const dogExpenses = this.expenses.filter(exp => exp.dogID === dogID);
     return of(new DogDetails(dog, dogExpenses));
   }
-
+  // getVendorsList(): Observable<string[]> {
+  //   return this.http.get<string[]>(`${this.apiUrl}/vendorList`);
+  // }
   getVendorsList(): Observable<string[]> {
     return of(['Vendor A', 'Vendor B', 'Vendor C']);
   }
 
-  /** Returns mock breeds */
+  // getBreedList(): Observable<string[]> {
+  //   return this.http.get<string[]>(`${this.apiUrl}/breedList`);
+  // }
   getBreedList(): Observable<string[]> {
     return of(['Labrador', 'Golden Retriever', 'German Shepherd', 'Mixed', 'Unknown']);
   }
@@ -86,13 +96,12 @@ export class DogService {
   getDogDashboards(): DogDashboard[] {
     return this.dogDashboards;
   }
-  getAvailabilityCount(): Observable<number> {
-    return this.http.get<number>(`${this.apiUrl}/availability`);
-  }
-
-  // getBreedList(): Observable<string[]> {
-  //   return this.http.get<string[]>(`${this.apiUrl}/breedList`);
+  // getAvailabilityCount(): Observable<number> {
+  //   return this.http.get<number>(`${this.apiUrl}/availability`);
   // }
+  getAvailabilityCount(): number {
+    return 5;
+  }
 
   getCategoriesList(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/expenseCategoryList`);
@@ -102,12 +111,10 @@ export class DogService {
   //   return this.http.get<string[]>(`${this.apiUrl}/microchipVendorList`);
   // }
 
-  // getPendingApplications(): Observable<AdoptionApplication[]> {
-  //   return this.http.get<AdoptionApplication[]>(`${this.apiUrl}/pendingApplicationList`);
-  // }
-  getPendingApplications(): AdoptionApplication[] {
-    return MOCK_ADOPTION_APPLICATIONS;
+  getPendingApplications(): Observable<AdoptionApplication[]> {
+    return this.http.get<AdoptionApplication[]>(`${this.apiUrl}/pendingApplicationList`);
   }
+
   approveApplication(submit_date: string, email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/pendingApplicationList/approve`, { submit_date, email });
   }
@@ -116,18 +123,38 @@ export class DogService {
     return this.http.post(`${this.apiUrl}/pendingApplicationList/reject`, { submit_date, email });
   }
 
-  getEligibleAdopters(lastname:string):Observable<Adopter[]>{
-    return this.http.get<Adopter[]>(`${this.apiUrl}/adoptersList`);
+  getLatestApplication(email: string): Observable<ApplicationExpense> {
+    return this.http.post<ApplicationExpense>(`${this.apiUrl}/approvedApplication`, { email });
   }
-  getLatestApplication(email:string):Observable<ApplicationExpense>{
-    return this.http.post<ApplicationExpense>(`${this.apiUrl}/approvedApplication`,{email});
+  // getAdopters(lastname:string):Observable<Adopter[]>{
+  //   return this.http.post<Adopter[]>(`${this.apiUrl}/adoptersList`,{lastname});
+  // }
+
+  getAdopters(lastname: string): Observable<Adopter[]> {
+    // Filter mock adopters by last name (case-insensitive)
+    const filteredAdopters = MOCK_ADOPTERS.filter(adopter =>
+      adopter.last_name.toLowerCase().includes(lastname.toLowerCase())
+    );
+
+    return of(filteredAdopters); // ✅ Return filtered results as Observable
   }
-  addAdoption(application:ApprovedApplication): Observable<Object> {
-    return this.http.post<Object>(`${this.apiUrl}/adoption`, {application});
+  getLatestApprovedApplication(email: string): Observable<ApprovedApplication | undefined> {
+    const approvedApplication = MOCK_APPROVED_APPLICATIONS.find(app => app.email === email);
+    return of(approvedApplication);
+  }
+  addAdoption(application: ApprovedApplication): Observable<Object> {
+    return this.http.post<Object>(`${this.apiUrl}/adoption`, { application });
+  }
+
+  checkEmailExists(email: string): Observable<Adopter> {
+    return this.http.post<Adopter>(`${this.apiUrl}/adopter`, { email });
+  }
+  submitApplication(data:any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/newApplication`, { data });
   }
 
 }
-const MOCK_ADOPTION_APPLICATIONS: AdoptionApplication[] = [
+const MOCK_ADOPTERS: AdoptionApplication[] = [
   new AdoptionApplication(
     'alice.smith@example.com',
     new Date('2024-02-10'),
@@ -142,9 +169,9 @@ const MOCK_ADOPTION_APPLICATIONS: AdoptionApplication[] = [
   ),
   new AdoptionApplication(
     'bob.johnson@example.com',
-    new Date('2024-02-15'),
+    new Date('2024-02-7'),
     'Bob',
-    'Johnson',
+    'Smith',
     '555-4567',
     2,
     '456 Pine Avenue',
@@ -187,5 +214,57 @@ const MOCK_ADOPTION_APPLICATIONS: AdoptionApplication[] = [
     'Seattle',
     'WA',
     '98101'
+  )
+];
+
+const MOCK_APPROVED_APPLICATIONS: ApprovedApplication[] = [
+  new ApprovedApplication(
+    'alice.smith@example.com',
+    new Date('2024-02-10'),  // Submit Date
+    new Date('2024-02-15'),  // Approved Date
+    null,
+    null
+  ),
+  new ApprovedApplication(
+    'alice.smith@example.com',
+    new Date('2023-02-09'),  // Submit Date
+    new Date('2024-02-15'),  // Approved Date
+    null,
+    null
+  ),
+  new ApprovedApplication(
+    'alice.smith@example.com',
+    new Date('2024-02-08'),  // Submit Date
+    new Date('2024-02-15'),  // Approved Date
+    null,
+    null
+  ),
+  new ApprovedApplication(
+    'bob.johnson@example.com',
+    new Date('2024-02-15'),
+    new Date('2024-02-18'),
+    null,
+    null
+  ),
+  new ApprovedApplication(
+    'charlie.wilson@example.com',
+    new Date('2024-02-20'),
+    new Date('2024-02-22'),
+    null,
+    null
+  ),
+  new ApprovedApplication(
+    'dana.miller@example.com',
+    new Date('2024-03-01'),
+    new Date('2024-03-05'),
+    null,
+    null
+  ),
+  new ApprovedApplication(
+    'eve.brown@example.com',
+    new Date('2024-03-05'),
+    new Date('2024-03-07'),
+    null,
+    null
   )
 ];

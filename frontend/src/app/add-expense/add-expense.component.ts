@@ -40,7 +40,6 @@ export class AddExpenseComponent implements OnInit {
 
   onSubmit(): void {
     if (this.expenseForm.valid) {
-
       this.service.saveExpense(this.expenseForm.value).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Expense added successfully.' });

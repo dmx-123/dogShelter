@@ -1,13 +1,22 @@
 <div class="container">
-    <h2>Search Eligible Adopter</h2>
+
     <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-        <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Last Name</mat-label>
-            <input matInput formControlName="last_name" placeholder="Enter last name">
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">
-            <mat-icon>search</mat-icon> Search
-        </button>
+        <div>
+            <span class="page-name">Search Eligible Adopter</span>
+            <button class="button" mat-raised-button type="button" (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon> Go Back
+            </button>
+        </div>
+        <hr>
+        <div>
+            <mat-form-field appearance="fill" class="full-width field">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="last_name" placeholder="Enter last name">
+            </mat-form-field>
+            <button mat-raised-button type="submit">
+                <mat-icon>search</mat-icon> Search
+            </button>
+        </div>
     </form>
     <hr>
     <table mat-table [dataSource]="adopters" class="mat-elevation-z0" *ngIf="adopters.length > 0">

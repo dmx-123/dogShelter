@@ -6,8 +6,8 @@
         </button>
         <button class="button" mat-raised-button color="primary" type="submit" [disabled]="!dogForm.valid">
             <mat-icon>check</mat-icon> Save</button>
-        <button class="button" mat-raised-button aria-label="Add Adoption" (click)="addAdoption()"
-            *ngIf="this.isAdmin && alterationStatusControl?.value && microchipIDControl?.value">
+        <button class="button" type="button" mat-raised-button aria-label="Add Adoption" (click)="addAdoption()"
+            *ngIf="this.isAdmin && alterationStatusControl?.value && microchipIDControl?.value" [disabled]="dogForm.dirty">
             <mat-icon>add</mat-icon>Add Adoption
         </button>
     </div>

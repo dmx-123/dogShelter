@@ -44,7 +44,7 @@ export class DogDashboardComponent {
     //   next: (count) => this.count = count,
     //   error: (err) => console.error('Failed to fetch count', err)
     // });
-
+    this.count = this.service.getAvailabilityCount();
     this.filterForm.get('adoptabilityFilter')?.valueChanges.subscribe(value => {
       this.filterDogs();
     });

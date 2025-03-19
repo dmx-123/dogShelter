@@ -1,0 +1,93 @@
+<form [formGroup]="adopterForm" (ngSubmit)="submitAdopter()">
+    <div>
+        <span class="page-name">Add Adoption Application</span>
+        <button class="button" mat-raised-button color="primary" type="button" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon> Go Back
+        </button>
+        <button class="button" mat-raised-button color="primary" type="submit"
+            [disabled]="!adopterForm.valid || !emailChecked">
+            <mat-icon>check</mat-icon> Submit
+        </button>
+    </div>
+    <hr>
+    <div class="row">
+        <mat-form-field appearance="fill" class="col-sm-8 field">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-error *ngIf="adopterForm.get('email')?.hasError('required')">
+                Email is required.
+            </mat-error>
+            <button mat-icon-button matSuffix (click)="checkEmail()" type="button">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill" class="col-sm-4 field">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="first_name" required>
+            <mat-error *ngIf="adopterForm.get('first_name')?.hasError('required')">
+                First name is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col-sm-4 field">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="last_name" required>
+            <mat-error *ngIf="adopterForm.get('last_name')?.hasError('required')">
+                Last name is required.
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill" class="col-sm-4 field">
+            <mat-label>Phone Number</mat-label>
+            <input matInput formControlName="phone_number" required>
+            <mat-error *ngIf="adopterForm.get('phone_number')?.hasError('required')">
+                Phone number is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-sm-4 field">
+            <mat-label>Household Number</mat-label>
+            <input matInput formControlName="household_size" required type="number" (keypress)="numericOnly($event)">
+            <mat-error *ngIf="adopterForm.get('household_size')?.hasError('required')">
+                Household size is required.
+            </mat-error>
+            <mat-error *ngIf="adopterForm.get('household_size')?.hasError('min')">
+                Household size must be at least 1.
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill" class="col-sm-8 field">
+            <mat-label>Street</mat-label>
+            <input matInput formControlName="street" required>
+            <mat-error *ngIf="adopterForm.get('street')?.hasError('required')">
+                Street is required.
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill" class="col-sm-4 field">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city" required>
+            <mat-error *ngIf="adopterForm.get('city')?.hasError('required')">
+                City is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-sm-2 field">
+            <mat-label>State</mat-label>
+            <input matInput formControlName="state" required>
+            <mat-error *ngIf="adopterForm.get('state')?.hasError('required')">
+                State is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-sm-2 field">
+            <mat-label>Zip Code</mat-label>
+            <input matInput formControlName="zip_code" required>
+            <mat-error *ngIf="adopterForm.get('zip_code')?.hasError('required')">
+                Zip code is required.
+            </mat-error>
+        </mat-form-field>
+    </div>
+</form>

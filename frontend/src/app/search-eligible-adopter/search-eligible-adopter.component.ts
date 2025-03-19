@@ -9,13 +9,13 @@ import { Dog } from '../model/Dog';
 import { AdoptionConfirmationDialogComponent } from '../adoption-confirmation-dialog/adoption-confirmation-dialog.component';
 
 @Component({
-  selector: 'app-add-adoption',
-  templateUrl: './add-adoption.component.html',
-  styleUrl: './add-adoption.component.css'
+  selector: 'app-search-eligible-adopter',
+  templateUrl: './search-eligible-adopter.component.html',
+  styleUrl: './search-eligible-adopter.component.css'
 })
-export class AddAdoptionComponent implements OnInit {
+export class SearchEligibleAdopterComponent implements OnInit {
   searchForm!: FormGroup;
-  displayedColumns: string[] = ['email', 'name', 'phone', 'household_size', 'address', 'submit_date'];
+  displayedColumns: string[] = ['email', 'name', 'phone', 'household_size', 'address'];
   dog!: Dog;
   adoptionForm!: FormGroup;
   adopters: any[] = [];
@@ -25,7 +25,9 @@ export class AddAdoptionComponent implements OnInit {
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private service: DogService, private messageService: MessageService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.dog = history.state.dog;
+    this.service.currentDog.subscribe(dog => {
+      this.dog = dog;
+    });
     this.searchForm = this.fb.group({
       last_name: ['', Validators.required]
     });
@@ -38,7 +40,7 @@ export class AddAdoptionComponent implements OnInit {
   onSearch(): void {
     const lastName = this.searchForm.value.last_name;
 
-    this.service.getEligibleAdopters(lastName).subscribe({
+    this.service.getAdopters(lastName).subscribe({
       next: (data) => {
         this.adopters = data;
         if (this.adopters.length === 0) {
@@ -53,10 +55,9 @@ export class AddAdoptionComponent implements OnInit {
 
   openApprovedApplicationDialog(adopter: any): void {
     const dialogRef = this.dialog.open(ApprovedApplicationDialogComponent, {
-      width: '500px',
+      width: '850px',
       data: {
         adopter: adopter,
-        dog: this.dog
       }
     });
 
@@ -69,8 +70,13 @@ export class AddAdoptionComponent implements OnInit {
 
   openAdoptionConfirmationDialog(adoptionDetails: any): void {
     this.dialog.open(AdoptionConfirmationDialogComponent, {
-      width: '500px',
+      width: '850px',
       data: { adoptionDetails }
     });
   }
+
+  goBack(): void {
+    this.router.navigate(['/dog-dashboard']);
+  }
+
 }

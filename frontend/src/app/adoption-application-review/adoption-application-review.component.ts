@@ -20,15 +20,14 @@ export class AdoptionApplicationReviewComponent implements OnInit {
   }
 
   getPendingApplications(): void {
-    // this.service.getPendingApplications().subscribe({
-    //   next: (data) => {
-    //     this.pendingApplications = data;
-    //   },
-    //   error: () => {
-    //     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error loading pending applications.', sticky: true });
-    //   }
-    // });
-    this.pendingApplications = this.service.getPendingApplications();
+    this.service.getPendingApplications().subscribe({
+      next: (data) => {
+        this.pendingApplications = data;
+      },
+      error: () => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error loading pending applications.', sticky: true });
+      }
+    });
   }
 
   approveApplication(submit_date: string, email: string): void {

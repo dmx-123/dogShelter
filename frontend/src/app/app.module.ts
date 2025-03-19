@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
@@ -38,8 +39,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { DogDetailComponent } from './dog-detaila/dog-details.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { ApprovedApplicationDialogComponent } from './approved-application-dialog/approved-application-dialog.component';
-import { AddAdoptionComponent } from './add-adoption/add-adoption.component';
+import { SearchEligibleAdopterComponent } from './search-eligible-adopter/search-eligible-adopter.component';
 import { AdoptionConfirmationDialogComponent } from './adoption-confirmation-dialog/adoption-confirmation-dialog.component';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { AddAdoptionApplicationComponent } from './add-adoption-application/add-adoption-application.component';
 
 @NgModule({
   declarations: [
@@ -59,9 +62,10 @@ import { AdoptionConfirmationDialogComponent } from './adoption-confirmation-dia
     VolunteerLookupComponent,
     VolunteerBirthdaysComponent,
     DogDetailComponent,
-    AddAdoptionComponent,
+    SearchEligibleAdopterComponent,
     ApprovedApplicationDialogComponent,
     AdoptionConfirmationDialogComponent,
+    AddAdoptionApplicationComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +76,8 @@ import { AdoptionConfirmationDialogComponent } from './adoption-confirmation-dia
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatDialogModule,
     MatIconModule,
     MatMenuModule,
@@ -86,7 +92,8 @@ import { AdoptionConfirmationDialogComponent } from './adoption-confirmation-dia
     HttpClientModule,
   ],
   providers: [
-    MessageService
+    MessageService,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-US' }
   ],
   bootstrap: [AppComponent]
 })

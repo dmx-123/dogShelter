@@ -8,17 +8,14 @@
     width: 100%;
 }
 
-.gap-bottom {
-    margin-bottom: 20px;
-}
-
 .field {
     font-size: small;
     padding-bottom: 0%;
     height: 70px;
 }
 
-.option {
-    min-height: 30px;
-    font-size: smaller;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

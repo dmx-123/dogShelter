@@ -12,19 +12,21 @@ import { DogDashboardComponent } from './dog-dashboard/dog-dashboard.component';
 import { DogDetailComponent } from './dog-detaila/dog-details.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { AdoptionApplicationReviewComponent } from './adoption-application-review/adoption-application-review.component';
-import { AddAdoptionComponent } from './add-adoption/add-adoption.component';
+import { SearchEligibleAdopterComponent } from './search-eligible-adopter/search-eligible-adopter.component';
+import { AddAdoptionApplicationComponent } from './add-adoption-application/add-adoption-application.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent  },
+  { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  
+
   { path: 'dog-dashboard', component: DogDashboardComponent },
   { path: 'dog-details/:dogID', component: DogDetailComponent },
   { path: 'add-expense/:dogID', component: AddExpenseComponent },
   { path: 'view-reports', component: ViewReportsComponent },
   { path: 'add-dog', component: AddDogComponent },
-  { path: 'add-adoption', component: AddAdoptionComponent },
+  { path: 'search-eligible-adopter/:dogID', component: SearchEligibleAdopterComponent },
   { path: 'adoption-application-review', component: AdoptionApplicationReviewComponent },
+  { path: 'add-adoption-application', component: AddAdoptionApplicationComponent },
 
   { path: 'animal-control-report', component: AnimalControlReportComponent },
   { path: 'monthly-adoption-report', component: MonthlyAdoptionReportComponent },

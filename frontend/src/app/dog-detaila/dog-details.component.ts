@@ -170,7 +170,9 @@ export class DogDetailComponent implements OnInit {
   }
 
   addAdoption(): void {
-    this.router.navigate(['/add-adoption-application'], { state: { dog: this.dog } });
+    this.service.changeDog(this.dog);
+    this.router.navigate(['/search-eligible-adopter', this.dogID]);
+
   }
 
   addExpense(): void {
