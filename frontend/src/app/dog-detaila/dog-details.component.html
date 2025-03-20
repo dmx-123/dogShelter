@@ -7,7 +7,8 @@
         <button class="button" mat-raised-button color="primary" type="submit" [disabled]="!dogForm.valid">
             <mat-icon>check</mat-icon> Save</button>
         <button class="button" type="button" mat-raised-button aria-label="Add Adoption" (click)="addAdoption()"
-            *ngIf="this.isAdmin && alterationStatusControl?.value && microchipIDControl?.value" [disabled]="dogForm.dirty">
+            *ngIf="this.isAdmin && alterationStatusControl?.value && microchipIDControl?.value"
+            [disabled]="dogForm.dirty">
             <mat-icon>add</mat-icon>Add Adoption
         </button>
     </div>
@@ -16,11 +17,11 @@
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-4 field">
                 <mat-label>Dog ID</mat-label>
-                <input matInput formControlName="dogID" readonly required="true">
+                <input matInput formControlName="dogID" required="true">
             </mat-form-field>
             <mat-form-field appearance="fill" class="col-sm-4 field">
                 <mat-label>Name</mat-label>
-                <input matInput formControlName="name" readonly required="true">
+                <input matInput formControlName="name" required="true">
             </mat-form-field>
         </div>
         <div class="row">
@@ -35,7 +36,7 @@
 
             <mat-form-field appearance="fill" class="col-sm-2 field">
                 <mat-label>Age</mat-label>
-                <input matInput type="number" formControlName="age" readonly required="true">
+                <input matInput type="number" formControlName="age" required="true">
             </mat-form-field>
             <mat-checkbox color="primary" formControlName="alteration_status" class="col-sm-4">
                 Alteration Status
@@ -75,17 +76,17 @@
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-8 field">
                 <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description" readonly></textarea>
+                <textarea matInput formControlName="description"></textarea>
             </mat-form-field>
         </div>
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-6 field">
                 <mat-label>Surrender Date</mat-label>
-                <input matInput formControlName="surrender_date" readonly>
+                <input matInput formControlName="surrender_date">
             </mat-form-field>
             <mat-form-field appearance="fill" class="col-sm-4 field" *ngIf="this.isAdmin">
                 <mat-label>Surrenderer Phone</mat-label>
-                <input matInput formControlName="surrenderer_phone" readonly>
+                <input matInput formControlName="surrenderer_phone">
             </mat-form-field>
             <mat-checkbox formControlName="surrendered_by_animal_control">
                 Surrendered by Animal Control

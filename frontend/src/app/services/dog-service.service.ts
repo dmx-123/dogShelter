@@ -111,10 +111,13 @@ export class DogService {
   //   return this.http.get<string[]>(`${this.apiUrl}/microchipVendorList`);
   // }
 
+  // getPendingApplications(): Observable<AdoptionApplication[]> {
+  //   return this.http.get<AdoptionApplication[]>(`${this.apiUrl}/pendingApplicationList`);
+  // }
   getPendingApplications(): Observable<AdoptionApplication[]> {
-    return this.http.get<AdoptionApplication[]>(`${this.apiUrl}/pendingApplicationList`);
+    const pending = MOCK_ADOPTERS;
+    return of(pending);
   }
-
   approveApplication(submit_date: string, email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/pendingApplicationList/approve`, { submit_date, email });
   }
