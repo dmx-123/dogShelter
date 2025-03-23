@@ -58,6 +58,8 @@ def get_dogs():
                     d.dogID, 
                     d.name, 
                     d.age, 
+                    d.sex,
+                    d.alteration_status,
                     (SELECT GROUP_CONCAT(db.breed_type ORDER BY db.breed_type ASC SEPARATOR '/')
                     FROM DogBreed db 
                     WHERE db.dogID = d.dogID) AS breed,
@@ -156,7 +158,7 @@ def get_dog(id: int):
     cursor = conn.cursor(dictionary=True)
     query = """
                 SELECT 
-                    d.dogID, d.name, d.sex, d.description, d.alteration_status, d.age, m.microchipID, d.surrender_date, d.surrenderer_phone, d.surrendered_by_animal_control, d.add_by, m.vendor_name, 
+                    d.dogID, d.name, d.sex, d.description, d.alteration_status, d.age, m.microchipID, d.surrender_date, d.surrenderer_phone, d.surrendered_by_animal_control, m.vendor_name, 
                     (SELECT GROUP_CONCAT(db.breed_type ORDER BY db.breed_type ASC SEPARATOR '/') 
                     FROM DogBreed db WHERE db.dogID = d.dogID) AS breeds
                 FROM Dog d 
