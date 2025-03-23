@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
+
+from backend.data.api import adoption_blueprint
 from data.api import user_blueprint, dog_blueprint, util_blueprint, report_blueprint
 import os
 
@@ -22,6 +24,7 @@ app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(dog_blueprint, url_prefix='/dog')
 app.register_blueprint(util_blueprint, url_prefix='/util')
 app.register_blueprint(report_blueprint, url_prefix='/report')
+app.register_blueprint(adoption_blueprint, url_prefix='/adoption')
 
 if __name__ == "__main__":
     app.run(port=8080, debug=True)

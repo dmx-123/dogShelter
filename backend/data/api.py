@@ -2,8 +2,8 @@ from datetime import date, datetime, timedelta
 import os
 from flask import Blueprint, request, jsonify
 import jwt
-from data.token import token_required  
-import database.script_runner as db
+from backend.data.token import token_required
+import backend.database.script_runner as db
 
 user_blueprint = Blueprint('user', __name__)
 
@@ -89,7 +89,7 @@ def edit_dogs(dogID):
         
     breeds = data.get('breeds')
     if breeds:
-        db.delete_dog_breeds(dogID)
+        db.remove_dog_breeds(dogID)
         db.add_dog_breeds(dogID, breeds)
         
     return jsonify(), 200
@@ -171,7 +171,7 @@ report_blueprint = Blueprint('report', __name__)
 
 @report_blueprint.route('/volunteerLookup', methods=['POST'])
 @token_required
-def volunteer_lookkup():
+def volunteer_lookup():
     data = request.json
     input = data.get('input')
     
@@ -260,3 +260,100 @@ def monthly_adoption_report():
 def expense_analysis():
     res = db.expense_analysis()
     return jsonify({"data": res}), 200
+
+
+# Adding functionalities about adoption
+# range from "Search Eligible Adopter" to "Approve/Reject Adoption Application"
+adoption_blueprint = Blueprint('adoption', __name__)
+
+@adoption_blueprint.route('/search/eligibleAdopter', methods=['POST'])
+@token_required
+def search_eligible_adopter():
+    data = request.json
+    last_name = data.get('last_name')
+    res = db.search_eligible_adopter(last_name)
+    return jsonify({"data": res}), 200
+
+@adoption_blueprint.route('/view/adopter/latestApprovedApplication', methods=['POST'])
+@token_required
+def view_adopter_latest_approved_application():
+    data = request.json
+    email = data.get('email')
+    res = db.view_adopter_latest_approved_application(email)
+    return jsonify({"data": res}), 200
+
+@adoption_blueprint.route('/submit', methods=['POST'])
+@token_required
+def submit_adoption():
+    data = request.json
+    dog_id = int(data.get('dog_id'))
+    email = data.get('email')
+    adoption_date = data.get('adoption_date')
+    submit_date = data.get('submit_date')
+    db.submit_adoption(adoption_date, dog_id, email, submit_date)
+    return jsonify(), 200
+
+@adoption_blueprint.route('/add/adoptionApplication', methods=['POST'])
+@token_required
+def add_adoption_application():
+    data = request.json
+    email = data.get('email')
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    phone_number = data.get('phone_number')
+    household_size = int(data.get('household_size'))
+    street = data.get('street')
+    city = data.get('city')
+    state = data.get('state')
+    zip_code = data.get('zip_code')
+    submit_date = data.get('submit_date')
+
+    is_exist = db.check_email_existence(email)
+    if not is_exist:
+        db.insert_new_adopter(email, first_name, last_name, phone_number, household_size, street, city, state, zip_code)
+
+    exist = db.lookup_adoption_application(email, submit_date)
+    if exist:
+        return jsonify({"error": "The adopter has already submitted an application."}), 400
+    else:
+        db.insert_new_adoption_application(email, submit_date)
+    return jsonify(), 200
+
+@adoption_blueprint.route('/check/adopter', methods=['POST'])
+@token_required
+def check_adopter_existence():
+    data = request.json
+    email = data.get('email')
+    is_exist = db.check_email_existence(email)
+    if is_exist:
+        res = db.display_adopter_info(email)
+        return jsonify({"data": res}), 200
+    else:
+        return jsonify({"error": "The adopter does not exist."}), 400
+
+@adoption_blueprint.route('/view/AdoptionApplication/pending', methods=['GET'])
+@token_required
+def view_pending_adoption_application():
+    pending = db.view_pending_adoption_application()
+    return jsonify({"data": pending}), 200
+
+@adoption_blueprint.route('/add/approved/AdoptionApplication/', methods=['POST'])
+@token_required
+def add_approved_adoption_application():
+    data = request.json
+    email = data.get('email')
+    approved_date = data.get('approved_date')
+    submit_date = data.get('submit_date')
+    db.approve_adoption_application(email, approved_date, submit_date)
+    return jsonify(), 200
+
+@adoption_blueprint.route('/add/rejected/AdoptionApplication/', methods=['POST'])
+@token_required
+def add_rejected_adoption_application():
+    data = request.json
+    email = data.get('email')
+    rejected_date = data.get('rejected_date')
+    submit_date = data.get('submit_date')
+    db.reject_adoption_application(email, rejected_date, submit_date)
+    return jsonify(), 200
+

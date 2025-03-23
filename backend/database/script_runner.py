@@ -235,7 +235,7 @@ def microchip_exist(id: str):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     query = """
-                SELECT count(1) AS exist FROM Microchip WHERE microchipID  = %s';
+                SELECT count(1) AS exist FROM Microchip WHERE microchipID  = %s;
             """
     cursor.execute(query, (id,))
     res = cursor.fetchone()
@@ -256,7 +256,6 @@ def add_dog_microchip(dog_id: int, microchip_id: str, vendor_name: str):
     cursor.execute(query, (microchip_id, dog_id, vendor_name))
     cursor.close()
     conn.close()
-    
 
 def expense_exist(id: str, vendor_name: str, date: date):
     """
@@ -316,15 +315,204 @@ def add_expense(id: str, vendor_name: str, date: date, amount: float, category_n
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     query = """
-                NSERT INTO Expense (dogID, date, vendor_name, amount, category_name)
+                INSERT INTO Expense (dogID, date, vendor_name, amount, category_name)
                 VALUES (%s, %s, %s, %s, %s);
             """
     cursor.execute(query, (id, date, vendor_name, amount, category_name))
     cursor.close()
     conn.close()
 
-# Adoption related
-## todo: add more functions here
+# -------------------------------- Adoption Related ---------------------------------------
+## from "Search Eligible Adopter" to "Approve/Reject Adoption Application" in the phase-2 report
+def search_eligible_adopter(last_name:str):
+    """
+    Search eligible adopters for an un-adopted dog,
+    return a list of eligible adopters and their contact information.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                SELECT a.first_name, a.last_name, a.street, a.city, a.state, a.zip_code, 
+                    a.email, a.phone_number
+                FROM Adopter a 
+                JOIN ApprovedApplication aa ON aa.email = a.email 
+                WHERE aa.dogID IS NULL 
+                AND LOWER(a.last_name) LIKE CONCAT('%', LOWER(%s), '%') 
+                AND aa.submit_date = ( SELECT MAX(submit_date) 
+                FROM `ApprovedApplication` WHERE email = a.email);
+            """
+    cursor.execute(query, (last_name, ))
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return res
+
+def view_adopter_latest_approved_application(email:str):
+    """
+    Search the latest approved application of an eligible adopter,
+    return the approved application and the contact info of this adopter.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                SELECT a.first_name, a.last_name, a.street, a.city, a.state, a.zip_code, 
+                    a.email, a.phone_number, aa.submit_date, aa.approved_date 
+                FROM Adopter a 
+                JOIN ApprovedApplication aa ON a.email = aa.email 
+                WHERE a.email = %s ORDER BY aa.submit_date DESC LIMIT 1;
+            """
+    cursor.execute(query, (email,))
+    res = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return res
+
+def submit_adoption(adoption_date:str, dog_id:int, email:str, submit_date:str):
+    """
+    Update an adoption record to the ApprovedApplication table.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                UPDATE ApprovedApplication 
+                SET adoption_date = %s, dogID = %d 
+                WHERE email = %s AND submit_date = %s;
+            """
+    cursor.execute(query, (adoption_date, dog_id, email, submit_date))
+    cursor.close()
+    conn.close()
+
+def check_email_existence(email:str):
+    """
+    Check if an email (adopter) exists, return a Boolean.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                SELECT COUNT(*) AS isExist FROM Adopter WHERE EMAIL = %s;
+            """
+    cursor.execute(query, (email,))
+    res = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return res['isExist'] > 0
+
+def display_adopter_info(email:str):
+    """
+    Display the information of an adopter.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                SELECT email, first_name, last_name, phone_number, household_size, street, city, state, zip_code 
+                FROM Adopter WHERE EMAIL = %s;
+            """
+    cursor.execute(query, (email,))
+    res = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return res
+
+def insert_new_adopter(email:str, first_name:str, last_name:str, phone_number:str, household_size:int, street:str, city:str, state:str, zip_code:str):
+    """
+    Insert a new adopter record to the database.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                INSERT INTO Adopter (email, first_name, last_name, phone_number, household_size, street, city, state, zip_code) 
+                VALUES (%s, %s, %s, %s, %d, %s, %s, %s, %s);
+            """
+    cursor.execute(query, (email, first_name, last_name, phone_number, household_size, street, city, state, zip_code))
+    cursor.close()
+    conn.close()
+
+def lookup_adoption_application(email:str, submit_date:date):
+    """
+    Look up if an adoption application of an eligible adopter already exists, return a Boolean.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                SELECT COUNT(*) AS result FROM AdoptionApplication
+                WHERE email = %s AND submit_date = %s;
+            """
+    cursor.execute(query, (email, submit_date))
+    res = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return res['result'] > 0
+
+def insert_new_adoption_application(email:str, submit_date:date):
+    """
+    Insert a new adoption application record to the database.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                INSERT INTO AdoptionApplication (email, submit_date) 
+                VALUES (%s, %s);
+            """
+    cursor.execute(query, (email, submit_date))
+    cursor.close()
+    conn.close()
+
+def view_pending_adoption_application():
+    """
+    View pending adoption application,
+    return a list of pending adoption applications.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                SELECT d.email, d.first_name, d.last_name, d.phone_number, d.household_size, 
+                d.street, d.city, d.state, d.zip_code, aa.submit_date 
+                FROM AdoptionApplication aa 
+                JOIN Adopter d ON aa.email = d.email 
+                WHERE NOT EXISTS ( 
+                    SELECT 1 FROM ApprovedApplication ap 
+                    WHERE ap.email = aa.email AND ap.submit_date = aa.submit_date 
+                    ) 
+                    AND NOT EXISTS ( 
+                        SELECT 1 FROM RejectedApplication rj 
+                        WHERE rj.email = aa.email AND rj.submit_date = aa.submit_date 
+                        );
+            """
+    cursor.execute(query)
+    res = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return res
+
+def approve_adoption_application(email:str, submit_date:date, current_date: date):
+    """
+    If an adoption application as approved, update its information to the database.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                INSERT INTO ApprovedApplication (email, submit_date, approved_date) 
+                VALUES (%s, %s, %s);    
+            """
+    cursor.execute(query, (email, submit_date, current_date))
+    cursor.close()
+    conn.close()
+
+def reject_adoption_application(email:str, submit_date:date, rejected_date:date):
+    """
+    If an adoption application as rejected, update its information to the database.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+                INSERT INTO RejectedApplication (email, submit_date, rejected_date) 
+                VALUES (%s, %s, %s);
+            """
+    cursor.execute(query, (email, submit_date, rejected_date))
+    cursor.close()
+    conn.close()
+
+# ----------------------------- The End of Adoption-Related Section ----------------------
 
 # Report related
 def volunteer_lookup(name: str):
