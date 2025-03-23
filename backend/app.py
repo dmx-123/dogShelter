@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from dotenv import load_dotenv
 
 from data.api import adoption_blueprint
@@ -16,6 +17,7 @@ DB_PASSWORD = os.getenv('DB_PASSWORD', 'password')
 
 # Init App 
 app = Flask(__name__)
+CORS(app)
 
 # Add features module
 app.register_blueprint(user_blueprint, url_prefix='/user')
