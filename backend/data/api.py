@@ -118,7 +118,7 @@ def add_dogs():
         if db.microchip_exist(microchipID):
             return jsonify({"error": "Microchip already exist"}), 400
         
-    if name == 'Uga' and breeds.contains('Bulldog'):
+    if name.lower() == 'uga' and breeds.contains('Bulldog'):
         return jsonify({"error": "Bulldog named Uga could not be accepted to shelter."}), 400
     
     if surrenderer_by_animal_control == True and not surrenderer_phone:
