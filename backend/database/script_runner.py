@@ -183,6 +183,7 @@ def add_dog(name: str, sex: str, description: str, alteration_status: bool, age:
             """
     cursor.execute(query, (name, sex, description, alteration_status, age, surrender_date, surrenderer_phone, surrendered_by_animal_control, email))
     res = cursor.lastrowid
+    conn.commit()
     cursor.close()
     conn.close()
     return res
@@ -211,6 +212,7 @@ def add_dog_breeds(dog_id: int, breeds: List[str]):
             """
     for breed in breeds:
         cursor.execute(query, (dog_id, breed))
+    conn.commit()
     cursor.close()
     conn.close()
     
@@ -254,6 +256,7 @@ def add_dog_microchip(dog_id: int, microchip_id: str, vendor_name: str):
                 VALUES (%s, %s, %s);
             """
     cursor.execute(query, (microchip_id, dog_id, vendor_name))
+    conn.commit()
     cursor.close()
     conn.close()
 
@@ -319,6 +322,7 @@ def add_expense(id: str, vendor_name: str, date: date, amount: float, category_n
                 VALUES (%s, %s, %s, %s, %s);
             """
     cursor.execute(query, (id, date, vendor_name, amount, category_name))
+    conn.commit()
     cursor.close()
     conn.close()
 
@@ -421,9 +425,10 @@ def insert_new_adopter(email:str, first_name:str, last_name:str, phone_number:st
     cursor = conn.cursor(dictionary=True)
     query = """
                 INSERT INTO Adopter (email, first_name, last_name, phone_number, household_size, street, city, state, zip_code) 
-                VALUES (%s, %s, %s, %s, %d, %s, %s, %s, %s);
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
             """
     cursor.execute(query, (email, first_name, last_name, phone_number, household_size, street, city, state, zip_code))
+    conn.commit()
     cursor.close()
     conn.close()
 
@@ -454,6 +459,7 @@ def insert_new_adoption_application(email:str, submit_date:date):
                 VALUES (%s, %s);
             """
     cursor.execute(query, (email, submit_date))
+    conn.commit()
     cursor.close()
     conn.close()
 
@@ -495,6 +501,7 @@ def approve_adoption_application(email:str, submit_date:date, current_date: date
                 VALUES (%s, %s, %s);    
             """
     cursor.execute(query, (email, submit_date, current_date))
+    conn.commit()
     cursor.close()
     conn.close()
 
@@ -509,6 +516,7 @@ def reject_adoption_application(email:str, submit_date:date, rejected_date:date)
                 VALUES (%s, %s, %s);
             """
     cursor.execute(query, (email, submit_date, rejected_date))
+    conn.commit()
     cursor.close()
     conn.close()
 
