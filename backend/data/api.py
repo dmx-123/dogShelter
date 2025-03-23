@@ -266,7 +266,7 @@ def expense_analysis():
 # range from "Search Eligible Adopter" to "Approve/Reject Adoption Application"
 adoption_blueprint = Blueprint('adoption', __name__)
 
-@adoption_blueprint.route('/search/eligibleAdopter', methods=['POST'])
+@adoption_blueprint.route('/eligibleAdopter', methods=['POST'])
 @token_required
 def search_eligible_adopter():
     data = request.json
@@ -274,7 +274,7 @@ def search_eligible_adopter():
     res = db.search_eligible_adopter(last_name)
     return jsonify({"data": res}), 200
 
-@adoption_blueprint.route('/view/adopter/latestApprovedApplication', methods=['POST'])
+@adoption_blueprint.route('/latestApprovedApplication', methods=['POST'])
 @token_required
 def view_adopter_latest_approved_application():
     data = request.json
@@ -282,7 +282,7 @@ def view_adopter_latest_approved_application():
     res = db.view_adopter_latest_approved_application(email)
     return jsonify({"data": res}), 200
 
-@adoption_blueprint.route('/submit', methods=['POST'])
+@adoption_blueprint.route('', methods=['POST'])
 @token_required
 def submit_adoption():
     data = request.json
@@ -293,7 +293,7 @@ def submit_adoption():
     db.submit_adoption(adoption_date, dog_id, email, submit_date)
     return jsonify(), 200
 
-@adoption_blueprint.route('/add/adoptionApplication', methods=['POST'])
+@adoption_blueprint.route('/addApplication', methods=['POST'])
 @token_required
 def add_adoption_application():
     data = request.json
@@ -319,7 +319,7 @@ def add_adoption_application():
         db.insert_new_adoption_application(email, submit_date)
     return jsonify(), 200
 
-@adoption_blueprint.route('/check/adopter', methods=['POST'])
+@adoption_blueprint.route('/checkAdopter', methods=['POST'])
 @token_required
 def check_adopter_existence():
     data = request.json
@@ -331,13 +331,13 @@ def check_adopter_existence():
     else:
         return jsonify({"error": "The adopter does not exist."}), 400
 
-@adoption_blueprint.route('/view/AdoptionApplication/pending', methods=['GET'])
+@adoption_blueprint.route('/pendingApplication', methods=['GET'])
 @token_required
 def view_pending_adoption_application():
     pending = db.view_pending_adoption_application()
     return jsonify({"data": pending}), 200
 
-@adoption_blueprint.route('/add/approved/AdoptionApplication/', methods=['POST'])
+@adoption_blueprint.route('/approveApplication', methods=['POST'])
 @token_required
 def add_approved_adoption_application():
     data = request.json
@@ -347,7 +347,7 @@ def add_approved_adoption_application():
     db.approve_adoption_application(email, approved_date, submit_date)
     return jsonify(), 200
 
-@adoption_blueprint.route('/add/rejected/AdoptionApplication/', methods=['POST'])
+@adoption_blueprint.route('/rejecteApplication', methods=['POST'])
 @token_required
 def add_rejected_adoption_application():
     data = request.json
