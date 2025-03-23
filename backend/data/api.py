@@ -150,7 +150,7 @@ def add_expense():
 util_blueprint = Blueprint('util', __name__)
 
 @util_blueprint.route('/breedList', methods=['GET'])
-@token_required
+# @token_required
 def get_breeds_list():
     breeds = db.get_breeds()
     return jsonify({"data": breeds}), 200

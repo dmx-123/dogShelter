@@ -9,6 +9,7 @@ import { AdoptionApplication } from '../model/AdoptionApplication';
 import { ApprovedApplication } from '../model/ApprovedApplication';
 import { Adopter } from '../model/Adopter';
 import { ApplicationExpense } from '../model/ApplicationExpense';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,7 @@ export class DogService {
   currentDog = this.dogSource.asObservable();
 
   private apiUrl = "http://localhost:8080";
+  private utlUrl = "http://127.0.0.1:8080/util"
 
   constructor(private http: HttpClient) { }
 
@@ -76,12 +78,13 @@ export class DogService {
     return of(['Vendor A', 'Vendor B', 'Vendor C']);
   }
 
-  // getBreedList(): Observable<string[]> {
-  //   return this.http.get<string[]>(`${this.apiUrl}/breedList`);
-  // }
   getBreedList(): Observable<string[]> {
-    return of(['Labrador', 'Golden Retriever', 'German Shepherd', 'Mixed', 'Unknown']);
+    return this.http.get<{ data: { breed_type: string }[] }>(`${this.utlUrl}/breedList`)
+      .pipe(
+        map(res => res.data.map(b => b.breed_type))
+      );
   }
+
 
   getDogDashboards(): DogDashboard[] {
     return this.dogDashboards;
@@ -128,7 +131,7 @@ export class DogService {
     const filteredAdopters = MOCK_ADOPTERS.filter(adopter =>
       adopter.last_name.toLowerCase().includes(lastname.toLowerCase())
     );
-    return of(filteredAdopters); 
+    return of(filteredAdopters);
   }
   getLatestApprovedApplication(email: string): Observable<ApprovedApplication | undefined> {
     const approvedApplication = MOCK_APPROVED_APPLICATIONS.find(app => app.email === email);
@@ -141,7 +144,7 @@ export class DogService {
   checkEmailExists(email: string): Observable<Adopter> {
     return this.http.post<Adopter>(`${this.apiUrl}/adopter`, { email });
   }
-  submitApplication(data:any): Observable<any> {
+  submitApplication(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/newApplication`, { data });
   }
   //Reports
@@ -149,8 +152,8 @@ export class DogService {
   getMonthlyReport(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/monthlyAdoptionReport`);
   }
-  
-  getExpenseAnalysis():Observable<any[]>{
+
+  getExpenseAnalysis(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/expenseAnalysis`)
   }
 
@@ -185,7 +188,7 @@ const MOCK_EXPENSES: Expense[] = [
   new Expense(2, new Date('2024-03-15'), 'Trainer', 80, 'Training')
 ];
 
-const MOCK_DOGS:Dog[] = [
+const MOCK_DOGS: Dog[] = [
   new Dog(1, 'Buddy', 'Male', 'Friendly Golden Retriever', true, 3, new Date('2024-02-15'), '555-1234', false, 'AdminUser', "asd", null, 'Golden Retriever'),
   new Dog(2, 'Bella', 'Female', 'Calm Labrador Retriever', false, 4.5, new Date('2024-01-10'), '123456897', true, 'RescueCenter', null, null, 'Mixed')
 ]
