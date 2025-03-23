@@ -1,0 +1,15 @@
+<h2>Details for {{ data.month }} - {{ data.type | titlecase }}</h2>
+
+<mat-table [dataSource]="data.rows" class="mat-elevation-z8">
+    <ng-container *ngFor="let col of getColumns()" [matColumnDef]="col">
+        <mat-header-cell *matHeaderCellDef> {{ col | titlecase }} </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row[col] }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="getColumns()" class="header-row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: getColumns();" class="data-row"></mat-row>
+</mat-table>
+
+<div style="text-align: center;">
+    <button mat-stroked-button (click)="close()">Close</button>
+</div>

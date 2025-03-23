@@ -1,0 +1,35 @@
+<div class="container">
+    <h3 class="title">Latest Approved Application</h3>
+    <hr>
+    <p><strong>Adopter:</strong> {{ adopter.first_name }} {{ adopter.last_name }}</p>
+    <p><strong>Email:</strong> {{ adopter.email }}</p>
+    <p><strong>Phone:</strong> {{ adopter.phone_number }}</p>
+    <p><strong>Household Size:</strong> {{ adopter.household_size }}</p>
+    <p><strong>Street Address:</strong> {{ adopter.street }}</p>
+    <p><strong>City:</strong> {{ adopter.city }}</p>
+    <p><strong>State:</strong> {{ adopter.state }}</p>
+    <p><strong>Zip Code:</strong> {{ adopter.zip_code }}</p>
+    <p><strong>Adoption Fee:</strong> ${{ adoptionFee }}</p>
+    <p><strong>Approved Date:</strong> {{ latestApplication.approved_date | date: 'MMM dd yyyy' }}</p>
+    <p><strong>Submit Date:</strong> {{ latestApplication.submit_date | date: 'MMM dd yyyy' }}</p>
+
+    <form [formGroup]="adoptionForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Adoption Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="adoption_date" [min]="todayDate" readonly="true"
+                (click)="picker.open()">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="adoptionForm.get('adoption_date')?.hasError('required')">
+                Adoption date is required.
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+    <div class="button-container">
+        <button mat-raised-button (click)="confirmAdoption()">Confirm</button>
+        <button mat-button (click)="dialogRef.close()">Cancel</button>
+    </div>
+
+</div>

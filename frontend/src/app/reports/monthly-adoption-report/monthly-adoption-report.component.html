@@ -1,0 +1,48 @@
+
+<div class="gap-bottom">
+    <span class="page-name">Monthly Adoption Report</span>
+    <button class="button" mat-raised-button color="primary" type="button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon> Go Back
+    </button>
+</div>
+<hr>
+<mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+    <ng-container matColumnDef="month">
+        <mat-header-cell *matHeaderCellDef> Month </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row.month }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="breed_label">
+        <mat-header-cell *matHeaderCellDef> Breed </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row.breed_label }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="num_surrendered">
+        <mat-header-cell *matHeaderCellDef> Surrendered </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row.num_surrendered }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="num_adoption">
+        <mat-header-cell *matHeaderCellDef> Adopted </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row.num_adoption }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total_expense">
+        <mat-header-cell *matHeaderCellDef> Expense </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row.total_expense | currency }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total_adoption_fee">
+        <mat-header-cell *matHeaderCellDef> Adoption Fee </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row.total_adoption_fee | currency }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="net_profit">
+        <mat-header-cell *matHeaderCellDef> Net Profit </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row.net_profit | currency }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></mat-row>
+</mat-table>

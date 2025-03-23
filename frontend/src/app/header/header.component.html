@@ -1,0 +1,23 @@
+<h1>Animal Shelter Management</h1>
+<mat-toolbar color="primary">
+    <span class="nav-title">Dog Dashboard</span>
+    <button mat-button routerLink="/add-adoption-application">Add Adoption Application</button>
+
+    <!-- Buttons only for Admin -->
+    <button mat-button *ngIf="isAdmin" routerLink="/adoption-application-review">
+        Adoption Application Review
+    </button>
+
+    <!-- View Report Dropdown (Admin Only) -->
+    <ng-container *ngIf="isAdmin">
+        <button mat-button [matMenuTriggerFor]="reportMenu">View Report</button>
+        <mat-menu #reportMenu="matMenu">
+            <button mat-menu-item routerLink="/animal-control-report">Animal Control Report</button>
+            <button mat-menu-item routerLink="/monthly-adoption-report">Monthly Adoption Report</button>
+            <button mat-menu-item routerLink="/expense-analysis">Expense Analysis</button>
+            <button mat-menu-item routerLink="/volunteer-lookup">Volunteer Lookup</button>
+            <button mat-menu-item routerLink="/volunteer-birthdays">Volunteer Birthdays</button>
+        </mat-menu>
+    </ng-container>
+    <button mat-button (click)="logout()">Logout</button>
+</mat-toolbar>

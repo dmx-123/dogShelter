@@ -1,0 +1,15 @@
+.button {
+    display: flex;
+    float: right !important;
+}
+
+.page-name {
+    font-size: x-large;
+    width: 100%;
+}
+
+.field {
+    font-size: small;
+    padding-bottom: 0%;
+    height: 70px;
+}

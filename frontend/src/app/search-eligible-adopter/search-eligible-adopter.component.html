@@ -1,0 +1,56 @@
+<div class="container">
+
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <div>
+            <span class="page-name">Search Eligible Adopter</span>
+            <button class="button" mat-raised-button type="button" (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon> Go Back
+            </button>
+        </div>
+        <hr>
+        <div>
+            <mat-form-field appearance="fill" class="full-width field">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="last_name" placeholder="Enter last name">
+            </mat-form-field>
+            <button mat-raised-button type="submit">
+                <mat-icon>search</mat-icon> Search
+            </button>
+        </div>
+    </form>
+    <hr>
+    <table mat-table [dataSource]="adopters" class="mat-elevation-z0" *ngIf="adopters.length > 0">
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let application" class="cell"> {{ application.email }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let application" class="cell"> {{ application.first_name }} {{
+                application.last_name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> Phone </th>
+            <td mat-cell *matCellDef="let application" class="cell"> {{ application.phone_number }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="household_size">
+            <th mat-header-cell *matHeaderCellDef> Household Size </th>
+            <td mat-cell *matCellDef="let application" class="cell"> {{ application.household_size }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef> Address </th>
+            <td mat-cell *matCellDef="let application" class="cell">
+                {{ application.street }}, {{ application.city }}, {{ application.state }} {{ application.zip_code }}
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="head-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"
+            (click)="openApprovedApplicationDialog(row)"></tr>
+    </table>
+</div>

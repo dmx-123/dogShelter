@@ -1,0 +1,52 @@
+<app-header></app-header>
+<form [formGroup]="filterForm">
+    <div class="shelter-container">
+        <mat-form-field appearance="fill" class="col-sm-3 field">
+            <mat-label>Adoptability Status</mat-label>
+            <mat-select formControlName="adoptabilityFilter">
+                <mat-option value="All">All</mat-option>
+                <mat-option value="Ready for adoption">Ready for adoption</mat-option>
+                <mat-option value="Not ready for adoption">Not ready for adoption</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div>
+            <div>
+                <button *ngIf="count > 0" class="button" type="button" mat-raised-button aria-label="Add Dog"
+                    (click)="addDog()">
+                    <mat-icon>add</mat-icon>Add Dog
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        Shelter Availability Count: {{ count }}
+    </div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let dog" class="cell">{{ dog.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef>Age</th>
+            <td mat-cell *matCellDef="let dog" class="cell">{{ dog.age }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="breed">
+            <th mat-header-cell *matHeaderCellDef>Breed</th>
+            <td mat-cell *matCellDef="let dog" class="cell">{{ dog.breed }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="adoptability_status">
+            <th mat-header-cell *matHeaderCellDef>Adoptability Status</th>
+            <td mat-cell *matCellDef="let dog" class="cell">
+                {{ dog.adoptability_status ? 'Ready for adoption' : 'Not ready for adoption' }}
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="head-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onDogSelect(row.dogID)" class="data-row">
+        </tr>
+    </table>
+</form>

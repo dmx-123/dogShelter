@@ -1,0 +1,40 @@
+.shelter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button {
+    display: flex;
+    float: right !important;
+}
+
+.field {
+    font-size: small;
+    padding-bottom: 0%;
+    height: 70px;
+}
+
+.data-row:nth-child(even) {
+    background-color: whitesmoke;
+}
+
+.data-row:nth-child(odd) {
+    background-color: white;
+}
+
+.data-row:hover {
+    width: auto;
+    text-decoration: none;
+    background: lightgray !important;
+}
+
+.data-row {
+    cursor: pointer;
+}
+
+.head-row {
+    width: auto;
+    border-bottom: 0.15em solid;
+}

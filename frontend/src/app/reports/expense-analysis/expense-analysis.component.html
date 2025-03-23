@@ -1,0 +1,23 @@
+<div class="gap-bottom">
+    <span class="page-name">Expense Analysis</span>
+    <button class="button" mat-raised-button color="primary" type="button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon> Go Back
+    </button>
+</div>
+<hr>
+<mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+    <ng-container matColumnDef="vendor_name">
+        <mat-header-cell *matHeaderCellDef> Vendor </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row.vendor_name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total_expense">
+        <mat-header-cell *matHeaderCellDef> Total Expense </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="cell"> {{ row.total_expense | currency }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></mat-row>
+
+</mat-table>
