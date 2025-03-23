@@ -30,11 +30,9 @@ import { ViewReportsComponent } from './view-reports/view-reports.component';
 import { AddDogComponent } from './add-dog/add-dog.component';
 import { DogDashboardComponent } from './dog-dashboard/dog-dashboard.component';
 import { AdoptionApplicationReviewComponent } from './adoption-application-review/adoption-application-review.component';
-import { AnimalControlReportComponent } from './animal-control-report/animal-control-report.component';
-import { MonthlyAdoptionReportComponent } from './monthly-adoption-report/monthly-adoption-report.component';
-import { ExpenseAnalysisComponent } from './expense-analysis/expense-analysis.component';
-import { VolunteerLookupComponent } from './volunteer-lookup/volunteer-lookup.component';
-import { VolunteerBirthdaysComponent } from './volunteer-birthdays/volunteer-birthdays.component';
+import { MonthlyAdoptionReportComponent } from './reports/monthly-adoption-report/monthly-adoption-report.component';
+import { ExpenseAnalysisComponent } from './reports/expense-analysis/expense-analysis.component';
+import { VolunteerLookupComponent } from './reports/volunteer-lookup/volunteer-lookup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DogDetailComponent } from './dog-detaila/dog-details.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
@@ -43,6 +41,9 @@ import { SearchEligibleAdopterComponent } from './search-eligible-adopter/search
 import { AdoptionConfirmationDialogComponent } from './adoption-confirmation-dialog/adoption-confirmation-dialog.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { AddAdoptionApplicationComponent } from './add-adoption-application/add-adoption-application.component';
+import { VolunteerBirthdayReportComponent } from './reports/volunteer-birthday-report/volunteer-birthday-report.component';
+import { AnimalControlDrilldownComponent } from './reports/animal-control-drilldown/animal-control-drilldown.component';
+import { AnimalControlReportComponent } from './reports/animal-control-report/animal-control-report.component';
 
 @NgModule({
   declarations: [
@@ -60,12 +61,13 @@ import { AddAdoptionApplicationComponent } from './add-adoption-application/add-
     MonthlyAdoptionReportComponent,
     ExpenseAnalysisComponent,
     VolunteerLookupComponent,
-    VolunteerBirthdaysComponent,
+    VolunteerBirthdayReportComponent,
     DogDetailComponent,
     SearchEligibleAdopterComponent,
     ApprovedApplicationDialogComponent,
     AdoptionConfirmationDialogComponent,
     AddAdoptionApplicationComponent,
+    AnimalControlDrilldownComponent,
   ],
   imports: [
     BrowserModule,

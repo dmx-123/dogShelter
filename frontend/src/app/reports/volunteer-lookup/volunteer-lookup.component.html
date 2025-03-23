@@ -1,0 +1,47 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form">
+
+    <div class="gap-bottom">
+        <span class="page-name">Volunteer Birthday Report</span>
+        <button class="button" mat-raised-button color="primary" type="button" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon> Go Back
+        </button>
+    </div>
+    <hr>
+    <div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-4 field">
+                <mat-label>Search Name</mat-label>
+                <input matInput placeholder="Enter name" formControlName="name" />
+            </mat-form-field>
+        </div>
+    </div>
+    <div *ngIf="noData">
+        No results found.
+    </div>
+    <mat-table *ngIf="!noData" [dataSource]="dataSource" class="mat-elevation-z0">
+
+        <ng-container matColumnDef="first_name">
+            <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"> {{ row.first_name }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="last_name">
+            <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"> {{ row.last_name }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"> {{ row.email }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="phone_number">
+            <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"> {{ row.phone_number }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></mat-row>
+
+    </mat-table>
+</form>
