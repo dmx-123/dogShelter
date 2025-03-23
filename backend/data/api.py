@@ -2,8 +2,8 @@ from datetime import date, datetime, timedelta
 import os
 from flask import Blueprint, request, jsonify
 import jwt
-from backend.data.token import token_required
-import backend.database.script_runner as db
+from  data.token import token_required
+import database.script_runner as db
 
 user_blueprint = Blueprint('user', __name__)
 
@@ -153,19 +153,19 @@ util_blueprint = Blueprint('util', __name__)
 @token_required
 def get_breeds_list():
     breeds = db.get_breeds()
-    return jsonify({"data": breeds}), 200
+    return jsonify({"data":[row[0] for row in  breeds]}), 200
 
 @util_blueprint.route('/expenseCategoryList', methods=['GET'])
 @token_required
 def get_categories_list():
     categories = db.get_expense_categories()
-    return jsonify({"data": categories}), 200
+    return jsonify({"data":  [row[0] for row in categories]}), 200
 
 @util_blueprint.route('/microchipVendorList', methods=['GET'])
 @token_required
 def get_vendors_list():
     vendors = db.get_microchip_vendors()
-    return jsonify({"data": vendors}), 200
+    return jsonify({"data": [row[0] for row in vendors]}), 200
 
 report_blueprint = Blueprint('report', __name__)
 

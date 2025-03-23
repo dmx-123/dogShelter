@@ -104,7 +104,7 @@ def get_breeds():
     Returns a list of string.
     """
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor(dictionary=False)
     query = """
                 SELECT breed_type FROM Breed ORDER BY breed_type; 
             """
@@ -120,7 +120,7 @@ def get_expense_categories():
     Returns a list of string.
     """
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor(dictionary=False)
     query = """
                 SELECT category_name FROM ExpenseCategory ORDER BY category_name ASC; 
             """
@@ -136,7 +136,7 @@ def get_microchip_vendors():
     Returns a list of string.
     """
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor(dictionary=False)
     query = """
                SELECT vendor_name FROM  MicrochipVendor ORDER BY vendor_name; 
             """

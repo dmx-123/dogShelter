@@ -3,15 +3,16 @@
 ## Backend & Database Setup Instructions
 
 ### 1. Install and Start MySQL
-
 `brew install mysql`
 `brew services start mysql`
 
 ### 2. Locate init scripts and run with mysql
 `mysql -u root -p < init.sql`
 
-### 3. Run app
+### 3. Init Run app
+`python3 -m venv venv`
 `source venv/bin/activate`
+`pip install -r requirements.txt`
 `python3 app.py`
 
 For Angular Frontend:

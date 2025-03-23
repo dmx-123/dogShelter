@@ -1,7 +1,7 @@
 from flask import Flask
 from dotenv import load_dotenv
 
-from backend.data.api import adoption_blueprint
+from data.api import adoption_blueprint
 from data.api import user_blueprint, dog_blueprint, util_blueprint, report_blueprint
 import os
 
