@@ -1,0 +1,56 @@
+<form [formGroup]="birthdayForm" (ngSubmit)="onSubmit()" class="form-container">
+
+    <div class="gap-bottom">
+        <span class="page-name">Volunteer Birthday Report</span>
+        <button class="button" mat-raised-button color="primary" type="button" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon> Go Back
+        </button>
+    </div>
+    <hr>
+    <div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-4 field">
+                <mat-label>Year</mat-label>
+                <mat-select formControlName="year">
+                    <mat-option *ngFor="let y of years" [value]="y">{{ y }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" clsee="col-sm-4 field">
+                <mat-label>Month</mat-label>
+                <mat-select formControlName="month">
+                    <mat-option *ngFor="let m of months" [value]="m.value">{{ m.label }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div *ngIf="noData">
+        No volunteer birthdays this month!
+    </div>
+    <mat-table *ngIf="!noData" [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="first_name">
+            <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"> {{ row.first_name }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="last_name">
+            <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"> {{ row.last_name }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"> {{ row.email }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="milestone_birthday">
+            <mat-header-cell *matHeaderCellDef> Milestone </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"> {{ row.milestone_birthday }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></mat-row>
+
+    </mat-table>
+</form>

@@ -15,18 +15,8 @@ import { ApplicationExpense } from '../model/ApplicationExpense';
 })
 export class DogService {
 
-  private dogs: Dog[] = [
-    new Dog(1, 'Buddy', 'Male', 'Friendly Golden Retriever', true, 3, new Date('2024-02-15'), '555-1234', false, 'AdminUser', "asd", null, 'Golden Retriever'),
-    new Dog(2, 'Bella', 'Female', 'Calm Labrador Retriever', false, 4.5, new Date('2024-01-10'), '123456897', true, 'RescueCenter', null, null, 'Mixed')
-  ];
 
-  private expenses: Expense[] = [
-    new Expense(1, new Date('2024-03-10'), 'Pet Food Store', 50, 'Food'),
-    new Expense(1, new Date('2024-03-12'), 'Vet Clinic', 120, 'Vet'),
-    new Expense(2, new Date('2024-03-15'), 'Trainer', 80, 'Training')
-  ];
-
-  private dogDashboards: DogDashboard[] = this.dogs.map(dog => new DogDashboard(
+  private dogDashboards: DogDashboard[] = MOCK_DOGS.map(dog => new DogDashboard(
     dog.dogID,
     dog.name,
     dog.age,
@@ -68,15 +58,15 @@ export class DogService {
   }
 
   getDogs(): Dog[] {
-    return this.dogs;
+    return MOCK_DOGS
   }
 
   getDog(dogID: number): Observable<DogDetails | undefined> {
-    const dog = this.dogs.find(d => d.dogID === dogID);
+    const dog = MOCK_DOGS.find(d => d.dogID === dogID);
     if (!dog) {
       return of(undefined); // If dog not found, return undefined
     }
-    const dogExpenses = this.expenses.filter(exp => exp.dogID === dogID);
+    const dogExpenses = MOCK_EXPENSES.filter(exp => exp.dogID === dogID);
     return of(new DogDetails(dog, dogExpenses));
   }
   // getVendorsList(): Observable<string[]> {
@@ -138,8 +128,7 @@ export class DogService {
     const filteredAdopters = MOCK_ADOPTERS.filter(adopter =>
       adopter.last_name.toLowerCase().includes(lastname.toLowerCase())
     );
-
-    return of(filteredAdopters); // ✅ Return filtered results as Observable
+    return of(filteredAdopters); 
   }
   getLatestApprovedApplication(email: string): Observable<ApprovedApplication | undefined> {
     const approvedApplication = MOCK_APPROVED_APPLICATIONS.find(app => app.email === email);
@@ -155,8 +144,51 @@ export class DogService {
   submitApplication(data:any): Observable<any> {
     return this.http.post(`${this.apiUrl}/newApplication`, { data });
   }
+  //Reports
 
+  getMonthlyReport(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/monthlyAdoptionReport`);
+  }
+  
+  getExpenseAnalysis():Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}/expenseAnalysis`)
+  }
+
+  getBirthdayReport(month: number, year: number): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/volunteerBirthdayReport`, { month, year });
+  }
+
+  lookupVolunteers(input: string): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/volunteerLookup`, { input });
+  }
+
+  getSummary() {
+    return this.http.get<any>(`${this.apiUrl}/animalControlReport`);
+  }
+
+  getSurrenders(year: number, month: number) {
+    return this.http.post<any>(`${this.apiUrl}/animalControlReport/animalControlSurrender`, { year, month });
+  }
+
+  getSixtyPlus(year: number, month: number) {
+    return this.http.post<any>(`${this.apiUrl}/animalControlReport/sixtyDaysOrMore`, { year, month });
+  }
+
+  getExpenses(year: number, month: number) {
+    return this.http.post<any>(`${this.apiUrl}/animalControlReport/expense`, { year, month });
+  }
 }
+
+const MOCK_EXPENSES: Expense[] = [
+  new Expense(1, new Date('2024-03-10'), 'Pet Food Store', 50, 'Food'),
+  new Expense(1, new Date('2024-03-12'), 'Vet Clinic', 120, 'Vet'),
+  new Expense(2, new Date('2024-03-15'), 'Trainer', 80, 'Training')
+];
+
+const MOCK_DOGS:Dog[] = [
+  new Dog(1, 'Buddy', 'Male', 'Friendly Golden Retriever', true, 3, new Date('2024-02-15'), '555-1234', false, 'AdminUser', "asd", null, 'Golden Retriever'),
+  new Dog(2, 'Bella', 'Female', 'Calm Labrador Retriever', false, 4.5, new Date('2024-01-10'), '123456897', true, 'RescueCenter', null, null, 'Mixed')
+]
 const MOCK_ADOPTERS: AdoptionApplication[] = [
   new AdoptionApplication(
     'alice.smith@example.com',
