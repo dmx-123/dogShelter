@@ -9,7 +9,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './add-dog.component.html',
   styleUrls: ['./add-dog.component.css']
 })
-export class AddDogComponent implements OnInit {
+export class DogDetailComponent implements OnInit {
   dogForm: FormGroup;
   breedsList: string[] = [];
   vendorList: string[] = [];
