@@ -158,14 +158,14 @@ def get_dog(id: int):
     cursor = conn.cursor(dictionary=True)
     query = """
                 SELECT 
-                    d.dogID, d.name, d.sex, d.description, d.alteration_status, d.age, m.microchipID, d.surrender_date, d.surrenderer_phone, d.surrendered_by_animal_control, m.vendor_name, 
+                    d.dogID, d.name, d.sex, d.description, d.alteration_status, d.age, m.microchipID, d.surrender_date, d.surrenderer_phone, d.surrendered_by_animal_control, m.vendor_name as microchip_vendor, 
                     (SELECT GROUP_CONCAT(db.breed_type ORDER BY db.breed_type ASC SEPARATOR '/') 
                     FROM DogBreed db WHERE db.dogID = d.dogID) AS breeds
                 FROM Dog d 
                 LEFT JOIN Microchip m ON d.dogID = m.dogID
                 WHERE d.dogID = %s;
             """
-    cursor.execute(query, (id))
+    cursor.execute(query, (id, ))
     res = cursor.fetchone()
     cursor.close()
     conn.close()
@@ -181,9 +181,9 @@ def add_dog(name: str, sex: str, description: str, alteration_status: bool, age:
     cursor = conn.cursor(dictionary=True)
     query = """
                 INSERT INTO  Dog (name, sex, description, alteration_status, age, surrender_date, surrenderer_phone, surrendered_by_animal_control, add_by) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, );
             """
-    cursor.execute(query, (name, sex, description, alteration_status, age, surrender_date, surrenderer_phone, surrendered_by_animal_control, email))
+    cursor.execute(query, (name, sex, description, alteration_status, age, surrender_date, surrenderer_phone, surrendered_by_animal_control, email, ))
     res = cursor.lastrowid
     conn.commit()
     cursor.close()
@@ -199,7 +199,7 @@ def update_dog(id: int, sex: str, alternation_status: bool):
     query = """
                 UPDATE Dog SET sex = %s, alteration_status = %s WHERE dogID = %s;
             """
-    cursor.execute(query, (sex, alternation_status, id))
+    cursor.execute(query, (sex, alternation_status, id, ))
     cursor.close()
     conn.close()
 
@@ -213,7 +213,7 @@ def add_dog_breeds(dog_id: int, breeds: List[str]):
                 INSERT INTO DogBreed (dogID, breed_type) VALUES (%s, %s);
             """
     for breed in breeds:
-        cursor.execute(query, (dog_id, breed))
+        cursor.execute(query, (dog_id, breed, ))
     conn.commit()
     cursor.close()
     conn.close()
@@ -257,7 +257,7 @@ def add_dog_microchip(dog_id: int, microchip_id: str, vendor_name: str):
                 INSERT INTO Microchip (microchipID, dogID, vendor_name) 
                 VALUES (%s, %s, %s);
             """
-    cursor.execute(query, (microchip_id, dog_id, vendor_name))
+    cursor.execute(query, (microchip_id, dog_id, vendor_name, ))
     conn.commit()
     cursor.close()
     conn.close()
@@ -272,7 +272,7 @@ def expense_exist(id: str, vendor_name: str, date: date):
     query = """
                 SELECT COUNT(*) AS exist FROM Expense WHERE dogID = %s AND vendor_name = %s AND date = %s;
             """
-    cursor.execute(query, (id, vendor_name, date))
+    cursor.execute(query, (id, vendor_name, date, ))
     res = cursor.fetchone()
     cursor.close()
     conn.close()
@@ -323,7 +323,7 @@ def add_expense(id: str, vendor_name: str, date: date, amount: float, category_n
                 INSERT INTO Expense (dogID, date, vendor_name, amount, category_name)
                 VALUES (%s, %s, %s, %s, %s);
             """
-    cursor.execute(query, (id, date, vendor_name, amount, category_name))
+    cursor.execute(query, (id, date, vendor_name, amount, category_name, ))
     conn.commit()
     cursor.close()
     conn.close()
@@ -367,7 +367,7 @@ def view_adopter_latest_approved_application(email:str):
                 JOIN ApprovedApplication aa ON a.email = aa.email 
                 WHERE a.email = %s ORDER BY aa.submit_date DESC LIMIT 1;
             """
-    cursor.execute(query, (email,))
+    cursor.execute(query, (email, ))
     res = cursor.fetchone()
     cursor.close()
     conn.close()
@@ -397,7 +397,7 @@ def check_email_existence(email:str):
     query = """
                 SELECT COUNT(*) AS isExist FROM Adopter WHERE EMAIL = %s;
             """
-    cursor.execute(query, (email,))
+    cursor.execute(query, (email, ))
     res = cursor.fetchone()
     cursor.close()
     conn.close()
@@ -413,7 +413,7 @@ def display_adopter_info(email:str):
                 SELECT email, first_name, last_name, phone_number, household_size, street, city, state, zip_code 
                 FROM Adopter WHERE EMAIL = %s;
             """
-    cursor.execute(query, (email,))
+    cursor.execute(query, (email, ))
     res = cursor.fetchone()
     cursor.close()
     conn.close()
@@ -429,7 +429,7 @@ def insert_new_adopter(email:str, first_name:str, last_name:str, phone_number:st
                 INSERT INTO Adopter (email, first_name, last_name, phone_number, household_size, street, city, state, zip_code) 
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
             """
-    cursor.execute(query, (email, first_name, last_name, phone_number, household_size, street, city, state, zip_code))
+    cursor.execute(query, (email, first_name, last_name, phone_number, household_size, street, city, state, zip_code, ))
     conn.commit()
     cursor.close()
     conn.close()
@@ -444,7 +444,7 @@ def lookup_adoption_application(email:str, submit_date:date):
                 SELECT COUNT(*) AS result FROM AdoptionApplication
                 WHERE email = %s AND submit_date = %s;
             """
-    cursor.execute(query, (email, submit_date))
+    cursor.execute(query, (email, submit_date, ))
     res = cursor.fetchone()
     cursor.close()
     conn.close()
@@ -460,7 +460,7 @@ def insert_new_adoption_application(email:str, submit_date:date):
                 INSERT INTO AdoptionApplication (email, submit_date) 
                 VALUES (%s, %s);
             """
-    cursor.execute(query, (email, submit_date))
+    cursor.execute(query, (email, submit_date, ))
     conn.commit()
     cursor.close()
     conn.close()
@@ -502,7 +502,7 @@ def approve_adoption_application(email:str, submit_date:date, current_date: date
                 INSERT INTO ApprovedApplication (email, submit_date, approved_date) 
                 VALUES (%s, %s, %s);    
             """
-    cursor.execute(query, (email, submit_date, current_date))
+    cursor.execute(query, (email, submit_date, current_date, ))
     conn.commit()
     cursor.close()
     conn.close()
@@ -517,7 +517,7 @@ def reject_adoption_application(email:str, submit_date:date, rejected_date:date)
                 INSERT INTO RejectedApplication (email, submit_date, rejected_date) 
                 VALUES (%s, %s, %s);
             """
-    cursor.execute(query, (email, submit_date, rejected_date))
+    cursor.execute(query, (email, submit_date, rejected_date, ))
     conn.commit()
     cursor.close()
     conn.close()
@@ -541,7 +541,7 @@ def volunteer_lookup(name: str):
                     AND email NOT IN (SELECT email FROM ExecutiveDirector)
                 ORDER BY last_name ASC, first_name ASC;
             """
-    cursor.execute(query, (name, name))
+    cursor.execute(query, (name, name, ))
     res = cursor.fetchall()
     cursor.close()
     conn.close()
@@ -565,7 +565,7 @@ def volunteer_birthday_report(year: int, month: int):
                 WHERE MONTH(birthdate) = %s AND email NOT IN (SELECT email FROM ExecutiveDirector)
                 ORDER BY last_name ASC, first_name ASC;
             """
-    cursor.execute(query, (year, month))
+    cursor.execute(query, (year, month, ))
     res = cursor.fetchall()
     cursor.close()
     conn.close()
@@ -647,7 +647,7 @@ def animal_control_surrender_drilldown_report(month: str):
                     AND DATE_FORMAT(d.surrender_date, '%Y-%m') = %s
                 ORDER BY d.dogID ASC;
             """
-    cursor.execute(query, (month,))
+    cursor.execute(query, (month, ))
     res = cursor.fetchall()
     cursor.close()
     conn.close()
@@ -676,7 +676,7 @@ def sixty_days_or_more_drilldown_report(month: str):
                     AND (DATEDIFF(a.adoption_date, d.surrender_date) + 1) >= 60
                 ORDER BY rescue_days DESC, d.dogID DESC;
             """
-    cursor.execute(query, (month,))
+    cursor.execute(query, (month, ))
     res = cursor.fetchall()
     cursor.close()
     conn.close()
