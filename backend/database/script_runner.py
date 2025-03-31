@@ -553,8 +553,8 @@ def volunteer_lookup(name: str):
                 SELECT first_name, last_name, email, phone_number
                 FROM User
                 WHERE 
-                    LOWER(first_name) LIKE CONCAT('%', LOWER(%s), '%')
-                    OR LOWER(last_name) LIKE CONCAT('%', LOWER(%s), '%')
+                    (LOWER(first_name) LIKE CONCAT('%', LOWER(%s), '%')
+                    OR LOWER(last_name) LIKE CONCAT('%', LOWER(%s), '%'))
                     AND email NOT IN (SELECT email FROM ExecutiveDirector)
                 ORDER BY last_name ASC, first_name ASC;
             """
