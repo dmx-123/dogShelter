@@ -194,7 +194,7 @@ def volunteer_birthday_report(email):
     if (year < 1900 or year > 2100):    
         return jsonify({"error": "Invalid year"}), 400
     
-    res = db.volunteer_birthday_report(month, year)
+    res = db.volunteer_birthday_report(year, month)
     return jsonify({"data": res}), 200
 
 @report_blueprint.route('/animalControlReport', methods=['GET'])

@@ -25,7 +25,7 @@ export class VolunteerBirthdayReportComponent implements OnInit {
     { value: 12, label: 'Dec' }
   ];
 
-  years = Array.from({ length: 20 }, (_, i) => new Date().getFullYear() - 10 + i);
+  years = Array.from({ length: 2 }, (_, i) => new Date().getFullYear() - 1 + i);
   displayedColumns: string[] = ['first_name', 'last_name', 'email', 'milestone_birthday'];
   dataSource: any[] = [];
   noData: boolean = false;
@@ -40,6 +40,9 @@ export class VolunteerBirthdayReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadReport();
+    this.birthdayForm.valueChanges.subscribe(() => {
+      this.loadReport();
+    });
   }
 
   loadReport(): void {
