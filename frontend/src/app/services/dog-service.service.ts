@@ -104,7 +104,7 @@ export class DogService {
     return this.http.post(`${this.adoptionUrl}/rejecteApplication`, { submit_date, email });
   }
 
-  getAdopters(lastname: string): Observable<Adopter[]> {
+  getAdopters(lastname: string): Observable<any> {
     return this.http.post<Adopter[]>(`${this.adoptionUrl}/eligibleAdopter`, { lastname });
   }
 

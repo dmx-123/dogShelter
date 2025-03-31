@@ -849,7 +849,7 @@ def expense_analysis():
     cursor = conn.cursor(dictionary=True)
     query = """
                 SELECT e.vendor_name, COALESCE(SUM(e.amount), 0) AS total_expense
-                FROM Expense e ON e.vendor_name = e.vendor_name
+                FROM Expense e 
                 GROUP BY e.vendor_name
                 ORDER BY total_expense DESC;
             """

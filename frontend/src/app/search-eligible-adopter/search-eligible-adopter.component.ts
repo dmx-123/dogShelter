@@ -15,7 +15,7 @@ import { AdoptionConfirmationDialogComponent } from '../adoption-confirmation-di
 })
 export class SearchEligibleAdopterComponent implements OnInit {
   searchForm!: FormGroup;
-  displayedColumns: string[] = ['email', 'name', 'phone', 'household_size', 'address'];
+  displayedColumns: string[] = ['email', 'name', 'phone', 'address'];
   dog!: Dog;
   adoptionForm!: FormGroup;
   adopters: any[] = [];
@@ -42,7 +42,7 @@ export class SearchEligibleAdopterComponent implements OnInit {
 
     this.service.getAdopters(lastName).subscribe({
       next: (data) => {
-        this.adopters = data;
+        this.adopters = data.data;
         if (this.adopters.length === 0) {
           this.messageService.add({ severity: 'info', summary: 'No Results', detail: 'No eligible adopters found.' });
         }
