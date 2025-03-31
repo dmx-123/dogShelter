@@ -16,7 +16,7 @@ export class AddAdoptionApplicationComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private service: DogService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) {
-    this.adopterForm = new FormGroup({
+    this.adopterForm =  this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       first_name: new FormControl({ value: '', disabled: true }, Validators.required),
       last_name: new FormControl({ value: '', disabled: true }, Validators.required),

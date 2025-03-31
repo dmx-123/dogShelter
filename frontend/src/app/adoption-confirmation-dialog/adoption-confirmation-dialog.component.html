@@ -2,21 +2,21 @@
     <h3 class="title">Adoption Confirmation</h3>
     <hr>
     <div class="details-section">
-        <p><strong>Dog Name:</strong> {{ dog.name }}</p>
+        <p><strong>Dog Name:</strong> {{ dog?.name }}</p>
         <h6>Adopter Details</h6>
         <hr>
-        <p><strong>Name:</strong> {{ adopter.first_name }} {{ adopter.last_name }}</p>
-        <p><strong>Email:</strong> {{ adopter.email }}</p>
-        <p><strong>Phone:</strong> {{ adopter.phone_number }}</p>
-        <p><strong>Address:</strong> {{ adopter.street }}, {{ adopter.city }},
-            {{ adopter.state }} {{ adopter.zip_code }}</p>
+        <p><strong>Name:</strong> {{ adopter?.first_name }} {{ adopter?.last_name }}</p>
+        <p><strong>Email:</strong> {{ adopter?.email }}</p>
+        <p><strong>Phone:</strong> {{ adopter?.phone_number }}</p>
+        <p><strong>Address:</strong> {{ adopter?.street }}, {{ adopter?.city }},
+            {{ adopter?.state }} {{ adopter?.zip_code }}</p>
     </div>
 
     <div class="details-section">
         <h6>Adoption Details</h6>
         <hr>
         <p><strong>Adoption Fee:</strong> ${{ adoption_fee }}</p>
-        <p><strong>Adoption Date:</strong> {{ adoption_date | date: 'MMM dd yyyy' }}</p>
+        <p><strong>Adoption Date:</strong> {{ adoption_date |   date: 'yyyy-MM-dd' : 'UTC'  }}</p>
     </div>
 
     <div class="button-container">

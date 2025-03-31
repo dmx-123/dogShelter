@@ -297,7 +297,7 @@ def view_adopter_latest_approved_application(email):
 @token_required
 def submit_adoption(email):
     data = request.json
-    dog_id = int(data.get('dog_id'))
+    dog_id = int(data.get('dogID'))
     adopter_email = data.get('email')
     adoption_date = data.get('adoption_date')
     submit_date = data.get('submit_date')

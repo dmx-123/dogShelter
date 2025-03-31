@@ -7,6 +7,8 @@ import { ApprovedApplicationDialogComponent } from '../approved-application-dial
 import { MatDialog } from '@angular/material/dialog';
 import { Dog } from '../model/Dog';
 import { AdoptionConfirmationDialogComponent } from '../adoption-confirmation-dialog/adoption-confirmation-dialog.component';
+import { DogDetails } from '../model/DogDetails';
+import { ExpenseSummary } from '../model/ExpenseSummary';
 
 @Component({
   selector: 'app-search-eligible-adopter',
@@ -16,7 +18,9 @@ import { AdoptionConfirmationDialogComponent } from '../adoption-confirmation-di
 export class SearchEligibleAdopterComponent implements OnInit {
   searchForm!: FormGroup;
   displayedColumns: string[] = ['email', 'name', 'phone', 'address'];
+  dogDetails!: DogDetails
   dog!: Dog;
+  expenses!: ExpenseSummary[];
   adoptionForm!: FormGroup;
   adopters: any[] = [];
   selectedAdopter: any | null = null;
@@ -25,8 +29,12 @@ export class SearchEligibleAdopterComponent implements OnInit {
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private service: DogService, private messageService: MessageService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.service.currentDog.subscribe(dog => {
-      this.dog = dog;
+    this.service.currentDog.subscribe(details => {
+      if (details) {
+        this.dogDetails = details;
+        this.dog = details.dog;
+        this.expenses = details.expenses;
+      }
     });
     this.searchForm = this.fb.group({
       last_name: ['', Validators.required]
@@ -69,9 +77,14 @@ export class SearchEligibleAdopterComponent implements OnInit {
   }
 
   openAdoptionConfirmationDialog(adoptionDetails: any): void {
-    this.dialog.open(AdoptionConfirmationDialogComponent, {
+    const dialogRef = this.dialog.open(AdoptionConfirmationDialogComponent, {
       width: '850px',
       data: { adoptionDetails }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.router.navigate(['/dog-dashboard']);
+      }
     });
   }
 

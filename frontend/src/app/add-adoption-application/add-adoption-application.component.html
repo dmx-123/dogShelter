@@ -1,11 +1,10 @@
 <form [formGroup]="adopterForm" (ngSubmit)="submitAdopter()">
     <div>
         <span class="page-name">Add Adoption Application</span>
-        <button class="button" mat-raised-button color="primary" type="button" (click)="goBack()">
+        <button class="button" mat-raised-button type="button" (click)="goBack()">
             <mat-icon>arrow_back</mat-icon> Go Back
         </button>
-        <button class="button" mat-raised-button color="primary" type="submit"
-            [disabled]="!adopterForm.valid || !emailChecked">
+        <button class="button" mat-raised-button type="submit" [disabled]="!adopterForm.valid || !emailChecked">
             <mat-icon>check</mat-icon> Submit
         </button>
     </div>
