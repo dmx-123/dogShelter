@@ -47,6 +47,9 @@
                 <mat-label>Breeds</mat-label>
                 <mat-select formControlName="breeds" multiple (selectionChange)="onBreedsChange($event)"
                     required="true">
+                    <mat-select-trigger>
+                        {{ selectedBreedsDisplay }}
+                      </mat-select-trigger>
                     <mat-option *ngFor="let breed of breedsList" [value]="breed" [disabled]="
                       (isMixedOrUnknownSelected && !['Mixed', 'Unknown'].includes(breed)) || 
                       (selectedMixed && breed === 'Unknown') || 

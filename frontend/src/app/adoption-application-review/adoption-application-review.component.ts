@@ -21,8 +21,8 @@ export class AdoptionApplicationReviewComponent implements OnInit {
 
   getPendingApplications(): void {
     this.service.getPendingApplications().subscribe({
-      next: (data) => {
-        this.pendingApplications = data;
+      next: (res) => {
+        this.pendingApplications = res.data;
       },
       error: () => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error loading pending applications.', sticky: true });
@@ -31,7 +31,10 @@ export class AdoptionApplicationReviewComponent implements OnInit {
   }
 
   approveApplication(submit_date: string, email: string): void {
-    this.service.approveApplication(submit_date,email).subscribe({
+    const rawDate = new Date(submit_date); 
+    const formattedDate = rawDate.toISOString().split('T')[0]; 
+
+    this.service.approveApplication(formattedDate,email).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Application approved.' });
         this.getPendingApplications();
@@ -43,7 +46,10 @@ export class AdoptionApplicationReviewComponent implements OnInit {
   }
 
   rejectApplication(submit_date: string, email: string): void {
-    this.service.rejectApplication(submit_date,email).subscribe({
+    const rawDate = new Date(submit_date); 
+    const formattedDate = rawDate.toISOString().split('T')[0]; 
+
+    this.service.rejectApplication(formattedDate,email).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Application rejected.' });
         this.getPendingApplications();

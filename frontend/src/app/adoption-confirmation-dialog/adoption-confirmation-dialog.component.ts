@@ -33,7 +33,7 @@ export class AdoptionConfirmationDialogComponent implements OnInit {
   submitAdoption(): void {
     this.application.dogID = this.dog.dogID;
     this.application.adoption_date = this.adoption_date;
-    this.service.addAdoption(this.application).subscribe({
+    this.service.addAdoptionApplication(this.application).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Adoption recorded successfully!' });
         this.dialogRef.close(true);

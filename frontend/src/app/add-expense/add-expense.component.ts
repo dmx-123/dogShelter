@@ -40,14 +40,23 @@ export class AddExpenseComponent implements OnInit {
 
   onSubmit(): void {
     if (this.expenseForm.valid) {
-      this.service.saveExpense(this.expenseForm.value).subscribe({
+      const payload = { ...this.expenseForm.value };
+      if (payload.date instanceof Date) {
+        const year = payload.date.getFullYear();
+        const month = String(payload.date.getMonth() + 1).padStart(2, '0');
+        const day = String(payload.date.getDate()).padStart(2, '0');
+        payload.date = `${year}-${month}-${day}`; 
+      }
+  
+      this.service.addExpense(payload).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Expense added successfully.' });
           this.router.navigate(['/dog-details', this.dogID]);
         },
         error: err => {
-          console.error('Error saving expense:', err);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error saving expense. Try again.', sticky: true });
+          const errorMessage = err.error?.error || 'Error saving expense. Try again.';
+          console.error('Error saving expense:', errorMessage);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: errorMessage, sticky: true });
         }
       });
     }
