@@ -16,9 +16,12 @@ export class ExpenseAnalysisComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getExpenseAnalysis().subscribe({
-      next: (data) => this.dataSource = data,
+      next: (data: any)=> {
+        this.dataSource = data.data || [];
+      },
       error: (err) => console.error('Error fetching data', err)
     });
+    console.log('Data source:', this.dataSource);
   }
 
   goBack(): void {
