@@ -10,6 +10,7 @@ import { ApprovedApplication } from '../model/ApprovedApplication';
 import { Adopter } from '../model/Adopter';
 import { ApplicationExpense } from '../model/ApplicationExpense';
 import { map } from 'rxjs/operators';
+import { ExpenseSummary } from '../model/ExpenseSummary';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,9 @@ export class DogService {
 
   private dogUrl = "http://localhost:8080/dog";
   private userUrl = "http://localhost:8080/user";
-  private utlUrl = "http://127.0.0.1:8080/util";
-  private reportUrl = "http://127.0.0.1:8080/report";
-  private adoptionUrl = "http://127.0.0.1:8080/adoption";
+  private utlUrl = "http://localhost:8080/util";
+  private reportUrl = "http://localhost:8080/report";
+  private adoptionUrl = "http://localhost:8080/adoption";
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
@@ -47,7 +48,15 @@ export class DogService {
 
 
   getDog(dogID: number): Observable<DogDetails> {
-    return this.http.get<DogDetails>(`${this.dogUrl}/${dogID}`);
+    return this.http.get<{ data: { dog: Dog; expense: any[] } }>(`${this.dogUrl}/${dogID}`).pipe(
+      map(res => {
+        const mappedExpenses: ExpenseSummary[] = res.data.expense.map(e => ({
+          category_name: e.category_name,
+          amount: e.expense
+        }));
+        return new DogDetails(res.data.dog, mappedExpenses);
+      })
+    );
   }
 
   updateDog(dogID: number, requestBody: any): Observable<Object> {
@@ -63,28 +72,28 @@ export class DogService {
   }
 
   getBreedList(): Observable<string[]> {
-    return this.http.get<{ data: { breed_type: string }[] }>(`${this.utlUrl}/breedList`)
+    return this.http.get<{ data: string[] }>(`${this.utlUrl}/breedList`)
       .pipe(
-        map(res => res.data.map(b => b.breed_type))
+        map(res => res.data)
       );
   }
 
   getCategoriesList(): Observable<string[]> {
-    return this.http.get<{ data: { category_name: string }[] }>(`${this.utlUrl}/expenseCategoryList`)
+    return this.http.get<{ data: string[] }>(`${this.utlUrl}/expenseCategoryList`)
       .pipe(
-        map(res => res.data.map(d => d.category_name))
+        map(res => res.data)
       );
   }
 
   getMicrochipVendorsList(): Observable<string[]> {
-    return this.http.get<{ data: { vendor_name: string }[] }>(`${this.utlUrl}/microchipVendorList`)
+    return this.http.get<{ data: string[] }>(`${this.utlUrl}/microchipVendorList`)
       .pipe(
-        map(res => res.data.map(d => d.vendor_name))
+        map(res => res.data)
       );
   }
 
-  getPendingApplications(): Observable<AdoptionApplication[]> {
-    return this.http.get<AdoptionApplication[]>(`${this.adoptionUrl}/pendingApplication`);
+  getPendingApplications(): Observable<{ data: AdoptionApplication[] }> {
+    return this.http.get<{ data: AdoptionApplication[] }>(`${this.adoptionUrl}/pendingApplication`);
   }
 
   approveApplication(submit_date: string, email: string): Observable<any> {
@@ -108,13 +117,17 @@ export class DogService {
   }
 
   addAdoptionApplication(application: ApprovedApplication): Observable<Object> {
-    return this.http.post<Object>(`${this.adoptionUrl}/addApplication`, { application });
+    return this.http.post<Object>(`${this.adoptionUrl}/addApplication`, application);
   }
 
-  checkEmailExists(email: string): Observable<Adopter> {
-    return this.http.post<Adopter>(`${this.adoptionUrl}/checkAdopter`, { email });
+  checkEmailExists(email: string): Observable<{ data: Adopter }> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<{ data: Adopter }>(
+      `${this.adoptionUrl}/checkAdopter`,
+      { email },
+      { headers }
+    );
   }
-
   //Reports
   lookupVolunteers(input: string): Observable<any[]> {
     return this.http.post<any[]>(`${this.reportUrl}/volunteerLookup`, { input });

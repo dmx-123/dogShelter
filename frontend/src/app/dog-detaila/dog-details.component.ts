@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DogDetails } from '../model/DogDetails';
 import { Expense } from '../model/Expense';
 import { MessageService } from 'primeng/api';
+import { ExpenseSummary } from '../model/ExpenseSummary';
 
 @Component({
   selector: 'app-dog-details',
@@ -19,7 +20,7 @@ export class DogDetailComponent implements OnInit {
   displayedColumns: string[] = ['category_name', 'amount'];
   dogDetails?: DogDetails;
   dog!: Dog;
-  expenses: Expense[] = [];
+  expenses: ExpenseSummary[] = [];
   dogID!: number;
   vendorList: string[] = [];
   breedsList: string[] = [];
@@ -53,7 +54,7 @@ export class DogDetailComponent implements OnInit {
     this.age = JSON.parse(localStorage.getItem('userAge') || '0');
 
     this.getBreedsList();
-
+    
     if (this.dogID) {
       this.service.getDog(this.dogID).subscribe({
         next: data => {
@@ -88,6 +89,29 @@ export class DogDetailComponent implements OnInit {
     });
 
   }
+  
+  loadDog(): void {
+    if (this.dogID) {
+      this.service.getDog(this.dogID).subscribe({
+        next: data => {
+          if (data) {
+            this.dogDetails = data;
+            this.dog = data.dog;
+            this.expenses = data.expenses;
+            const breedsArray = Array.isArray(this.dog.breeds) ? this.dog.breeds : this.dog.breeds.split('/');
+            this.validateBreedsSelection(breedsArray);
+  
+            this.dogForm.patchValue({
+              ...this.dog,
+              breeds: breedsArray
+            });
+            this.setFieldAccessibility(this.dog);
+          }
+        },
+        error: err => console.error('Failed to fetch dog details', err)
+      });
+    }
+  }
 
   get sexControl() {
     return this.dogForm.get('sex');
@@ -107,21 +131,37 @@ export class DogDetailComponent implements OnInit {
 
   get vendorNameControl() {
     return this.dogForm.get('vendor_name');
+  }
 
+  get selectedBreedsDisplay(): string {
+    const selectedBreeds = this.breedControl?.value;
+    return selectedBreeds.length ? selectedBreeds.join('/') : 'Select breeds';
   }
 
   setFieldAccessibility(dog: Dog): void {
     if (dog.sex === 'Unknown') {
       this.sexControl?.enable();
+    }else{
+      this.sexControl?.disable();
     }
     if (!dog.alteration_status) {
       this.alterationStatusControl?.enable();
+    }else{
+      this.alterationStatusControl?.disable();
     }
     if (this.age > 18 && !dog.microchipID) {
-      this.dogForm.get('microchipID')?.enable();
+      this.microchipIDControl?.enable();
+    }else{
+      this.microchipIDControl?.disable();
+
     }
     if (['Unknown', 'Mixed'].includes(dog.breeds)) {
       this.breedControl?.enable();
+    }else{
+      this.breedControl?.disable();
+    }
+    if (dog.vendor_name) {
+      this.vendorNameControl?.disable();
     }
   }
 
@@ -184,12 +224,14 @@ export class DogDetailComponent implements OnInit {
         alteration_status: this.dogForm.value.alteration_status,
         microchipID: this.dogForm.value.microchipID || null,
         vendor: this.dogForm.value.vendor_name || null,
-        breeds: this.dogForm.value.breeds.length ? this.dogForm.value.breeds : null,
+        breeds: this.dogForm.value.breeds? this.dogForm.value.breeds : null,
       };
       this.service.updateDog(this.dogID, requestBody).subscribe({
         next: response => {
           console.log('Dog Updated:', response);
+          this.loadDog();
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Dog details saved successfully' });
+
         },
         error: error => {
           console.error('Error saving dog:', error);

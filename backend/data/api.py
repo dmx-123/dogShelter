@@ -4,6 +4,7 @@ from flask import Blueprint, request, jsonify
 import jwt
 from  data.token import token_required
 import database.script_runner as db
+from datetime import datetime
 
 user_blueprint = Blueprint('user', __name__)
 
@@ -73,9 +74,8 @@ def view_dog(dogID):
 @token_required
 def edit_dogs(dogID):
     data = request.json
-    
     sex = data.get('sex')
-    if (sex != 'Unknown' or sex != 'Female' or sex != 'Male'):
+    if sex is not None and sex not in {'Unknown', 'Female', 'Male'}:
         return jsonify({"error": "Invalid sex"}), 400
     alteration_status = data.get('alteration_status')
     db.update_dog(id=dogID, sex=sex, alteration_status=alteration_status)
@@ -83,6 +83,7 @@ def edit_dogs(dogID):
     microchipID = data.get('microchipID')
     if microchipID:
         vendor = data.get('vendor')
+        print(f"microchipID: {microchipID}, vendor: {vendor}")  
         if not vendor:
             return jsonify({"error": "Vendor required"}), 400
         db.add_dog_microchip(dogID, microchipID, vendor)
@@ -111,7 +112,8 @@ def add_dogs():
     mircrochip_vendor = data.get('mircrochip_vendor')
     breeds = data.get('breeds')
     email = data.get('email')
-    
+    if sex not in {'Unknown', 'Female', 'Male'}:
+        return jsonify({"error": "Invalid sex"}), 400
     if microchipID:
         if not mircrochip_vendor:
             return jsonify({"error": "Vendor required"}), 400
@@ -306,7 +308,8 @@ def add_adoption_application():
     city = data.get('city')
     state = data.get('state')
     zip_code = data.get('zip_code')
-    submit_date = data.get('submit_date')
+    # submit_date = data.get('submit_date')
+    submit_date = datetime.now().strftime('%Y-%m-%d')
 
     is_exist = db.check_email_existence(email)
     if not is_exist:
@@ -342,7 +345,8 @@ def view_pending_adoption_application():
 def add_approved_adoption_application():
     data = request.json
     email = data.get('email')
-    approved_date = data.get('approved_date')
+    # approved_date = data.get('approved_date')
+    approved_date = datetime.now().strftime('%Y-%m-%d') 
     submit_date = data.get('submit_date')
     db.approve_adoption_application(email, approved_date, submit_date)
     return jsonify(), 200
@@ -352,7 +356,8 @@ def add_approved_adoption_application():
 def add_rejected_adoption_application():
     data = request.json
     email = data.get('email')
-    rejected_date = data.get('rejected_date')
+    # rejected_date = data.get('rejected_date')
+    rejected_date = datetime.now().strftime('%Y-%m-%d') 
     submit_date = data.get('submit_date')
     db.reject_adoption_application(email, rejected_date, submit_date)
     return jsonify(), 200

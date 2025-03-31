@@ -1,9 +1,9 @@
 import { Dog } from "./Dog";
-import { Expense } from "./Expense";
+import { ExpenseSummary } from "./ExpenseSummary";
 
 export class DogDetails {
   constructor(
     public dog: Dog,
-    public expenses: Expense[]
+    public expenses: ExpenseSummary[]
   ) { }
 }

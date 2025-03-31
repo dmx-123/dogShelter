@@ -190,16 +190,29 @@ def add_dog(name: str, sex: str, description: str, alteration_status: bool, age:
     conn.close()
     return res
 
-def update_dog(id: int, sex: str, alternation_status: bool): 
+def update_dog(id: int, sex: Optional[str] = None, alteration_status: Optional[bool] = None): 
     """
     Update a dog's information by ID.
     """
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    query = """
-                UPDATE Dog SET sex = %s, alteration_status = %s WHERE dogID = %s;
-            """
-    cursor.execute(query, (sex, alternation_status, id))
+    updates = []
+    parameters = []
+
+    if sex is not None:
+        updates.append("sex = %s")
+        parameters.append(sex)
+    if alteration_status is not None:
+        updates.append("alteration_status = %s")
+        parameters.append(alteration_status)
+
+    if not updates:
+        return
+    
+    query = f"UPDATE Dog SET {', '.join(updates)} WHERE dogID = %s;"
+    parameters.append(id)
+    cursor.execute(query, tuple(parameters))
+    conn.commit()
     cursor.close()
     conn.close()
 
@@ -207,6 +220,7 @@ def add_dog_breeds(dog_id: int, breeds: List[str]):
     """
     Insert breeds for a dog into the DogBreed table.
     """
+    print(f"Breeds to add: {breeds}", flush=True) 
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     query = """
@@ -225,9 +239,10 @@ def remove_dog_breeds(dog_id: int,):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     query = """
-                DELETE DogBreed WHERE dogID = %s;
+                DELETE FROM DogBreed WHERE dogID = %s;
             """
     cursor.execute(query, (dog_id,))
+    conn.commit()
     cursor.close()
     conn.close()
     
@@ -276,7 +291,7 @@ def expense_exist(id: str, vendor_name: str, date: date):
     res = cursor.fetchone()
     cursor.close()
     conn.close()
-    return res['exist'] > 1
+    return res['exist'] > 0
 
 def get_expense_by_category(id: str):
     """

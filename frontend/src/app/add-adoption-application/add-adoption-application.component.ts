@@ -39,23 +39,35 @@ export class AddAdoptionApplicationComponent implements OnInit {
 
   checkEmail() {
     const email = this.adopterForm.get('email')?.value;
-    this.emailChecked = true;
-    //   this.service.checkEmailExists(email).subscribe({
-    //     next: (data) => {
-    //       if (data) {
-    //         this.adopterForm.patchValue(data);
-    //         this.adopterForm.disable();
-    //         this.adopterForm.get('email')?.enable();
-    //       } else {
-    //         this.emailExists = false;
-    //         this.enableFormFields();
-    //       }
-    //     },
-    //     error: (error) => {
-    //       console.error('Error checking email', error);
-    //     }
-    //   });
-    this.enableFormFields();
+
+    this.service.checkEmailExists(email).subscribe({
+      next: (res) => {
+        const adopterData = res.data;
+        if (adopterData) {
+          this.adopterForm.patchValue(adopterData);
+          // Disable all except email
+          this.disableFormFields();
+        
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Adopter Found',
+            detail: 'Adopter information auto-filled.',
+          });
+        } else {
+          this.enableFormFields();
+        }
+      },
+      error: (error) => {
+        console.error('Error checking email', error);
+        this.enableFormFields();
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Not Found',
+          detail: 'Adopter not found. Please enter their information.',
+          sticky: true
+        });
+      }
+    });
   }
 
   disableFormFields(): void {
@@ -77,9 +89,9 @@ export class AddAdoptionApplicationComponent implements OnInit {
       }
     });
   }
-  
+
   // restrict e,+,-,E 
-  numericOnly(event:any): boolean { 
+  numericOnly(event: any): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
     if (charCode == 101 || charCode == 69 || charCode == 45 || charCode == 43) {
       return false;
@@ -89,7 +101,18 @@ export class AddAdoptionApplicationComponent implements OnInit {
   }
   submitAdopter() {
     if (this.adopterForm.valid) {
-      this.service.addAdoptionApplication(this.adopterForm.value);
+      this.service.addAdoptionApplication(this.adopterForm.value).subscribe({
+        next: (res) => {
+          console.log('Success!', res);
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Application saved successfully' });
+
+        },
+        error: (err) => {
+          console.error('Error submitting application:', err);
+          const errorMessage = err?.error?.error || 'Error saving application. Try again.';
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: errorMessage, sticky: true });
+        }
+      });
     }
   }
 
