@@ -115,7 +115,7 @@ def add_dogs(email):
   
     if sex not in {'Unknown', 'Female', 'Male'}:
         return jsonify({"error": "Invalid sex"}), 400
-    if microchipID and microchipID.len() > 0:
+    if microchipID and len(microchipID) > 0:
         if not mircrochip_vendor or mircrochip_vendor.len() == 0:
             return jsonify({"error": "Vendor required"}), 400
         if db.microchip_exist(microchipID):
@@ -128,7 +128,7 @@ def add_dogs(email):
         return jsonify({"error": "Surrenderer phone is required if surrendered by animal control"}), 400
     
     new_dogID = db.add_dog(name, sex, description, alteration_status, age, surrender_date, surrenderer_phone, surrenderer_by_animal_control, email)
-    if microchipID and microchipID.len() == 0:
+    if microchipID and len(microchipID) > 0:
         db.add_dog_microchip(new_dogID, microchipID, mircrochip_vendor)
     if breeds and len(breeds) > 0:
         db.add_dog_breeds(new_dogID, breeds)
