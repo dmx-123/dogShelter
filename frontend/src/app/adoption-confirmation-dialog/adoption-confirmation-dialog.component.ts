@@ -5,6 +5,8 @@ import { DogService } from '../services/dog-service.service';
 import { Adopter } from '../model/Adopter';
 import { Dog } from '../model/Dog';
 import { ApprovedApplication } from '../model/ApprovedApplication';
+import { ExpenseSummary } from '../model/ExpenseSummary';
+import { DogDetails } from '../model/DogDetails';
 
 @Component({
   selector: 'app-adoption-confirmation-dialog',
@@ -13,6 +15,8 @@ import { ApprovedApplication } from '../model/ApprovedApplication';
 })
 export class AdoptionConfirmationDialogComponent implements OnInit {
   adopter!: Adopter;
+  dogDetails!: DogDetails
+
   dog!: Dog;
   adoption_fee: number = 0;
   adoption_date!: Date;
@@ -23,17 +27,25 @@ export class AdoptionConfirmationDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.adopter = this.data.adoptionDetails.adopter;
-    this.service.currentDog.subscribe(dog => {
-      this.dog = dog;
+    this.application = this.data.adoptionDetails.application;
+    this.service.currentDog.subscribe(details => {
+      if (details) {
+        this.dogDetails = details;
+        this.dog = details.dog;
+      }
     });
     this.adoption_date = this.data.adoptionDetails.adoption_date;
     this.adoption_fee = this.data.adoptionDetails.adoption_fee;
   }
 
   submitAdoption(): void {
-    this.application.dogID = this.dog.dogID;
-    this.application.adoption_date = this.adoption_date;
-    this.service.addAdoptionApplication(this.application).subscribe({
+    const payload = {
+      dogID: this.dog.dogID,
+      email: this.application.email,
+      adoption_date: this.formatDate(this.adoption_date),
+      submit_date: this.formatDate(this.application.submit_date)
+    };
+    this.service.submitApplication(payload).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Adoption recorded successfully!' });
         this.dialogRef.close(true);
@@ -42,6 +54,14 @@ export class AdoptionConfirmationDialogComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error recording adoption. Try again.' });
       }
     });
+  }
+
+  formatDate(dateInput: string | Date): string {
+    const date = new Date(dateInput);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   closeDialog(): void {

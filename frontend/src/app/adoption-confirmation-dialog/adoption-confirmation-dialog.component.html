@@ -16,7 +16,7 @@
         <h6>Adoption Details</h6>
         <hr>
         <p><strong>Adoption Fee:</strong> ${{ adoption_fee }}</p>
-        <p><strong>Adoption Date:</strong> {{ adoption_date | date: 'MMM dd yyyy' }}</p>
+        <p><strong>Adoption Date:</strong> {{ adoption_date |   date: 'yyyy-MM-dd' : 'UTC'  }}</p>
     </div>
 
     <div class="button-container">

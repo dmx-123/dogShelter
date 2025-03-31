@@ -9,7 +9,7 @@
     <p><strong>City:</strong> {{ adopter.city }}</p>
     <p><strong>State:</strong> {{ adopter.state }}</p>
     <p><strong>Zip Code:</strong> {{ adopter.zip_code }}</p>
-    <p><strong>Adoption Fee:</strong> ${{ adoptionFee }}</p>
+    <p><strong>Adoption Fee:</strong> ${{ adoptionFee.toFixed(2) }}<span *ngIf="isFeeWaived"> (waived)</span></p>
     <p><strong>Approved Date:</strong> {{ latestApplication?.approved_date |  date: 'yyyy-MM-dd': 'UTC' }}</p>
     <p><strong>Submit Date:</strong> {{ latestApplication?.submit_date |  date: 'yyyy-MM-dd' : 'UTC' }}</p>
 

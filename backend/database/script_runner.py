@@ -398,10 +398,11 @@ def submit_adoption(adoption_date:str, dog_id:int, email:str, submit_date:str):
     cursor = conn.cursor(dictionary=True)
     query = """
                 UPDATE ApprovedApplication 
-                SET adoption_date = %s, dogID = %d 
+                SET adoption_date = %s, dogID = %s 
                 WHERE email = %s AND submit_date = %s;
             """
     cursor.execute(query, (adoption_date, dog_id, email, submit_date))
+    conn.commit() 
     cursor.close()
     conn.close()
 

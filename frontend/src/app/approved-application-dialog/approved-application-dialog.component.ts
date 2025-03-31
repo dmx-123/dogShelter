@@ -4,6 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DogService } from '../services/dog-service.service';
 import { Adopter } from '../model/Adopter';
 import { Dog } from '../model/Dog';
+import { DogDetails } from '../model/DogDetails';
+import { Expense } from '../model/Expense';
+import { ExpenseSummary } from '../model/ExpenseSummary';
 
 @Component({
   selector: 'app-approved-application-dialog',
@@ -13,8 +16,11 @@ import { Dog } from '../model/Dog';
 export class ApprovedApplicationDialogComponent implements OnInit {
   adoptionForm: FormGroup;
   adopter!: Adopter;
+  dogDetails!: DogDetails
   dog!: Dog;
+  expenses!: ExpenseSummary[];
   adoptionFee: number = 0;
+  isFeeWaived:boolean = false;
   latestApplication: any;
   todayDate = new Date(new Date().toLocaleDateString());
 
@@ -26,8 +32,14 @@ export class ApprovedApplicationDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.currentDog.subscribe(dog => {
-      this.dog = dog;
+    this.service.currentDog.subscribe(details => {
+      if (details) {
+        this.dogDetails = details;
+        this.dog = details.dog;
+        this.expenses = details.expenses;
+        const result = this.getAdoptionFee(this.dog, this.expenses);
+        this.adoptionFee = result.fee;
+        this.isFeeWaived = result.waived;      }
     });
     this.adopter = this.data.adopter;
     this.loadLatestApplication();
@@ -37,7 +49,7 @@ export class ApprovedApplicationDialogComponent implements OnInit {
     this.service.getLatestApprovedApplication(this.adopter.email).subscribe((application) => {
       if (application) {
         this.latestApplication = application;
-        this.adoptionFee = 0;
+        this.adoptionFee =  this.adoptionFee;
       } else {
         console.warn('No approved application found for this email.');
       }
@@ -55,6 +67,29 @@ export class ApprovedApplicationDialogComponent implements OnInit {
     };
 
     this.dialogRef.close({ confirmed: true, adoptionDetails });
+  }
+
+  getTotalExpenses(expenses: ExpenseSummary[]): number {
+    return expenses.reduce((sum, expense) => sum + expense.amount, 0);
+  }
+
+  getAdoptionFee(dog: Dog, expenses: ExpenseSummary[]): { fee: number, waived: boolean }  {
+    const total = this.getTotalExpenses(expenses);
+
+    // Special case: Terrier + name "Sideways"
+    const breedList = typeof dog.breeds === 'string' ? dog.breeds.split('/') : dog.breeds;
+    const isTerrier = breedList.some((b: string) => b.toLowerCase().includes('terrier'));
+    const isSideways = dog.name?.trim().toLowerCase() === 'sideways';
+
+    if (isTerrier && isSideways) {
+      return { fee: total * 1.25, waived: true };
+    }
+
+    if (dog.surrendered_by_animal_control) {
+      return { fee: total * 0.10, waived: false };
+    }
+
+    return { fee: total * 1.25, waived: false };
   }
 }
 
