@@ -19,7 +19,10 @@ export class DogService {
 
   private dogSource = new BehaviorSubject<any>(null);
   currentDog = this.dogSource.asObservable();
-
+  setCurrentDog(dog: Dog): void {
+    this.dogSource.next(dog);
+  }
+  
   private dogUrl = "http://localhost:8080/dog";
   private userUrl = "http://localhost:8080/user";
   private utlUrl = "http://localhost:8080/util";
@@ -50,6 +53,8 @@ export class DogService {
   getDog(dogID: number): Observable<DogDetails> {
     return this.http.get<{ data: { dog: Dog; expense: any[] } }>(`${this.dogUrl}/${dogID}`).pipe(
       map(res => {
+        const dog = res.data.dog;
+        this.setCurrentDog(dog);
         const mappedExpenses: ExpenseSummary[] = res.data.expense.map(e => ({
           category_name: e.category_name,
           amount: e.expense
@@ -109,7 +114,9 @@ export class DogService {
   }
 
   getLatestApprovedApplication(email: string): Observable<ApprovedApplication> {
-    return this.http.post<ApprovedApplication>(`${this.adoptionUrl}/latestApprovedApplication`, { email });
+    return this.http.post<{ data: ApprovedApplication }>(`${this.adoptionUrl}/latestApprovedApplication`, { email }).pipe(
+      map(res => res.data)
+    );
   }
 
   submitApplication(data: any): Observable<any> {

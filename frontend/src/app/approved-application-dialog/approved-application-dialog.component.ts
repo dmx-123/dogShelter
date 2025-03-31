@@ -34,10 +34,6 @@ export class ApprovedApplicationDialogComponent implements OnInit {
   }
 
   loadLatestApplication(): void {
-    // this.service.getLatestApplication(this.adopter.email).subscribe((application) => {
-    //   this.latestApplication = application;
-    //   this.adoptionFee = application.expense;
-    // });
     this.service.getLatestApprovedApplication(this.adopter.email).subscribe((application) => {
       if (application) {
         this.latestApplication = application;

@@ -16,7 +16,7 @@ export class AddAdoptionApplicationComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private service: DogService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) {
-    this.adopterForm = new FormGroup({
+    this.adopterForm =  this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       first_name: new FormControl({ value: '', disabled: true }, Validators.required),
       last_name: new FormControl({ value: '', disabled: true }, Validators.required),
@@ -45,6 +45,9 @@ export class AddAdoptionApplicationComponent implements OnInit {
         const adopterData = res.data;
         if (adopterData) {
           this.adopterForm.patchValue(adopterData);
+          //dont know why but it does not patch value for city
+          this.adopterForm.get("city")?.setValue(res.data.city);
+          this.emailChecked = true;
           // Disable all except email
           this.disableFormFields();
         
@@ -101,7 +104,7 @@ export class AddAdoptionApplicationComponent implements OnInit {
   }
   submitAdopter() {
     if (this.adopterForm.valid) {
-      this.service.addAdoptionApplication(this.adopterForm.value).subscribe({
+      this.service.addAdoptionApplication(this.adopterForm.getRawValue()).subscribe({
         next: (res) => {
           console.log('Success!', res);
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Application saved successfully' });
