@@ -66,7 +66,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill" class="col-sm-4 field" *ngIf="microchipIDControl?.value">
                 <mat-label>Vendor Name</mat-label>
-                <mat-select formControlName="vendor_name">
+                <mat-select formControlName="microchip_vendor">
                     <mat-option *ngFor="let vendor of vendorList" [value]="vendor" class="option">
                         {{ vendor }}
                     </mat-option>

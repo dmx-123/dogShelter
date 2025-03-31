@@ -39,8 +39,8 @@ export class AdoptionApplicationReviewComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Application approved.' });
         this.getPendingApplications();
       },
-      error: () => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error approving application.', sticky: true });
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error, sticky: true });
       }
     });
   }
@@ -54,8 +54,8 @@ export class AdoptionApplicationReviewComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Application rejected.' });
         this.getPendingApplications();
       },
-      error: () => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error rejecting application.', sticky: true });
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error, sticky: true });
       }
     });
   }

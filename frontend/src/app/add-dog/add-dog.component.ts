@@ -30,10 +30,10 @@ export class AddDogComponent implements OnInit {
       alteration_status: [false, Validators.required],
       age: ['', [Validators.required, Validators.min(0)]],
       microchipID: [''],
-      vendor_name: [{ value: '', disabled: true }],
+      microchip_vendor: [{ value: '', disabled: true }],
       breeds: [[], Validators.required],
       surrender_date: ['', Validators.required],
-      surrenderer_phone: ['', Validators.required],
+      surrenderer_phone: [''],
       surrendered_by_animal_control: [false]
     });
   }
@@ -44,13 +44,24 @@ export class AddDogComponent implements OnInit {
 
     this.dogForm.get('microchipID')?.valueChanges.subscribe(value => {
       if (value) {
-        this.dogForm.get('vendor_name')?.enable();
-        this.dogForm.get('vendor_name')?.setValidators([Validators.required]);
+        this.dogForm.get('microchip_vendor')?.enable();
+        this.dogForm.get('microchip_vendor')?.setValidators([Validators.required]);
       } else {
-        this.dogForm.get('vendor_name')?.disable();
-        this.dogForm.get('vendor_name')?.clearValidators();
+        this.dogForm.get('microchip_vendor')?.setValue('');
+        this.dogForm.get('microchip_vendor')?.disable();
+        this.dogForm.get('microchip_vendor')?.clearValidators();
       }
-      this.dogForm.get('vendor_name')?.updateValueAndValidity();
+      this.dogForm.get('microchip_vendor')?.updateValueAndValidity();
+    });
+
+    this.dogForm.get('surrendered_by_animal_control')?.valueChanges.subscribe((isFromAnimalControl) => {
+      const phoneControl = this.dogForm.get('surrenderer_phone');
+      if (isFromAnimalControl) {
+        phoneControl?.setValidators([Validators.required]);
+      } else {
+        phoneControl?.clearValidators();
+      }
+      phoneControl?.updateValueAndValidity();
     });
   }
   
@@ -71,7 +82,7 @@ export class AddDogComponent implements OnInit {
   }
 
   get vendorNameControl() {
-    return this.dogForm.get('vendor_name');
+    return this.dogForm.get('microchip_vendor');
 
   }
 
@@ -90,6 +101,11 @@ export class AddDogComponent implements OnInit {
   onBreedsChange(event: any): void {
     const selectedBreeds: string[] = event.value;
     this.validateBreedsSelection(selectedBreeds);
+  }
+
+  get selectedBreedsDisplay(): string {
+    const selectedBreeds = this.breedControl?.value;
+    return selectedBreeds.length ? selectedBreeds.join('/') : 'Select breeds';
   }
 
   validateBreedsSelection(selectedBreeds: string[]): void {
@@ -128,11 +144,11 @@ export class AddDogComponent implements OnInit {
     this.service.addDog(formData).subscribe({
       next: (response) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Dog added successfully!' });
-        this.promptNavigation(response.dogID);
+        this.promptNavigation(response.data);
       },
       error: (error) => {
         console.error('Error adding dog:', error);
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error adding dog. Try again.' });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error || 'Failed to add dog.' });
       }
     });
   }

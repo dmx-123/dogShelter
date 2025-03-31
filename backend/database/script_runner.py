@@ -70,7 +70,9 @@ def get_dogs():
                     END AS adoptability_status
                 FROM Dog d
                 LEFT JOIN Microchip m ON d.dogID = m.dogID
-                WHERE d.dogID NOT IN (SELECT dogID FROM ApprovedApplication)
+                WHERE NOT EXISTS (
+                    SELECT 1 FROM ApprovedApplication a WHERE a.dogID = d.dogID
+                )
                 ORDER BY d.surrender_date ASC;
             """
     cursor.execute(query)
@@ -181,7 +183,7 @@ def add_dog(name: str, sex: str, description: str, alteration_status: bool, age:
     cursor = conn.cursor(dictionary=True)
     query = """
                 INSERT INTO  Dog (name, sex, description, alteration_status, age, surrender_date, surrenderer_phone, surrendered_by_animal_control, add_by) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, );
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
             """
     cursor.execute(query, (name, sex, description, alteration_status, age, surrender_date, surrenderer_phone, surrendered_by_animal_control, email, ))
     res = cursor.lastrowid
@@ -359,8 +361,8 @@ def search_eligible_adopter(last_name:str):
                 JOIN ApprovedApplication aa ON aa.email = a.email 
                 WHERE aa.dogID IS NULL 
                 AND LOWER(a.last_name) LIKE CONCAT('%', LOWER(%s), '%') 
-                AND aa.submit_date = ( SELECT MAX(submit_date) 
-                FROM `ApprovedApplication` WHERE email = a.email);
+                AND aa.submit_date = (SELECT MAX(submit_date) 
+                FROM ApprovedApplication WHERE email = a.email);
             """
     cursor.execute(query, (last_name, ))
     res = cursor.fetchall()

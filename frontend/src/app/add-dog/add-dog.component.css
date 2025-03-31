@@ -44,7 +44,7 @@ textarea {
 }
 
 
-mat-form-field[formControlName='vendor_name'] {
+mat-form-field[formControlName='microchip_vendor'] {
     width: 45%;
 }
 

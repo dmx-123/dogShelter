@@ -11,7 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class DogDashboardComponent {
   filterForm: FormGroup;
-  displayedColumns: string[] = ['name', 'age', 'breed', 'adoptability_status'];
+  displayedColumns: string[] = ['name', 'breed', 'sex', 'alteration_status','age', 'adoptability_status'];
   dataSource!: DogDashboard[];
   isAdmin: boolean = false;
   dogs: DogDashboard[] = [];

@@ -20,10 +20,11 @@ def token_required(f):
         secret_key = os.getenv('JWT_KEY')
         try:
             data = jwt.decode(token, secret_key, algorithms=['HS256'])
+            email = data.get('email')
         except jwt.ExpiredSignatureError:
             return jsonify({"error": "Token has expired!"}), 401
         except jwt.InvalidTokenError:
             return jsonify({"error": "Invalid token!"}), 401
         
-        return f(*args, **kwargs)
+        return f(email, *args, **kwargs)
     return decorated

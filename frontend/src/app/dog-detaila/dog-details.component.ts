@@ -39,7 +39,7 @@ export class DogDetailComponent implements OnInit {
       alteration_status: [{ value: false, disabled: true }],
       age: [{ value: '', disabled: true }],
       microchipID: [{ value: '', disabled: true }],
-      vendor_name: [{ value: '', disabled: true }],
+      microchip_vendor: [{ value: '', disabled: true }],
       breeds: [{ value: [], disabled: true }],
       surrender_date: [{ value: '', disabled: true }],
       surrenderer_phone: [{ value: '', disabled: true }],
@@ -130,7 +130,7 @@ export class DogDetailComponent implements OnInit {
   }
 
   get vendorNameControl() {
-    return this.dogForm.get('vendor_name');
+    return this.dogForm.get('microchip_vendor');
   }
 
   get selectedBreedsDisplay(): string {
@@ -160,7 +160,7 @@ export class DogDetailComponent implements OnInit {
     }else{
       this.breedControl?.disable();
     }
-    if (dog.vendor_name) {
+    if (dog.microchip_vendor) {
       this.vendorNameControl?.disable();
     }
   }
@@ -223,7 +223,7 @@ export class DogDetailComponent implements OnInit {
         sex: this.dogForm.value.sex,
         alteration_status: this.dogForm.value.alteration_status,
         microchipID: this.dogForm.value.microchipID || null,
-        vendor: this.dogForm.value.vendor_name || null,
+        vendor: this.dogForm.value.microchip_vendor || null,
         breeds: this.dogForm.value.breeds? this.dogForm.value.breeds : null,
       };
       this.service.updateDog(this.dogID, requestBody).subscribe({
@@ -235,7 +235,7 @@ export class DogDetailComponent implements OnInit {
         },
         error: error => {
           console.error('Error saving dog:', error);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error saving dog. Try again.', sticky: true });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error, sticky: true });
         }
       });
     }

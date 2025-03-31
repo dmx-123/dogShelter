@@ -11,7 +11,7 @@ export class Dog {
         public surrendered_by_animal_control: boolean,
         public add_by: string,
         public microchipID: string | null,  
-        public vendor_name: string | null,  
+        public microchip_vendor: string | null,  
         public breeds: string        
     ) { }
 }
