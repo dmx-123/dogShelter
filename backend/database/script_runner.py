@@ -165,7 +165,7 @@ def get_dog(id: int):
                 LEFT JOIN Microchip m ON d.dogID = m.dogID
                 WHERE d.dogID = %s;
             """
-    cursor.execute(query, (id))
+    cursor.execute(query, (id,))
     res = cursor.fetchone()
     cursor.close()
     conn.close()

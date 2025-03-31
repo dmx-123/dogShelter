@@ -34,46 +34,25 @@ export class LoginComponent {
     this.serverError = null; 
     const { email, password } = this.loginForm.value;
 
-    if (email === 'admin@test.com' && password === 'password123') {
-      const mockResponse = {
-        token: 'mock-jwt-token', // Simulated JWT token
-        data: {
-          isAdmin: true, // ✅ Simulated admin access
-          age: 30
-        }
-      };
-  
-      localStorage.setItem('authToken', mockResponse.token);
-      localStorage.setItem('isAdmin', JSON.stringify(mockResponse.data.isAdmin));
-      localStorage.setItem('userAge', JSON.stringify(mockResponse.data.age));
-      localStorage.setItem('email', email);
-  
-      this.messageService.add({ severity: 'success', summary: 'Login Successful', detail: 'Redirecting...' });
-  
-      setTimeout(() => {
-        this.router.navigate(['/dog-dashboard']);
-      }, 2000);
-    } else {
-      this.serverError = 'Invalid credentials (Test Mode)';
-    }
-    // this.service.login(email, password).subscribe({
-    //   next: (response) => {
-    //     const { token, data } = response;
+    this.service.login(email, password).subscribe({
+      next: (response) => {
+        const { token, data } = response;
 
-    //     localStorage.setItem('authToken', token);
-    //     localStorage.setItem('isAdmin', JSON.stringify(data.isAdmin));
-    //     localStorage.setItem('userAge', JSON.stringify(data.age));
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('isAdmin', JSON.stringify(data.isAdmin));
+        localStorage.setItem('userAge', JSON.stringify(data.age));
+        localStorage.setItem('email', JSON.stringify(this.emailControl?.value));
+        
+        this.messageService.add({ severity: 'success', summary: 'Login Successful', detail: 'Redirecting...' });
 
-    //     this.messageService.add({ severity: 'success', summary: 'Login Successful', detail: 'Redirecting...' });
+        setTimeout(() => {
+          this.router.navigate(['/dog-dashboard']); 
+        }, 2000);
 
-    //     setTimeout(() => {
-    //       this.router.navigate(['/dog-dashboard']); 
-    //     }, 2000);
-
-    //   },
-    //   error: (error) => {
-    //     this.serverError = error.error.error || 'Invalid credentials';
-    //   }
-    // });
+      },
+      error: (error) => {
+        this.serverError = error.error.error || 'Invalid credentials';
+      }
+    });
   }
 }

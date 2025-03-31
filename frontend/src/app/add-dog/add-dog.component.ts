@@ -14,6 +14,8 @@ export class AddDogComponent implements OnInit {
   breedsList: string[] = [];
   vendorList: string[] = [];
   isMixedOrUnknownSelected: boolean = false;
+  selectedMixed: boolean = false;
+  selectedUnknown: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +53,27 @@ export class AddDogComponent implements OnInit {
       this.dogForm.get('vendor_name')?.updateValueAndValidity();
     });
   }
+  
+  get sexControl() {
+    return this.dogForm.get('sex');
+  }
+
+  get breedControl() {
+    return this.dogForm.get('breeds');
+  }
+
+  get alterationStatusControl() {
+    return this.dogForm.get('alteration_status');
+  }
+
+  get microchipIDControl() {
+    return this.dogForm.get('microchipID');
+  }
+
+  get vendorNameControl() {
+    return this.dogForm.get('vendor_name');
+
+  }
 
   getBreedsList(): void {
     this.service.getBreedList().subscribe(breeds => {
@@ -59,44 +82,45 @@ export class AddDogComponent implements OnInit {
   }
 
   getVendorsList(): void {
-    this.service.getVendorsList().subscribe(vendors => {
+    this.service.getMicrochipVendorsList().subscribe(vendors => {
       this.vendorList = vendors;
     });
   }
 
   onBreedsChange(event: any): void {
     const selectedBreeds: string[] = event.value;
+    this.validateBreedsSelection(selectedBreeds);
+  }
+
+  validateBreedsSelection(selectedBreeds: string[]): void {
     const hasMixed = selectedBreeds.includes('Mixed');
     const hasUnknown = selectedBreeds.includes('Unknown');
 
-    if (hasMixed || hasUnknown) {
-      this.dogForm.get('breeds')?.setValue([hasMixed ? 'Mixed' : 'Unknown'], { emitEvent: false });
-      this.isMixedOrUnknownSelected = true;
-    } else {
-      this.isMixedOrUnknownSelected = false;
+    if (hasMixed && hasUnknown) {
+      selectedBreeds = [hasMixed ? 'Mixed' : 'Unknown'];
     }
+
+    if (hasMixed || hasUnknown) {
+      selectedBreeds = [hasMixed ? 'Mixed' : 'Unknown'];
+    }
+    this.dogForm.get('breeds')?.setValue(selectedBreeds, { emitEvent: false });
+
+    // If "Mixed" or "Unknown" is selected, disable other breeds
+    this.isMixedOrUnknownSelected = hasMixed || hasUnknown;
+
+    this.selectedMixed = hasMixed;
+    this.selectedUnknown = hasUnknown;
   }
 
   onSubmit(): void {
     if (this.dogForm.valid) {
       const formData = this.dogForm.value;
 
-      if (formData.name === 'Uga' && formData.breeds.includes('Bulldog')) {
+      if (formData.name.toLowerCase() === 'uga' && formData.breeds.includes('Bulldog')) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Name cannot be Uga with breed Bulldog.' });
         return;
       }
-
-      if (formData.microchipID) {
-        this.service.checkMicrochipID(formData.microchipID).subscribe(result => {
-          if (result.exist > 0) {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Microchip ID already exists.' });
-          } else {
-            this.addDog(formData);
-          }
-        });
-      } else {
-        this.addDog(formData);
-      }
+      this.addDog(formData);
     }
   }
 

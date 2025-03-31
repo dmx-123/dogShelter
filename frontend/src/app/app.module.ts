@@ -33,7 +33,7 @@ import { AdoptionApplicationReviewComponent } from './adoption-application-revie
 import { MonthlyAdoptionReportComponent } from './reports/monthly-adoption-report/monthly-adoption-report.component';
 import { ExpenseAnalysisComponent } from './reports/expense-analysis/expense-analysis.component';
 import { VolunteerLookupComponent } from './reports/volunteer-lookup/volunteer-lookup.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DogDetailComponent } from './dog-detaila/dog-details.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { ApprovedApplicationDialogComponent } from './approved-application-dialog/approved-application-dialog.component';
@@ -44,6 +44,7 @@ import { AddAdoptionApplicationComponent } from './add-adoption-application/add-
 import { VolunteerBirthdayReportComponent } from './reports/volunteer-birthday-report/volunteer-birthday-report.component';
 import { AnimalControlDrilldownComponent } from './reports/animal-control-drilldown/animal-control-drilldown.component';
 import { AnimalControlReportComponent } from './reports/animal-control-report/animal-control-report.component';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,12 @@ import { AnimalControlReportComponent } from './reports/animal-control-report/an
   ],
   providers: [
     MessageService,
-    { provide: MAT_DATE_LOCALE, useValue: 'en-US' }
+    { provide: MAT_DATE_LOCALE, useValue: 'en-US' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

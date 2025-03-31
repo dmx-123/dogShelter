@@ -46,3 +46,9 @@ instance/
 # OS-specific files
 .DS_Store
 Thumbs.db
+backend/database/dog_breeds.sql
+backend/database/dog_expense.sql
+backend/database/dog.sql
+backend/database/expense_category.sql
+backend/database/microchipVendor.sql
+backend/database/users.sql

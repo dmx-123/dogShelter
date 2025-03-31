@@ -89,7 +89,7 @@ export class AddAdoptionApplicationComponent implements OnInit {
   }
   submitAdopter() {
     if (this.adopterForm.valid) {
-      this.service.submitApplication(this.adopterForm.value);
+      this.service.addAdoptionApplication(this.adopterForm.value);
     }
   }
 

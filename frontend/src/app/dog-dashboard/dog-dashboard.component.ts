@@ -27,24 +27,21 @@ export class DogDashboardComponent {
 
   ngOnInit() {
 
-    //Get is Admin from localStorgae
     this.isAdmin = JSON.parse(localStorage.getItem('isAdmin') || 'false');
-    //Get dog list for dashboard
-    // this.service.getDogs().subscribe({
-    //   next: (dogs) => {
-    //     this.dogs = dogs;
-    //     this.filterDogs();
-    //   },
-    //   error: (err) => console.error('Failed to fetch dogs', err)
-    // });
-    this.dogs = this.service.getDogDashboards();
+    this.service.getDogs().subscribe({
+      next: (dogs) => {
+        this.dogs = dogs;
+        this.filterDogs();
+      },
+      error: (err) => console.error('Failed to fetch dogs', err)
+    });
+
     this.filterDogs();
     //Get shelter availability
-    // this.service.getAvailabilityCount().subscribe({
-    //   next: (count) => this.count = count,
-    //   error: (err) => console.error('Failed to fetch count', err)
-    // });
-    this.count = this.service.getAvailabilityCount();
+    this.service.getAvailabilityCount().subscribe({
+      next: (count) => this.count = count,
+      error: (err) => console.error('Failed to fetch count', err)
+    });
     this.filterForm.get('adoptabilityFilter')?.valueChanges.subscribe(value => {
       this.filterDogs();
     });
@@ -55,10 +52,10 @@ export class DogDashboardComponent {
     const filterValue = this.filterForm.get('adoptabilityFilter')?.value;
     switch (filterValue) {
       case 'Ready for adoption':
-        this.filteredDogs = this.dogs.filter(dog => dog.adoptability_status === true);
+        this.filteredDogs = this.dogs.filter(dog => Boolean(dog.adoptability_status));
         break;
       case 'Not ready for adoption':
-        this.filteredDogs = this.dogs.filter(dog => dog.adoptability_status === false);
+        this.filteredDogs = this.dogs.filter(dog =>  !Boolean(dog.adoptability_status));
         break;
       default:
         this.filteredDogs = this.dogs;
