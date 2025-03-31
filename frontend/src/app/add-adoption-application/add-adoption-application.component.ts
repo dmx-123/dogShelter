@@ -25,7 +25,8 @@ export class AddAdoptionApplicationComponent implements OnInit {
       street: new FormControl({ value: '', disabled: true }, Validators.required),
       city: new FormControl({ value: '', disabled: true }, Validators.required),
       state: new FormControl({ value: '', disabled: true }, Validators.required),
-      zip_code: new FormControl({ value: '', disabled: true }, Validators.required)
+      zip_code: new FormControl({ value: '', disabled: true }, Validators.required),
+      submit_date:  new FormControl('', Validators.required),
     });
   }
 
@@ -43,22 +44,29 @@ export class AddAdoptionApplicationComponent implements OnInit {
     this.service.checkEmailExists(email).subscribe({
       next: (res) => {
         const adopterData = res.data;
-        if (adopterData) {
-          this.adopterForm.patchValue(adopterData);
-          //dont know why but it does not patch value for city
-          this.adopterForm.get("city")?.setValue(res.data.city);
-          this.emailChecked = true;
-          // Disable all except email
+        if (adopterData != null && adopterData != undefined) {
+          this.adopterForm.patchValue({
+            first_name: adopterData.first_name,
+            last_name: adopterData.last_name,
+            phone_number: adopterData.phone_number,
+            household_size: adopterData.household_size,
+            street: adopterData.street,
+            city: adopterData.city,
+            state: adopterData.state,
+            zip_code: adopterData.zip_code
+          });
           this.disableFormFields();
-        
           this.messageService.add({
             severity: 'info',
             summary: 'Adopter Found',
             detail: 'Adopter information auto-filled.',
           });
+          this.emailChecked = true;
         } else {
           this.enableFormFields();
+          this.emailChecked = true;
         }
+       console.log(this.emailChecked)
       },
       error: (error) => {
         console.error('Error checking email', error);
@@ -75,13 +83,13 @@ export class AddAdoptionApplicationComponent implements OnInit {
 
   disableFormFields(): void {
     Object.keys(this.adopterForm.controls).forEach(field => {
-      if (field !== 'email') this.adopterForm.get(field)?.disable();
+      if (field !== 'email' && field !== 'submit_date') this.adopterForm.get(field)?.disable();
     });
   }
 
   enableFormFields(): void {
     Object.keys(this.adopterForm.controls).forEach(field => {
-      if (field !== 'email') this.adopterForm.get(field)?.enable();
+      if (field !== 'email'&& field !== 'submit_date') this.adopterForm.get(field)?.enable();
     });
   }
 
@@ -103,12 +111,15 @@ export class AddAdoptionApplicationComponent implements OnInit {
 
   }
   submitAdopter() {
-    if (this.adopterForm.valid) {
-      this.service.addAdoptionApplication(this.adopterForm.getRawValue()).subscribe({
+    if (this.adopterForm.valid && this.emailChecked) {
+      const rawFormValue = this.adopterForm.getRawValue();
+      rawFormValue.submit_date = rawFormValue.submit_date.toISOString().split('T')[0];;
+      this.service.addAdoptionApplication(rawFormValue).subscribe({
         next: (res) => {
-          console.log('Success!', res);
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Application saved successfully' });
-
+          this.emailChecked = false;
+          this.adopterForm.reset();
+          this.disableFormFields();
         },
         error: (err) => {
           console.error('Error submitting application:', err);
