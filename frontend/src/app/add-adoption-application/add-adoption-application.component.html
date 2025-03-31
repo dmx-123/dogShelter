@@ -89,5 +89,15 @@
                 Zip code is required.
             </mat-error>
         </mat-form-field>
+        <mat-form-field appearance="fill" class="col-sm-2 field">
+            <mat-label>Submit Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="submit_date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          
+            <mat-error *ngIf="adopterForm.get('submit_date')?.hasError('required')">
+              Submit date is required.
+            </mat-error>
+          </mat-form-field>
     </div>
 </form>
