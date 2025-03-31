@@ -152,6 +152,12 @@ def add_expense(email):
         db.add_expense(dogID, vendor_name, date, amount, category_name)
     return jsonify(), 200
 
+@dog_blueprint.route('/<int:dogID>/expense', methods=['GET'])
+@token_required
+def get_all_expense(email, dogID):
+    res = db.get_all_expense(dogID)
+    return jsonify({"data": res}), 200
+
 util_blueprint = Blueprint('util', __name__)
 
 @util_blueprint.route('/breedList', methods=['GET'])
@@ -311,8 +317,8 @@ def add_adoption_application(email):
     city = data.get('city')
     state = data.get('state')
     zip_code = data.get('zip_code')
-    # submit_date = data.get('submit_date')
-    submit_date = datetime.now().strftime('%Y-%m-%d')
+    submit_date = data.get('submit_date')
+    # submit_date = datetime.now().strftime('%Y-%m-%d')
 
     is_exist = db.check_email_existence(adopter_email)
     if not is_exist:
@@ -335,7 +341,7 @@ def check_adopter_existence(email):
         res = db.display_adopter_info(adopter_email)
         return jsonify({"data": res}), 200
     else:
-        return jsonify({"error": "The adopter does not exist."}), 400
+        return jsonify({"data": None}), 200
 
 @adoption_blueprint.route('/pendingApplication', methods=['GET'])
 @token_required
