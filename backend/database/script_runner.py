@@ -2,6 +2,8 @@ from datetime import date, datetime
 import os
 from typing import List, Optional
 import mysql.connector
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 DB_HOST = os.getenv('DB_HOST', 'localhost')
 DB_USER = os.getenv('DB_USER', 'user')
@@ -773,23 +775,23 @@ def monthly_adoption_report():
                     SELECT dogID, COALESCE(SUM(amount), 0) AS total_expense
                     FROM Expense
                     GROUP BY dogID
-                )
-                SELECT 
+                ),
+                report_data AS (SELECT 
                 m.month_ym AS month,
                 db.breed_label,
-                SUM(
-                    CASE
+                COUNT(
+                    DISTINCT CASE
                         WHEN DATE_FORMAT(d.surrender_date, '%Y-%m') = m.month_ym
-                        THEN 1
-                        ELSE 0
+                        THEN d.DogID
+                        ELSE NULL
                     END
                 ) AS num_surrendered,
-                SUM(
-                    CASE
+                COUNT(
+                    DISTINCT CASE
                         WHEN a.adoption_date IS NOT NULL
                         AND DATE_FORMAT(a.adoption_date, '%Y-%m') = m.month_ym
-                        THEN 1
-                        ELSE 0
+                        THEN d.DogID
+                        ELSE NULL
                     END
                 ) AS num_adoption,
                 SUM(
@@ -831,18 +833,34 @@ def monthly_adoption_report():
                 INNER JOIN dog_breeds db ON db.dogID = d.dogID
                 LEFT JOIN dog_adoption a ON a.dogID = d.dogID
                 LEFT JOIN dog_expenses e ON e.dogID = d.dogID
-                WHERE 
-                    DATE_FORMAT(d.surrender_date, '%Y-%m') = m.month_ym
-                    OR 
-                    (a.adoption_date IS NOT NULL AND DATE_FORMAT(a.adoption_date, '%Y-%m') = m.month_ym)
                 GROUP BY m.month_ym, db.breed_label
-                ORDER BY m.month_ym ASC, db.breed_label ASC;
+                ORDER BY m.month_ym ASC, db.breed_label ASC
+            )
+            SELECT *
+            FROM report_data
+                WHERE num_surrendered > 0
+                OR num_adoption > 0
+                OR total_expense > 0
+                OR total_adoption_fee > 0
+                OR net_profit > 0
+            ORDER BY month ASC, breed_label ASC;
             """
     cursor.execute(query)
     res = cursor.fetchall()
+    report = {}
+    for row in res:
+        month = row['month']
+        if month not in report:
+            report[month] = []
+        report[month].append(row)
+    now = datetime.now()
+    for i in range(12):
+        month_str = (now - relativedelta(months=i+1)).strftime('%Y-%m')
+        if month_str not in report:
+            report[month_str] = []
     cursor.close()
     conn.close()
-    return res
+    return {month: report[month] for month in sorted(report)}
 
 def expense_analysis():
     """
