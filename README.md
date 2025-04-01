@@ -8,6 +8,9 @@
 
 ### 2. Locate init scripts and run with mysql
 `mysql -u root -p < init.sql`
+'mysql -u root -p < users.sql'
+usrs.sql must be first loaded
+
 
 ### 3. Init Run app
 `python3 -m venv venv`
