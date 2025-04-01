@@ -357,7 +357,7 @@ def search_eligible_adopter(last_name:str):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     query = """
-                SELECT a.first_name, a.last_name, a.street, a.city, a.state, a.zip_code, 
+                SELECT DISTINCT a.first_name, a.last_name, a.street, a.city, a.state, a.zip_code, 
                     a.email, a.phone_number
                 FROM Adopter a 
                 JOIN ApprovedApplication aa ON aa.email = a.email 
