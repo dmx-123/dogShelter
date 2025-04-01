@@ -24,7 +24,7 @@ export class AnimalControlReportComponent implements OnInit {
 
   openDrilldown(type: 'surrender' | 'sixtyPlus' | 'expenses', monthStr: string): void {
     const [year, month] = monthStr.split('-').map(Number);
-
+    console.log('Drilldown for', type, 'month:', monthStr);
     let request$;
     if (type === 'surrender') request$ = this.service.getSurrenders(year, month);
     else if (type === 'sixtyPlus') request$ = this.service.getSixtyPlus(year, month);
@@ -33,7 +33,8 @@ export class AnimalControlReportComponent implements OnInit {
     request$.subscribe({
       next: (res) => {
         this.dialog.open(AnimalControlDrilldownComponent, {
-          width: '900px',
+          width:'85vw',
+          maxWidth: '85vw',
           data: { type, rows: res.data || [], month: monthStr }
         });
       },

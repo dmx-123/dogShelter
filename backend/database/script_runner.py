@@ -382,7 +382,7 @@ def view_adopter_latest_approved_application(email:str):
                     a.email, a.phone_number, aa.submit_date, aa.approved_date 
                 FROM Adopter a 
                 JOIN ApprovedApplication aa ON a.email = aa.email 
-                WHERE a.email = %s ORDER BY aa.submit_date DESC LIMIT 1;
+                WHERE a.email = %s AND ORDER BY aa.submit_date DESC LIMIT 1;
             """
     cursor.execute(query, (email, ))
     res = cursor.fetchone()
@@ -604,38 +604,43 @@ def animal_control_report():
                         n + 1
                     FROM months
                     WHERE n < 7
+                ),
+                dog_expenses AS (
+                    SELECT dogID, SUM(amount) AS total_expense
+                    FROM Expense
+                    GROUP BY dogID
                 )
                 SELECT
 	                m.ym AS month,
-                    SUM(
-                        CASE 
+                    COUNT(
+                        DISTINCT CASE 
                             WHEN d.surrendered_by_animal_control = TRUE
                             AND DATE_FORMAT(d.surrender_date, '%Y-%m') = m.ym
-                            THEN 1
-                            ELSE 0
+                            THEN d.dogID
+                            ELSE NULL
                         END
                     ) AS animal_control_surrender_count,
-                    SUM(
-                        CASE 
+                    COUNT(
+                        DISTINCT CASE 
                             WHEN aa.adoption_date IS NOT NULL
                             AND DATE_FORMAT(aa.adoption_date, '%Y-%m') = m.ym
                             AND DATEDIFF(aa.adoption_date, d.surrender_date) + 1 >= 60
-                            THEN 1
-                            ELSE 0
+                            THEN d.dogID
+                            ELSE NULL
                         END
                     ) AS adopted_60plus_days_count,
                     SUM(
                         CASE 
                             WHEN aa.adoption_date IS NOT NULL
                             AND DATE_FORMAT(aa.adoption_date, '%Y-%m') = m.ym
-                            THEN IFNULL(e.amount, 0)
+                            THEN COALESCE(e.total_expense, 0)
                             ELSE 0
                         END
                     ) AS total_expenses_for_adopted_dogs
                 FROM months AS m
                 CROSS JOIN Dog d
                 LEFT JOIN ApprovedApplication aa ON aa.dogID = d.dogID
-                LEFT JOIN Expense e ON e.dogID = d.dogID
+                LEFT JOIN dog_expenses e ON e.dogID = d.dogID
                 GROUP BY m.ym
                 ORDER BY m.ym DESC;
             """

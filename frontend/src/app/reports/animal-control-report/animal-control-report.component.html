@@ -19,14 +19,14 @@
     </ng-container>
 
     <ng-container matColumnDef="sixtyPlus">
-        <mat-header-cell *matHeaderCellDef> 60+ Day Adoptions </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Adoptions of 60+ Days in Shelter  </mat-header-cell>
         <mat-cell *matCellDef="let row" class="cell">
             <a (click)="openDrilldown('sixtyPlus', row.month)">{{ row.adopted_60plus_days_count }}</a>
         </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="expenses">
-        <mat-header-cell *matHeaderCellDef> Expenses </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Expenses of Adopted Dogs</mat-header-cell>
         <mat-cell *matCellDef="let row" class="cell">
             <a (click)="openDrilldown('expenses', row.month)">{{ row.total_expenses_for_adopted_dogs | currency }}</a>
         </mat-cell>
