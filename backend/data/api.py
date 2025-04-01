@@ -4,7 +4,6 @@ from flask import Blueprint, request, jsonify
 import jwt
 from  data.token import token_required
 import database.script_runner as db
-from datetime import datetime
 
 user_blueprint = Blueprint('user', __name__)
 
