@@ -116,7 +116,7 @@ def add_dogs(email):
     if sex not in {'Unknown', 'Female', 'Male'}:
         return jsonify({"error": "Invalid sex"}), 400
     if microchipID and len(microchipID) > 0:
-        if not mircrochip_vendor or mircrochip_vendor.len() == 0:
+        if not mircrochip_vendor or len(mircrochip_vendor) == 0:
             return jsonify({"error": "Vendor required"}), 400
         if db.microchip_exist(microchipID):
             return jsonify({"error": "Microchip already exist"}), 400
