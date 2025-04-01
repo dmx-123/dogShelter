@@ -13,10 +13,10 @@ usrs.sql must be first loaded, then dog_breeds.sql, dog_seed.sql, expense_seed.s
 
 
 ### 3. Init Run app
-`python3 -m venv venv`
-`source venv/bin/activate`
-`pip install -r requirements.txt`
-`python3 app.py`
+`python3 -m venv venv`  
+`source venv/bin/activate` (for Linux/MacOS) or `venv\bin\Activate.ps1` (for Windows PowerShell)  
+`pip install -r requirements.txt`  
+`python3 app.py`  
 
 For Angular Frontend:
 1.	Angular requires Node.js (which includes npm — Node Package Manager).
