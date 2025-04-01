@@ -64,7 +64,7 @@ export class AddDogComponent implements OnInit {
       phoneControl?.updateValueAndValidity();
     });
   }
-  
+
   get sexControl() {
     return this.dogForm.get('sex');
   }

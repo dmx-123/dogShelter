@@ -360,9 +360,7 @@ def search_eligible_adopter(last_name:str):
                 FROM Adopter a 
                 JOIN ApprovedApplication aa ON aa.email = a.email 
                 WHERE aa.dogID IS NULL 
-                AND LOWER(a.last_name) LIKE CONCAT('%', LOWER(%s), '%') 
-                AND aa.submit_date = (SELECT MAX(submit_date) 
-                FROM ApprovedApplication WHERE email = a.email);
+                AND LOWER(a.last_name) LIKE CONCAT('%', LOWER(%s), '%');
             """
     cursor.execute(query, (last_name, ))
     res = cursor.fetchall()
@@ -382,7 +380,7 @@ def view_adopter_latest_approved_application(email:str):
                     a.email, a.phone_number, aa.submit_date, aa.approved_date 
                 FROM Adopter a 
                 JOIN ApprovedApplication aa ON a.email = aa.email 
-                WHERE a.email = %s AND ORDER BY aa.submit_date DESC LIMIT 1;
+                WHERE a.email = %s AND aa.dogID IS NULL ORDER BY aa.submit_date DESC LIMIT 1;
             """
     cursor.execute(query, (email, ))
     res = cursor.fetchone()
