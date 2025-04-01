@@ -2,7 +2,6 @@ from datetime import date, datetime
 import os
 from typing import List, Optional
 import mysql.connector
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 DB_HOST = os.getenv('DB_HOST', 'localhost')
