@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-add-dog',
   templateUrl: './add-dog.component.html',
-  styleUrls: ['./add-dog.component.css']
+  styleUrl: './add-dog.component.css'
 })
 export class AddDogComponent implements OnInit {
   dogForm: FormGroup;
