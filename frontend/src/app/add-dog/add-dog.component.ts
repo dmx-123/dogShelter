@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-add-dog',
   templateUrl: './add-dog.component.html',
-  styleUrl: './add-dog.component.css'
+  styleUrls: ['./add-dog.component.css']
 })
 export class AddDogComponent implements OnInit {
   dogForm: FormGroup;
@@ -64,7 +64,7 @@ export class AddDogComponent implements OnInit {
       phoneControl?.updateValueAndValidity();
     });
   }
-  
+
   get sexControl() {
     return this.dogForm.get('sex');
   }

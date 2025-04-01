@@ -10,7 +10,7 @@
     <hr>
     <div>
         <div class="row">
-            <mat-form-field appearance="fill" class="col-sm-4 field">
+            <mat-form-field appearance="fill" class="col-sm-3 field">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" required="true">
             </mat-form-field>
@@ -22,7 +22,10 @@
                     <mat-option value="Unknown">Unknown</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-sm-2 field">
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-sm-3 field">
                 <mat-label>Age when Surrendered</mat-label>
                 <input matInput type="number" formControlName="age" required="true">
             </mat-form-field>
