@@ -2,7 +2,7 @@ from datetime import date, datetime, timedelta
 import os
 from flask import Blueprint, request, jsonify
 import jwt
-from  data.token import token_required
+from data.token import token_required
 import database.script_runner as db
 
 user_blueprint = Blueprint('user', __name__)
@@ -146,7 +146,7 @@ def add_expense(email):
     
     check = db.expense_exist(dogID, vendor_name, date)
     if check:
-        return jsonify({"error": "Expense already exist"}), 400
+        return jsonify({"error": "Duplicate expense for this vendor and date."}), 400
     else:
         db.add_expense(dogID, vendor_name, date, amount, category_name)
     return jsonify(), 200
