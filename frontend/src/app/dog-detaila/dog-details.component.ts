@@ -38,7 +38,7 @@ export class DogDetailComponent implements OnInit {
       description: [{ value: '', disabled: true }],
       alteration_status: [{ value: false, disabled: true }],
       age: [{ value: '', disabled: true }],
-      microchipID: [{ value: '', disabled: true }],
+      microchipID: [{ value: '', disabled: true }, Validators.maxLength(250)],
       microchip_vendor: [{ value: '', disabled: true }],
       breeds: [{ value: [], disabled: true }],
       surrender_date: [{ value: '', disabled: true }],

@@ -63,6 +63,9 @@
             <mat-form-field appearance="fill" class="col-sm-8 field">
                 <mat-label>Microchip ID</mat-label>
                 <input matInput formControlName="microchipID">
+                <mat-error *ngIf="microchipIDControl?.hasError('maxlength')">
+                    Microchip ID cannot exceed 250 characters.
+                </mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill" class="col-sm-4 field" *ngIf="microchipIDControl?.value">
                 <mat-label>Vendor Name</mat-label>
