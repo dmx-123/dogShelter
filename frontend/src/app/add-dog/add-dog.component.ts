@@ -24,17 +24,18 @@ export class AddDogComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.dogForm = this.fb.group({
-      name: ['', Validators.required],
-      sex: ['Unknown', Validators.required],
-      description: [''],
-      alteration_status: [false, Validators.required],
-      age: ['', [Validators.required, Validators.min(0)]],
-      microchipID: [''],
-      microchip_vendor: [{ value: '', disabled: true }],
-      breeds: [[], Validators.required],
-      surrender_date: ['', Validators.required],
-      surrenderer_phone: [''],
-      surrendered_by_animal_control: [false]
+      dogID:[{value: '', disabled: true}],
+      name: [{value: '', disabled: true}, [Validators.required, Validators.maxLength(250)]],
+      sex: [{value: 'Unknown', disabled: true}, Validators.required],
+      description: [{value:'', disabled: true}, [Validators.required, Validators.maxLength(250)]],
+      alteration_status: [{value: false, disabled: true}, Validators.required],
+      age: [{value: '', disabled: true}, [Validators.required, Validators.min(1)]],
+      microchipID: [{value: '', disabled: true}, Validators.maxLength(250)],
+      microchip_vendor: [{ value: '', disabled: true }, Validators.maxLength(250)],
+      breeds: [{value: [], disabled: true}, Validators.required],
+      surrender_date: [{value: '', disabled: true}, Validators.required],
+      surrenderer_phone: [{value:'', disabled: true}, Validators.maxLength(15)],
+      surrendered_by_animal_control: [{value: false, disabled: true}, Validators.required]
     });
   }
 
