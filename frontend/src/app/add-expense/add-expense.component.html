@@ -47,6 +47,9 @@
             <mat-error *ngIf="expenseForm.get('date')?.hasError('required')">
                 Date is required.
             </mat-error>
+            <mat-error *ngIf="expenseForm.get('date')?.hasError('beforeSurrenderDate')">
+              Expense date must be after the dog's surrender date.
+            </mat-error>
         </mat-form-field>
     </div>
     <div class="row">

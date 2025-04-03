@@ -54,7 +54,7 @@ export class DogDetailComponent implements OnInit {
     this.age = JSON.parse(localStorage.getItem('userAge') || '0');
 
     this.getBreedsList();
-    
+
     if (this.dogID) {
       this.service.getDog(this.dogID).subscribe({
         next: data => {
@@ -89,7 +89,7 @@ export class DogDetailComponent implements OnInit {
     });
 
   }
-  
+
   loadDog(): void {
     if (this.dogID) {
       this.service.getDog(this.dogID).subscribe({
@@ -100,7 +100,7 @@ export class DogDetailComponent implements OnInit {
             this.expenses = data.expenses;
             const breedsArray = Array.isArray(this.dog.breeds) ? this.dog.breeds : this.dog.breeds.split('/');
             this.validateBreedsSelection(breedsArray);
-  
+
             this.dogForm.patchValue({
               ...this.dog,
               breeds: breedsArray
@@ -214,7 +214,8 @@ export class DogDetailComponent implements OnInit {
   }
 
   addExpense(): void {
-    this.router.navigate(['/add-expense', this.dogID]);
+    const surrenderDate = this.dogForm.get('surrender_date')?.value;
+    this.router.navigate(['/add-expense', this.dogID], {queryParams: {surrenderDate}});
   }
 
   onSubmit(): void {
