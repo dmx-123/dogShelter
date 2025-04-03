@@ -7,6 +7,7 @@ import { DogDetails } from '../model/DogDetails';
 import { Expense } from '../model/Expense';
 import { MessageService } from 'primeng/api';
 import { ExpenseSummary } from '../model/ExpenseSummary';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-dog-details',
@@ -64,11 +65,16 @@ export class DogDetailComponent implements OnInit {
             this.expenses = data.expenses;
             const breedsArray = Array.isArray(this.dog.breeds) ? this.dog.breeds : this.dog.breeds.split('/'); // Ensure array format
             this.validateBreedsSelection(breedsArray);
-
+            let formattedSurrenderDate = '';
+            if (this.dog.surrender_date) {
+              formattedSurrenderDate = formatDate(this.dog.surrender_date, 'yyyy-MM-dd', 'en');
+            }
             this.dogForm.patchValue({
               ...this.dog,
-              breeds: breedsArray
+              breeds: breedsArray,
+              surrender_date: formattedSurrenderDate,
             });
+            console.log('Dog Details:', this.dog);
             this.setFieldAccessibility(this.dog);
           }
         },
@@ -101,8 +107,14 @@ export class DogDetailComponent implements OnInit {
             const breedsArray = Array.isArray(this.dog.breeds) ? this.dog.breeds : this.dog.breeds.split('/');
             this.validateBreedsSelection(breedsArray);
 
+            let formattedSurrenderDate = '';
+            if (this.dog.surrender_date) {
+              formattedSurrenderDate = formatDate(this.dog.surrender_date, 'yyyy-MM-dd', 'en');
+            }
+
             this.dogForm.patchValue({
               ...this.dog,
+              surrender_date: formattedSurrenderDate,
               breeds: breedsArray
             });
             this.setFieldAccessibility(this.dog);

@@ -39,7 +39,7 @@
                 <input matInput type="number" formControlName="age" required="true">
             </mat-form-field>
             <mat-checkbox color="primary" formControlName="alteration_status" class="col-sm-4">
-                Alteration Status
+                Altered
             </mat-checkbox>
         </div>
         <div class="row">
@@ -82,7 +82,12 @@
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-8 field">
                 <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description"></textarea>
+                <textarea matInput formControlName="description" matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="2"
+                cdkAutosizeMaxRows="10"
+                [readonly]="true"
+                ></textarea>
             </mat-form-field>
         </div>
         <div class="row">

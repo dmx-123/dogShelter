@@ -8,8 +8,7 @@
 
 ### 2. Locate init scripts and run with mysql
 `mysql -u root -p < init.sql`
-'mysql -u root -p < users.sql'
-usrs.sql must be first loaded, then dog_breeds.sql, dog_seed.sql, expense_seed.sql, expense_category.sql, dog_breeds.sql, mirochipVendor.sql, dog.sql, dog_expense.sql.
+Then user_seed.sql must be first loaded, then dog_breeds.sql, expense_category.sql, mirochipVendor.sql, dog_seed.sql, expense_seed.sql, adoption_application_seed.sql.
 
 
 ### 3. Init Run app

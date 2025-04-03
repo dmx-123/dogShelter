@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DogService } from '../services/dog-service.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-add-dog',
@@ -26,10 +27,10 @@ export class AddDogComponent implements OnInit {
     this.dogForm = this.fb.group({
       dogID: [{ value: '', disabled: true }],
       name: ['', [Validators.required, Validators.maxLength(250)]],
-      sex: ['unknown', [Validators.required, Validators.pattern(/^(unknown|male|female)$/)]],
+      sex: ['unknown', [Validators.required, Validators.pattern(/^(Unknown|Male|Female)$/)]],
       description: ['', Validators.maxLength(250)],
       alteration_status: [false, Validators.required],
-      age: [{value: '', disabled: true}, [Validators.required, Validators.min(1)]],
+      age: [{value: ''}, [Validators.required, Validators.min(1)]],
       microchipID: ['', [Validators.maxLength(250)]],
       microchip_vendor: ['', [Validators.maxLength(250)]],
       breeds: [[], [Validators.required, Validators.maxLength(250)]],
@@ -42,6 +43,9 @@ export class AddDogComponent implements OnInit {
   ngOnInit(): void {
     this.getBreedsList();
     this.getVendorsList();
+
+    const today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+    this.dogForm.get('surrender_date')?.setValue(today);
 
     this.dogForm.get('microchipID')?.valueChanges.subscribe(value => {
       if (value) {
