@@ -1,4 +1,5 @@
 USE cs6400_sp25_team001;
+
 INSERT INTO Breed (breed_type) VALUES
 ('Affenpinscher'), ('Afghan Hound'), ('Airedale Terrier'), ('Akbash Dog'), ('Akita'),
 ('Alapaha Blue Blood Bulldog'), ('Alaskan Husky'), ('Alaskan Malamute'), ('American Bulldog'), ('American Eskimo'),
