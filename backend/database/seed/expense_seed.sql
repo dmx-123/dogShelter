@@ -82,8 +82,8 @@ INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (10
 INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (104, '2024-08-28', 'Canine Learning Centers', 8.75, 'Dental care');
 INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (104, '2024-08-01', 'Dr Brown', 290.26, 'Dental care');
 INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (104, '2024-08-22', 'Dr Smith', 132.67, 'Dental care');
-INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (106, '2024-10-25', 'Decker's Dog and Cat', 18.06, 'Dental care');
-INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (106, '2024-11-09', 'Decker's Dog and Cat', 22.34, 'Dental care');
+INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (106, '2024-10-25', 'Decker''s Dog and Cat', 18.06, 'Dental care');
+INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (106, '2024-11-09', 'Decker''s Dog and Cat', 22.34, 'Dental care');
 INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (106, '2024-08-09', 'Dr Arnold', 12.13, 'Dental care');
 INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (106, '2024-10-08', 'Dr Arnold', 171.01, 'Dental care');
 INSERT INTO Expense (dogID, date, vendor_name, amount, category_name) VALUES (106, '2024-12-16', 'Dr Hudson', 189.91, 'Dental care');
