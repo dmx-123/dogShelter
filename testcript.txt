@@ -1,0 +1,125 @@
+# Burdell's Devoted Dogs - Manual Test Script
+
+This is a **detailed, step-by-step manual test script** for a user or tester to verify that the system meets the requirements described in the project specification. All actions should be performed through the UI or relevant interfaces (frontend/backend). Each test also includes what should be **displayed** in the interface.
+
+---
+
+## ✅ 1. User Access and Permissions
+
+### 1.1 Login Tests
+- [✅ ] Try logging in with incorrect email/password → **Display:** Error message like "Invalid credentials"
+- [✅] Login as Executive Director → **Display:** Dog Dashboard with "Reports", "Adoption Application Review"
+- [✅] Login as Volunteer under 18 → **Display:** Dashboard
+- [✅] Login as Volunteer over 18 → **Display:** Dashboard
+
+### 1.2 Role Restrictions
+- [✅] Volunteers **cannot** perform adoptions → **Display:** No "Add Adoption" button
+- [✅] Executive Director **can** approve/reject applications and perform adoptions → **Display:** "Review Applications" and "Add Adoption" links/buttons visible
+
+---
+
+## ✅ 2. Dog Intake & Management
+
+### 2.1 Shelter Capacity
+- [✅] Add 15 dogs → All accepted → **Display:** 15 dogs listed on dashboard
+- [ ] Already 15 dods → **Display:** No "Add Dog" Button
+
+### 2.2 Breed Rules
+- [✅] Add dog with multiple breeds → **Display:** Breed shown as "Affenpinscher/Poodle/Vizsla"
+- [✅] Add dog with 'Mixed' or 'Unknown' breed → **Display:** Cannot select more than one breed
+- [✅] If breed is 'Mixed' or 'Unknown', try updating it later → **Display:** Breed dropdown enabled for editing; else no editing
+
+### 2.3 Sex and Alteration
+- [✅] Add dog with sex = "Unknown" → Try updating → **Display:** Editable dropdown
+- [✅] Mark dog as not altered  → Try updating → **Display:** Check box for altered status changes to Yes
+- [✅] Try adopting unaltered dog → **Display:** Error: "Dog must be altered before adoption"
+
+### 2.4 Microchip Rules
+- [✅] Add dog without microchip → Allowed
+- [✅] Add duplicate microchip ID → **Display:** Error: "Microchip ID already exists"
+- [✅] Only volunteers 18+ can add microchip → **Display:** Microchip entry form visible to eligible users
+
+### 2.5 "Uga" Name Restriction
+- [✅] Try to surrender a Bulldog named "Uga" → **Display:** Error: "Name 'Uga' is not allowed for Bulldogs"
+
+---
+
+## ✅ 3. Surrenders
+- [✅] Enter dog with optional surrenderer phone number → **Display:** Accepted without showing the number
+- [✅] Animal control surrender → Phone required → **Display:** Phone number field mandatory
+- [✅] Only Executive Director can view surrender phone → **Display:** Field shown only in Executive Director view
+
+---
+
+## ✅ 4. Expenses
+- [✅] Add valid expense → **Display:** Expense listed under Dog Detail with category, date, vendor, amount
+- [✅] Duplicate expense → **Display:** Error: "Duplicate expense for this vendor and date"
+- [✅] Volunteer under 18 → **Display:** No "Add Expense" Button
+
+---
+
+## ✅ 5. Adopters and Applications
+- [✅] Add adopter → **Display:** Success confirmation
+- [✅] Duplicate daily application → **Display:** Error: "Only one application per day allowed"
+- [✅] New application → **Display:** Status = "Pending"
+- [✅] Executive Director review → **Display:** List of pending apps with Approve/Reject buttons
+
+---
+
+## ✅ 6. Adoptions
+- [✅] Ineligible dog → **Display:** No "Add Adoption" Button
+- [✅] Adopter search → **Display:** Matching adopters with full contact info
+- [✅] Application selection → **Display:** Latest approved app auto-selected
+- [✅] Adoption fee display:
+  - [✅] Normal → **Display:** "Adoption Fee: $XYZ"
+  - [✅] Animal Control → **Display:** "Adoption Fee: $XYZ"
+  - [✅] Terrier named Sideways → **Display:** "Adoption Fee: $XYZ (waived)"
+
+---
+
+## ✅ 7. Dashboard
+- [✅] Dog list shows name, breed, age, sex, alteration, adoptability
+- [✅] Ordered by surrender date (oldest to newest)
+- [✅] Filter by adoptability → **Display:** Only adoptable/unadoptable dogs
+- [✅] Buttons shown: Add Dog (if space), Add Adoption Application
+
+---
+
+## ✅ 8. Reports (Executive Director Only)
+
+### 8.1 Animal Control Report
+- [✅] 7-month view → **Display:** Table with:
+  - [✅] # Animal control surrenders
+  - [✅] # Dogs adopted after 60 days
+  - [✅] Total expenses
+- [✅] Drill-down links show Dog ID, Breed, etc.
+
+### 8.2 Monthly Adoption Report
+- [✅] Table for each month → Columns:
+  - [✅] # Surrendered, # Adopted, Total Expenses, Adoption Fees, Net Profit
+  - [ ] Sorted by month → Breeds in alphabetical order
+
+### 8.3 Expense Analysis
+- [✅] List of vendors → **Display:** Vendor name + Total expenses (descending)
+
+### 8.4 Volunteer Lookup
+- [✅] Search "jon" → **Display:** Names like Jon Smith, Inge Jonsdottir
+- [✅] Sorted by Last Name, then First Name
+
+### 8.5 Volunteer Birthdays
+- [✅] Current month birthdays → Show names + milestone flag + email
+- [✅] No birthdays → **Display:** "No volunteer birthdays this month!"
+- [✅] Dropdowns: Month + Year (current + previous)
+
+---
+
+## ✅ 9. Final Checks
+- [ ] Attempt restricted action → **Display:** Permission error
+- [ ] Forms missing data → **Display:** Field-specific validation messages
+- [ ] Invalid input (duplicate, invalid data types) → Blocked with clear message
+
+---
+
+This concludes the full manual test script.
+✔️ All tests should be executed per user role and validated against business logic.
+📌 Each section now includes what should be **displayed in the UI** for clarity during testing.

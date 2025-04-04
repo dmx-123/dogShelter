@@ -793,15 +793,15 @@ def monthly_adoption_report():
                         ELSE NULL
                     END
                 ) AS num_adoption,
-                SUM(
+                COALESCE(SUM(
                     CASE
                         WHEN a.adoption_date IS NOT NULL
                         AND DATE_FORMAT(a.adoption_date, '%Y-%m') = m.month_ym
                         THEN e.total_expense
                         ELSE 0
                     END
-                ) AS total_expense,
-                SUM(
+                ), 0) AS total_expense,
+                COALESCE(SUM(
                     CASE
                         WHEN a.adoption_date IS NOT NULL
                         AND DATE_FORMAT(a.adoption_date, '%Y-%m') = m.month_ym
@@ -813,8 +813,8 @@ def monthly_adoption_report():
                             END)
                         ELSE 0
                     END
-                ) AS total_adoption_fee,
-                SUM(
+                ), 0) AS total_adoption_fee,
+                COALESCE(SUM(
                     CASE
                         WHEN a.adoption_date IS NOT NULL
                         AND DATE_FORMAT(a.adoption_date, '%Y-%m') = m.month_ym
@@ -826,7 +826,7 @@ def monthly_adoption_report():
                             END)
                         ELSE 0
                     END
-                ) AS net_profit
+                ), 0) AS net_profit
                 FROM months AS m
                 CROSS JOIN Dog d
                 INNER JOIN dog_breeds db ON db.dogID = d.dogID
