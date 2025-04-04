@@ -81,15 +81,10 @@ export class ApprovedApplicationDialogComponent implements OnInit {
     const isTerrier = breedList.some((b: string) => b.toLowerCase().includes('terrier'));
     const isSideways = dog.name?.trim().toLowerCase() === 'sideways';
 
-    if (isTerrier && isSideways) {
-      return { fee: total * 1.25, waived: true };
-    }
-
-    if (dog.surrendered_by_animal_control) {
-      return { fee: total * 0.10, waived: false };
-    }
-
-    return { fee: total * 1.25, waived: false };
+    return { 
+      fee: total * (dog.surrendered_by_animal_control ? 0.10 : 1.25), 
+      waived: isTerrier && isSideways 
+    };
   }
 }
 
