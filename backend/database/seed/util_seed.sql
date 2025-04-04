@@ -1,5 +1,4 @@
 USE cs6400_sp25_team001;
-
 INSERT INTO Breed (breed_type) VALUES
 ('Affenpinscher'), ('Afghan Hound'), ('Airedale Terrier'), ('Akbash Dog'), ('Akita'),
 ('Alapaha Blue Blood Bulldog'), ('Alaskan Husky'), ('Alaskan Malamute'), ('American Bulldog'), ('American Eskimo'),
@@ -14,7 +13,7 @@ INSERT INTO Breed (breed_type) VALUES
 ('Brussels Griffon'), ('Bull Terrier'), ('Bulldog'), ('Bullmastiff'), ('Cairn Terrier'), ('Canaan Dog'),
 ('Cane Corso'), ('Cardigan Welsh Corgi'), ('Catahoula Leopard Dog'), ('Caucasian Ovcharka'), ('Cavalier King Charles Spaniel'),
 ('Cavapom'), ('Cavapoo'), ('Cesky Terrier'), ('Chesapeake Bay Retriever'), ('Chihuahua'), ('Chinese Crested'),
-('Chinese Shar-Pei'), ('Chinook'), ('Chow Chow'), ('Chug'), ('Cirneco dell\'Etna'), ('Clumber Spaniel'),
+('Chinese Shar-Pei'), ('Chinook'), ('Chow Chow'), ('Chug'), ('Cirneco dell''Etna'), ('Clumber Spaniel'),
 ('Cockapoo'), ('Cocker Spaniel'), ('Collie'), ('Coton de Tulear'), ('Curly-Coated Retriever'), ('Dachshund'),
 ('Dalmatian'), ('Dandie Dinmont Terrier'), ('Doberman Pinscher'), ('Dogo Argentino'), ('Dogue de Bordeaux'),
 ('Doxiepoo'), ('English Cocker Spaniel'), ('English Foxhound'), ('English Setter'), ('English Springer Spaniel'),
@@ -45,3 +44,15 @@ INSERT INTO Breed (breed_type) VALUES
 ('Tosa Ken'), ('Vizsla'), ('Volpino Italiano'), ('Weimaraner'), ('Welsh Springer Spaniel'), ('Welsh Terrier'),
 ('West Highland White Terrier'), ('Whippet'), ('Wirehaired Pointing Griffon'), ('Wirehaired Vizsla'), ('Xoloitzcuintli'),
 ('Yorkipoo'), ('Yorkshire Terrier'), ('Unknown');
+
+INSERT INTO ExpenseCategory (category_name) VALUES
+('Veterinarian fees '), ('Medications'), ('Dental care'), ('Food supplies'),
+('Treats and Toys '), ('Leashes, collars, harnesses'), ('Shelter supplies '), ('Grooming supplies'),
+('Transportation'), ('Miscellaneous');
+
+INSERT INTO MicrochipVendor (vendor_name) VALUES
+('AKC Reunite'), ('AVID'), ('Banfield TruPaws'), ('BarkCode Solutions'),
+('CritterID Systems'), ('Datamars'), ('Destron Fearing'), ('FurSecure ID'),
+('FurTrack Microchips'), ('FurryTag Systems'), ('HomeAgain'), ('LifeChip'),
+('PawID Technologies'), ('PawPrint ID'), ('PawTech Microchips'),
+('PetGuardian Chips'), ('PetLink'), ('PetSafe Chips'), ('Trovan'), ('24PetWatch');
