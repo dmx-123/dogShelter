@@ -227,7 +227,9 @@ export class DogDetailComponent implements OnInit {
 
   addExpense(): void {
     const surrenderDate = this.dogForm.get('surrender_date')?.value;
-    this.router.navigate(['/add-expense', this.dogID], {queryParams: {surrenderDate}});
+    this.router.navigate(['/add-expense', this.dogID], {
+      queryParams: { surrenderDate } 
+    });
   }
 
   onSubmit(): void {
