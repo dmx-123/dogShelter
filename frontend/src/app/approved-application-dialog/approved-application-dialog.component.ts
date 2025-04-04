@@ -27,7 +27,7 @@ export class ApprovedApplicationDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ApprovedApplicationDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private service: DogService
   ) {
     this.adoptionForm = this.fb.group({
-      adoption_date: new FormControl('', [Validators.required])
+      adoption_date: new FormControl('', [Validators.required]),
     });
   }
 
@@ -38,8 +38,8 @@ export class ApprovedApplicationDialogComponent implements OnInit {
         this.dog = details.dog;
         this.expenses = details.expenses;
         const result = this.getAdoptionFee(this.dog, this.expenses);
-        this.adoptionFee = result.fee;
-        this.isFeeWaived = result.waived;      }
+        this.adoptionFee = result.fee;   
+      }
     });
     this.adopter = this.data.adopter;
     this.loadLatestApplication();
@@ -63,7 +63,8 @@ export class ApprovedApplicationDialogComponent implements OnInit {
       adopter: this.adopter,
       application: this.latestApplication,
       adoption_date: this.adoptionForm.value.adoption_date,
-      adoption_fee: this.adoptionFee
+      adoption_fee: this.adoptionFee,
+      isFeeWaived: this.isFeeWaived,
     };
 
     this.dialogRef.close({ confirmed: true, adoptionDetails });
@@ -80,7 +81,7 @@ export class ApprovedApplicationDialogComponent implements OnInit {
     const breedList = typeof dog.breeds === 'string' ? dog.breeds.split('/') : dog.breeds;
     const isTerrier = breedList.some((b: string) => b.toLowerCase().includes('terrier'));
     const isSideways = dog.name?.trim().toLowerCase() === 'sideways';
-
+    this.isFeeWaived = isTerrier && isSideways;
     return { 
       fee: total * (dog.surrendered_by_animal_control ? 0.10 : 1.25), 
       waived: isTerrier && isSideways 

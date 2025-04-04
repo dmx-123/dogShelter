@@ -20,6 +20,7 @@ export class AdoptionConfirmationDialogComponent implements OnInit {
   dog!: Dog;
   adoption_fee: number = 0;
   adoption_date!: Date;
+  isFeeWaived: boolean = false;
   application!: ApprovedApplication;
   constructor(
     public dialogRef: MatDialogRef<AdoptionConfirmationDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private service: DogService, private messageService: MessageService) { }
@@ -36,6 +37,7 @@ export class AdoptionConfirmationDialogComponent implements OnInit {
     });
     this.adoption_date = this.data.adoptionDetails.adoption_date;
     this.adoption_fee = this.data.adoptionDetails.adoption_fee;
+    this.isFeeWaived = this.data.adoptionDetails.isFeeWaived;
   }
 
   submitAdoption(): void {

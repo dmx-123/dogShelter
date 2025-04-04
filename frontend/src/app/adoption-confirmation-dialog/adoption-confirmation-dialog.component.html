@@ -15,7 +15,7 @@
     <div class="details-section">
         <h6>Adoption Details</h6>
         <hr>
-        <p><strong>Adoption Fee:</strong> ${{ adoption_fee }}</p>
+        <p><strong>Adoption Fee:</strong> ${{ adoption_fee }}<span *ngIf="isFeeWaived"> (waived)</span></p>
         <p><strong>Adoption Date:</strong> {{ adoption_date |   date: 'yyyy-MM-dd' : 'UTC'  }}</p>
     </div>
 
