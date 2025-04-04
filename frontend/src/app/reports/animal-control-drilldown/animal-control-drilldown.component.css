@@ -20,3 +20,9 @@
     width: auto;
     border-bottom: 0.15em solid;
 }
+
+.table-container {
+    max-height: calc(90vh - 100px);
+    overflow-y: auto;
+    margin: 15px;
+}
