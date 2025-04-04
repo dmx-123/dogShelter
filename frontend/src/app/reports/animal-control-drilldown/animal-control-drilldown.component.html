@@ -1,6 +1,6 @@
 <h2>Details for {{ data.month }} - {{ data.type | titlecase }}</h2>
 
-<mat-table [dataSource]="data.rows" class="mat-elevation-z8">
+<mat-table [dataSource]="data.rows" class="mat-elevation-z0">
     <ng-container *ngFor="let col of getColumns()" [matColumnDef]="col">
         <mat-header-cell *matHeaderCellDef> {{ columnLabels[col] || col }} </mat-header-cell>
         <mat-cell *matCellDef="let row" class="cell"> {{ formatCell(col, row[col]) }} </mat-cell>
