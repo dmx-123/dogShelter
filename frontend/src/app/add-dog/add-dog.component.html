@@ -28,6 +28,13 @@
             <mat-form-field appearance="fill" class="col-sm-3 field">
                 <mat-label>Age when Surrendered</mat-label>
                 <input matInput type="number" formControlName="age" required="true">
+                <div *ngIf="dogForm.get('age')?.hasError('required') && dogForm.get('age')?.touched" class="error-message">
+                    Age is required.
+                </div>
+                <div *ngIf="dogForm.get('age')?.hasError('min') && dogForm.get('age')?.touched" class="error-message">
+                    Age must be greater than or equal to 1.
+                </div>
+                
             </mat-form-field>
             <mat-checkbox color="primary" formControlName="alteration_status" class="col-sm-4">
                 Altered
