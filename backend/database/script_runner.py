@@ -725,7 +725,7 @@ def total_expense_drilldown_report(month: str):
                     (SELECT GROUP_CONCAT(db.breed_type ORDER BY db.breed_type ASC SEPARATOR
                     '/')  FROM DogBreed db WHERE db.dogID = d.dogID)  AS breed_label,
                     d.surrendered_by_animal_control,
-                    COALESCE(e.total_expense, 0) AS total_expense
+                    ROUND(COALESCE(e.total_expense, 0), 2) AS total_expense
                 FROM Dog d
                 INNER JOIN  ApprovedApplication a ON a.dogID = d.dogID
                 LEFT JOIN  Microchip m ON m.dogID = d.dogID
