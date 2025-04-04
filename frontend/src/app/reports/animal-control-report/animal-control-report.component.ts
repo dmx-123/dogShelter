@@ -35,6 +35,7 @@ export class AnimalControlReportComponent implements OnInit {
         this.dialog.open(AnimalControlDrilldownComponent, {
           width:'85vw',
           maxWidth: '85vw',
+          height:'95vh',
           data: { type, rows: res.data || [], month: monthStr }
         });
       },

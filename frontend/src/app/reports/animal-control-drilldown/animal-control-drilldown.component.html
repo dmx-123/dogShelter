@@ -1,15 +1,15 @@
-<h2>Details for {{ data.month }} - {{ data.type | titlecase }}</h2>
+<h2 style="margin-left: 15px;">Details for {{ data.month }} - {{ data.type | titlecase }}</h2>
+<div class="table-container">
+    <mat-table [dataSource]="data.rows" class="mat-elevation-z0">
+        <ng-container *ngFor="let col of getColumns()" [matColumnDef]="col">
+            <mat-header-cell *matHeaderCellDef> {{ columnLabels[col] || col }} </mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"> {{ formatCell(col, row[col]) }} </mat-cell>
+        </ng-container>
 
-<mat-table [dataSource]="data.rows" class="mat-elevation-z0">
-    <ng-container *ngFor="let col of getColumns()" [matColumnDef]="col">
-        <mat-header-cell *matHeaderCellDef> {{ columnLabels[col] || col }} </mat-header-cell>
-        <mat-cell *matCellDef="let row" class="cell"> {{ formatCell(col, row[col]) }} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="getColumns()" class="header-row"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: getColumns();" class="data-row"></mat-row>
-</mat-table>
-
-<div style="text-align: center;">
+        <mat-header-row *matHeaderRowDef="getColumns()" class="header-row"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: getColumns();" class="data-row"></mat-row>
+    </mat-table>
+</div>
+<div style="text-align: center; ">
     <button mat-stroked-button (click)="close()">Close</button>
 </div>
