@@ -296,6 +296,35 @@ def expense_exist(id: str, vendor_name: str, date: date):
     conn.close()
     return res['exist'] > 0
 
+def expense_valid_date(id: str):
+    """
+    Check if the provided expense date is within the valid range:
+    - On or after the dog's surrender date
+    - On or before the dog's adoption date (if adopted)
+    
+    Returns True if valid, False if invalid.
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    query = """
+        SELECT 
+            d.surrender_date as surrender_date,
+            a.adoption_date as adoption_date
+        FROM 
+            Dog d
+        LEFT JOIN 
+            ApprovedApplication a ON d.dogID = a.dogID
+        WHERE 
+            d.dogID = %s;
+    """
+    
+    cursor.execute(query, (id,))
+    res = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return res['surrender_date'], res['adoption_date'] if res['adoption_date'] is not None else None
+
 def get_expense_by_category(id: str):
     """
     Retrieve expenses by category

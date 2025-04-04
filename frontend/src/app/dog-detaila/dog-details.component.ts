@@ -67,7 +67,7 @@ export class DogDetailComponent implements OnInit {
             this.validateBreedsSelection(breedsArray);
             let formattedSurrenderDate = '';
             if (this.dog.surrender_date) {
-              formattedSurrenderDate = formatDate(this.dog.surrender_date, 'yyyy-MM-dd', 'en');
+              formattedSurrenderDate = formatDate(this.dog.surrender_date, 'yyyy-MM-dd', 'en', 'UTC');
             }
             this.dogForm.patchValue({
               ...this.dog,

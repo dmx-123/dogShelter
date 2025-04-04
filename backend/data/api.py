@@ -142,13 +142,18 @@ def add_expense(email):
     vendor_name = data.get('vendor_name')
     category_name = data.get('category_name')
     amount = data.get('amount')
-    date = data.get('date')
+    date = datetime.strptime(data.get('date'), "%Y-%m-%d").date()
     
     check = db.expense_exist(dogID, vendor_name, date)
+    surrender_date, adoption_date = db.expense_valid_date(dogID)
+    print(surrender_date, date)
     if check:
         return jsonify({"error": "Duplicate expense for this vendor and date."}), 400
-    else:
-        db.add_expense(dogID, vendor_name, date, amount, category_name)
+    if surrender_date and date < surrender_date:
+        return jsonify({"error": "Expense date cannot be before surrender date."}), 400
+    if adoption_date:
+        return jsonify({"error": "Could not add expense for adoted dog."}), 400
+    db.add_expense(dogID, vendor_name, date, amount, category_name)
     return jsonify(), 200
 
 @dog_blueprint.route('/<int:dogID>/expense', methods=['GET'])
