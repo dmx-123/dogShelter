@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DogService } from '../services/dog-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 
 @Component({
@@ -21,11 +21,20 @@ export class AddExpenseComponent implements OnInit {
   ngOnInit(): void {
     this.dogID = Number(this.route.snapshot.paramMap.get('dogID'));
     const surrenderDateParam = this.route.snapshot.queryParamMap.get('surrenderDate');
+    console.warn(surrenderDateParam);
+
     if (surrenderDateParam) {
       const [year, month, day] = surrenderDateParam.split('-').map(Number);
-      this.surrender_date = new Date(Date.UTC(year, month - 1, day));
+      if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+        this.surrender_date = new Date(Date.UTC(year, month - 1, day));
+      } else {
+        console.warn('⚠️ Invalid date components:', { year, month, day });
+      }
+    } else {
+      console.warn('⚠️ No surrenderDate query param found');
     }
-    console.log('Parsed surrender date:', this.surrender_date);
+    
+    console.log('✅ Parsed surrender_date:', this.surrender_date);
 
     this.expenseForm = this.fb.group({
       dogID: [this.dogID, Validators.required],
