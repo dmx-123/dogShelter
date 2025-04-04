@@ -330,7 +330,7 @@ def add_adoption_application(email):
 
     exist = db.lookup_adoption_application(adopter_email, submit_date)
     if exist:
-        return jsonify({"error": "The adopter has already submitted an application."}), 400
+        return jsonify({"error": f"The adopter has already submitted an application on {submit_date}."}), 400
     else:
         db.insert_new_adoption_application(adopter_email, submit_date)
     return jsonify(), 200
