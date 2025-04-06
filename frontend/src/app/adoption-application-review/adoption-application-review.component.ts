@@ -27,7 +27,8 @@ export class AdoptionApplicationReviewComponent implements OnInit {
           return item.last_name + ' ' + item.first_name;
         case 'address':
           return item.state + ' ' + item.city + ' ' + item.street;
-
+        case 'submit_date':
+          return new Date(item.submit_date);
         default:
           return (item as any)[property];
       }
