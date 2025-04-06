@@ -13,7 +13,7 @@ import { Adopter } from '../model/Adopter';
 export class AddAdoptionApplicationComponent implements OnInit {
   adopterForm: FormGroup;
   emailChecked: boolean = false;
-
+  today: Date = new Date();     
 
   constructor(private fb: FormBuilder, private service: DogService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) {
     this.adopterForm =  this.fb.group({

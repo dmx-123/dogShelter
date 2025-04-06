@@ -90,7 +90,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="col-sm-2 field">
             <mat-label>Submit Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="submit_date" required>
+            <input matInput [matDatepicker]="picker" formControlName="submit_date" required [max]="today" readonly>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           

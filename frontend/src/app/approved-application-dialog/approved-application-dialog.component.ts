@@ -22,8 +22,7 @@ export class ApprovedApplicationDialogComponent implements OnInit {
   adoptionFee: number = 0;
   isFeeWaived:boolean = false;
   latestApplication: any;
-  todayDate = new Date(new Date().toLocaleDateString());
-
+  today: Date = new Date();     
   constructor(public dialogRef: MatDialogRef<ApprovedApplicationDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private service: DogService
   ) {
     this.adoptionForm = this.fb.group({

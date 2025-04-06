@@ -16,7 +16,7 @@
     <form [formGroup]="adoptionForm">
         <mat-form-field appearance="fill">
             <mat-label>Adoption Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="adoption_date" [min]="todayDate" readonly="true"
+            <input matInput [matDatepicker]="picker" formControlName="adoption_date"  readonly="true" [max]="today"
                 (click)="picker.open()">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

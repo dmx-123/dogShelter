@@ -17,6 +17,7 @@ export class AddDogComponent implements OnInit {
   isMixedOrUnknownSelected: boolean = false;
   selectedMixed: boolean = false;
   selectedUnknown: boolean = false;
+  today: Date = new Date();     
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +35,7 @@ export class AddDogComponent implements OnInit {
       microchipID: ['', [Validators.maxLength(250)]],
       microchip_vendor: ['', [Validators.maxLength(250)]],
       breeds: [[], [Validators.required, Validators.maxLength(250)]],
-      surrender_date: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
+      surrender_date: ['', [Validators.required]],
       surrenderer_phone: ['', Validators.maxLength(15)],
       surrendered_by_animal_control: [false, Validators.required]
     });
@@ -43,9 +44,6 @@ export class AddDogComponent implements OnInit {
   ngOnInit(): void {
     this.getBreedsList();
     this.getVendorsList();
-
-    const today = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-    this.dogForm.get('surrender_date')?.setValue(today);
 
     this.dogForm.get('microchipID')?.valueChanges.subscribe(value => {
       if (value) {

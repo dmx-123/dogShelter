@@ -15,6 +15,7 @@ export class AddExpenseComponent implements OnInit {
   categories: string[] = [];
   dogID!: number;
   surrender_date: Date = new Date();
+  today: Date = new Date();     
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient, private service: DogService, private messageService: MessageService) { }
 
