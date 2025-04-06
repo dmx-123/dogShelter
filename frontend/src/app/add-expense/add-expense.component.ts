@@ -28,35 +28,19 @@ export class AddExpenseComponent implements OnInit {
       const [year, month, day] = surrenderDateParam.split('-').map(Number);
       if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
         this.surrender_date = new Date(Date.UTC(year, month - 1, day));
-      } else {
-        console.warn('⚠️ Invalid date components:', { year, month, day });
-      }
-    } else {
-      console.warn('⚠️ No surrenderDate query param found');
+      } 
     }
-    
-    console.log('✅ Parsed surrender_date:', this.surrender_date);
 
     this.expenseForm = this.fb.group({
       dogID: [this.dogID, Validators.required],
       category_name: ['', Validators.required],
       vendor_name: ['', Validators.required],
-      date: ['', [Validators.required, this.dateAfterSurrenderValidator(this.surrender_date)]],
+      date: ['', [Validators.required]],
       amount: ['', [Validators.required, Validators.min(0.01), Validators.pattern(/^(?!0\d)\d+(\.\d{1,2})?$/) // Only numbers with up to 2 decimals
       ]]
     });
     this.getCategories();
 
-  }
-
-  dateAfterSurrenderValidator(surrenderDate: Date) {
-    return (control: AbstractControl) => {
-      if (!control.value) return null;
-      const selectedDate = new Date(control.value);
-      selectedDate.setHours(0, 0, 0, 0);
-      surrenderDate.setHours(0, 0, 0, 0);
-      return selectedDate < surrenderDate ? { dateTooEarly: true } : null;
-    };
   }
 
   getCategories() {
