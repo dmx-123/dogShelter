@@ -45,6 +45,7 @@ import { VolunteerBirthdayReportComponent } from './reports/volunteer-birthday-r
 import { AnimalControlDrilldownComponent } from './reports/animal-control-drilldown/animal-control-drilldown.component';
 import { AnimalControlReportComponent } from './reports/animal-control-report/animal-control-report.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { AuthInterceptor } from './auth.interceptor';
     MessagesModule,
     MessageModule,
     ToastModule,
+    MatSortModule,
     HttpClientModule,
   ],
   providers: [

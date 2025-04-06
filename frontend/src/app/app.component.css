@@ -1,0 +1,5 @@
+.wider-container {
+    max-width: 85%; /* or any width you want */
+    margin: 0 auto;
+    padding-top: 60px;
+  }
