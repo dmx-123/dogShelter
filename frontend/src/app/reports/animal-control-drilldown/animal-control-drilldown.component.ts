@@ -10,7 +10,17 @@ export class AnimalControlDrilldownComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<AnimalControlDrilldownComponent>
-  ) {}
+  ) { }
+
+  typeLabels: { [key: string]: string } = {
+    surrender: 'Animal Control Surrenders',
+    sixtyPlus: 'Dogs Adopted in the Rescue 60 Days or More',
+    expenses: 'Total Expenses for Dogs Adopted'
+  };
+
+  getTypeLabel(): string {
+    return this.typeLabels[this.data.type] || this.data.type;
+  }
 
   columnLabels: { [key: string]: string } = {
     dogID: 'Dog ID',
@@ -28,15 +38,15 @@ export class AnimalControlDrilldownComponent {
     // Format date fields
     if (col.toLowerCase().includes('date') && value) {
       const date = new Date(value);
-      return isNaN(date.getTime()) ? value : date.toISOString().split('T')[0]; 
+      return isNaN(date.getTime()) ? value : date.toISOString().split('T')[0];
     }
-  
+
     // Format boolean values
     if (col.toLowerCase().includes('alteration') || col.toLowerCase().includes('surrender')) {
       console.log(col, value);
-      return value == 1? 'True' : 'False';
+      return value == 1 ? 'True' : 'False';
     }
-  
+
     return value;
   }
 
