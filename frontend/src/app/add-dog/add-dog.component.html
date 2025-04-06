@@ -102,10 +102,14 @@
             <mat-form-field appearance="fill" class="col-sm-4 field">
                 <mat-label>Surrenderer Phone</mat-label>
                 <input matInput formControlName="surrenderer_phone">
+                <mat-error *ngIf="dogForm.get('surrenderer_phone')?.hasError('required')">
+                    Surrenderer Phone is required.
+                </mat-error>
             </mat-form-field>
             <mat-checkbox formControlName="surrendered_by_animal_control">
                 Surrendered by Animal Control
             </mat-checkbox>
+          
         </div>
     </div>
 </form>
