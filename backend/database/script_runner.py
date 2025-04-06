@@ -332,7 +332,7 @@ def get_expense_by_category(id: str):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     query = """
-                SELECT category_name, SUM(amount) AS expense
+                SELECT category_name, ROUND(SUM(amount), 2) AS expense
                 FROM Expense
                 WHERE dogID = %s
                 GROUP BY category_name;
@@ -350,7 +350,7 @@ def get_all_expense(id: str):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     query = """
-                SELECT SUM(amount) AS expense
+                SELECT ROUND(SUM(amount), 2) AS expense
                 FROM Expense
                 WHERE dogID = %s;
             """

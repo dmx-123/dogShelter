@@ -105,7 +105,7 @@ def add_dogs(email):
     age = data.get('age')
     alteration_status = data.get('alteration_status')
     description = data.get('description')
-    surrender_date = data.get('surrender_date')
+    surrender_date = datetime.strptime(data.get('surrender_date'), "%Y-%m-%d").date()
     surrenderer_phone = None if data.get('surrenderer_phone') == "" else data.get('surrenderer_phone')
     surrenderer_by_animal_control = data.get('surrendered_by_animal_control')
     microchipID = data.get('microchipID')
@@ -114,6 +114,10 @@ def add_dogs(email):
   
     if sex not in {'Unknown', 'Female', 'Male'}:
         return jsonify({"error": "Invalid sex"}), 400
+    
+    if surrender_date > datetime.today().date():
+        return jsonify({"error": "Surrender date cannot be in the future."}), 400
+     
     if microchipID and len(microchipID) > 0:
         if not mircrochip_vendor or len(mircrochip_vendor) == 0:
             return jsonify({"error": "Vendor required"}), 400
@@ -144,15 +148,19 @@ def add_expense(email):
     amount = data.get('amount')
     date = datetime.strptime(data.get('date'), "%Y-%m-%d").date()
     
+    if date > datetime.today().date():
+        return jsonify({"error": "Expense date cannot be in the future."}), 400
+    
     check = db.expense_exist(dogID, vendor_name, date)
+   
     surrender_date, adoption_date = db.expense_valid_date(dogID)
-    print(surrender_date, date)
     if check:
         return jsonify({"error": "Duplicate expense for this vendor and date."}), 400
     if surrender_date and date < surrender_date:
         return jsonify({"error": "Expense date cannot be before surrender date."}), 400
     if adoption_date:
         return jsonify({"error": "Could not add expense for adoted dog."}), 400
+    
     db.add_expense(dogID, vendor_name, date, amount, category_name)
     return jsonify(), 200
 
@@ -303,8 +311,10 @@ def submit_adoption(email):
     data = request.json
     dog_id = int(data.get('dogID'))
     adopter_email = data.get('email')
-    adoption_date = data.get('adoption_date')
-    submit_date = data.get('submit_date')
+    adoption_date =  datetime.strptime(data.get('adoption_date'), "%Y-%m-%d").date()
+    submit_date = datetime.strptime(data.get('submit_date'), "%Y-%m-%d").date()
+    if adoption_date > datetime.today().date():
+        return jsonify({"error": "Adoption date cannot be in the future."}), 400  
     db.submit_adoption(adoption_date, dog_id, adopter_email, submit_date)
     return jsonify(), 200
 
@@ -321,9 +331,11 @@ def add_adoption_application(email):
     city = data.get('city')
     state = data.get('state')
     zip_code = data.get('zip_code')
-    submit_date = data.get('submit_date')
-    # submit_date = datetime.now().strftime('%Y-%m-%d')
-
+    submit_date = datetime.strptime(data.get('submit_date'), "%Y-%m-%d").date()
+    
+    if submit_date > datetime.today().date():
+        return jsonify({"error": "Submit date cannot be in the future."}), 400
+      
     is_exist = db.check_email_existence(adopter_email)
     if not is_exist:
         db.insert_new_adopter(adopter_email, first_name, last_name, phone_number, household_size, street, city, state, zip_code)
@@ -358,10 +370,8 @@ def view_pending_adoption_application(email):
 def add_approved_adoption_application(email):
     data = request.json
     adopter_email = data.get('email')
-    # approved_date = data.get('approved_date')
     approved_date = datetime.now().strftime('%Y-%m-%d') 
     submit_date = data.get('submit_date')
-    print(submit_date)
     db.approve_adoption_application(adopter_email, submit_date, approved_date )
     return jsonify(), 200
 
@@ -370,10 +380,8 @@ def add_approved_adoption_application(email):
 def add_rejected_adoption_application(email):
     data = request.json
     adopter_email = data.get('email')
-    # rejected_date = data.get('rejected_date')
     rejected_date = datetime.now().strftime('%Y-%m-%d') 
     submit_date = data.get('submit_date')
-    print(submit_date)
     db.reject_adoption_application(adopter_email,  submit_date, rejected_date)
     return jsonify(), 200
 

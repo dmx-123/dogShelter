@@ -52,8 +52,8 @@ export class AdoptionConfirmationDialogComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Adoption recorded successfully!' });
         this.dialogRef.close(true);
       },
-      error: () => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error recording adoption. Try again.' });
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.error });
       }
     });
   }

@@ -226,10 +226,11 @@ export class DogDetailComponent implements OnInit {
   }
 
   addExpense(): void {
-    const surrenderDate = this.dogForm.get('surrender_date')?.value;
+    const surrenderDate =  formatDate(this.dog.surrender_date, 'yyyy-MM-dd', 'en');
     this.router.navigate(['/add-expense', this.dogID], {
       queryParams: { surrenderDate } 
     });
+    
   }
 
   onSubmit(): void {
