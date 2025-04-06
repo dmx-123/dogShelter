@@ -28,7 +28,7 @@ export class AddDogComponent implements OnInit {
     this.dogForm = this.fb.group({
       dogID: [{ value: '', disabled: true }],
       name: ['', [Validators.required, Validators.maxLength(250)]],
-      sex: ['unknown', [Validators.required, Validators.pattern(/^(Unknown|Male|Female)$/)]],
+      sex: ['Unknown', [Validators.required, Validators.pattern(/^(Unknown|Male|Female)$/)]],
       description: ['', Validators.maxLength(250)],
       alteration_status: [false, Validators.required],
       age: [{value: ''}, [Validators.required, Validators.min(1)]],
