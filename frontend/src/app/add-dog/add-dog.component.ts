@@ -4,6 +4,16 @@ import { DogService } from '../services/dog-service.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { formatDate } from '@angular/common';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+
+function positiveNumberValidator(control: AbstractControl): ValidationErrors | null {
+ const value = control.value;
+ if (value !== null && value !== undefined && value <= 0) {
+   return { positiveNumber: true };
+ }
+ return null;
+}
+
 
 @Component({
   selector: 'app-add-dog',
@@ -31,7 +41,7 @@ export class AddDogComponent implements OnInit {
       sex: ['Unknown', [Validators.required, Validators.pattern(/^(Unknown|Male|Female)$/)]],
       description: ['', Validators.maxLength(250)],
       alteration_status: [false, Validators.required],
-      age: [{ value: '' }, [Validators.required, Validators.min(1)]],
+      age: ['', [Validators.required, positiveNumberValidator]],
       microchipID: ['', [Validators.maxLength(250)]],
       microchip_vendor: ['', [Validators.maxLength(250)]],
       breeds: [[], [Validators.required, Validators.maxLength(250)]],
