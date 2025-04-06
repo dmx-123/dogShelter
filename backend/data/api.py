@@ -38,7 +38,7 @@ def login():
         "email": user['email'],
         "isAdmin": user_is_admin,
         "age": age,
-        "exp": datetime.utcnow() + timedelta(hours=1)
+        "exp": datetime.utcnow() + timedelta(days=1)  
     }
     
     token = jwt.encode(payload, secret_key, algorithm='HS256')
