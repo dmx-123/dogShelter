@@ -34,7 +34,7 @@
             <mat-form-field appearance="fill" class="col-sm-3 field">
                 <mat-label>Age when Surrendered</mat-label>
                 <input matInput type="number" formControlName="age" required="true" >
-                <div *ngIf="dogForm.get('age')?.hasError('required') && dogForm.get('age')?.touched" class="error-message">
+                <div *ngIf="dogForm.get('age')?.hasError('required')" class="error-message">
                     Age is required.
                 </div>
                 <div *ngIf="dogForm.get('age')?.hasError('min') && dogForm.get('age')?.touched" class="error-message">
@@ -108,6 +108,9 @@
                 <mat-error *ngIf="dogForm.get('surrenderer_phone')?.hasError('required')">
                     Surrenderer Phone is required.
                 </mat-error>
+                <mat-error *ngIf="dogForm.get('surrenderer_phone')?.hasError('maxlength')">
+                    Phone number cannot exceed 15 characters.
+                  </mat-error>
             </mat-form-field>
             <mat-checkbox formControlName="surrendered_by_animal_control">
                 Surrendered by Animal Control
