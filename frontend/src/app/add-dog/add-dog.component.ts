@@ -17,7 +17,7 @@ export class AddDogComponent implements OnInit {
   isMixedOrUnknownSelected: boolean = false;
   selectedMixed: boolean = false;
   selectedUnknown: boolean = false;
-  today: Date = new Date();     
+  today: Date = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -31,12 +31,12 @@ export class AddDogComponent implements OnInit {
       sex: ['Unknown', [Validators.required, Validators.pattern(/^(Unknown|Male|Female)$/)]],
       description: ['', Validators.maxLength(250)],
       alteration_status: [false, Validators.required],
-      age: [{value: ''}, [Validators.required, Validators.min(1)]],
+      age: [{ value: '' }, [Validators.required, Validators.min(1)]],
       microchipID: ['', [Validators.maxLength(250)]],
       microchip_vendor: ['', [Validators.maxLength(250)]],
       breeds: [[], [Validators.required, Validators.maxLength(250)]],
       surrender_date: ['', [Validators.required]],
-      surrenderer_phone: ['', Validators.maxLength(15)],
+      surrenderer_phone: ['', [Validators.maxLength(15), Validators.pattern(/^[0-9]*$/)]],
       surrendered_by_animal_control: [false, Validators.required]
     });
   }
@@ -61,10 +61,10 @@ export class AddDogComponent implements OnInit {
       const phoneControl = this.dogForm.get('surrenderer_phone');
       if (isFromAnimalControl) {
         phoneControl?.clearValidators();
-        phoneControl?.setValidators([Validators.maxLength(15), Validators.required]);
+        phoneControl?.setValidators([Validators.maxLength(15), Validators.required, Validators.pattern(/^[0-9]*$/)]);
       } else {
         phoneControl?.clearValidators();
-        phoneControl?.setValidators([Validators.maxLength(15)]);
+        phoneControl?.setValidators([Validators.maxLength(15), Validators.pattern(/^[0-9]*$/)]);
       }
       phoneControl?.updateValueAndValidity();
     });
@@ -139,7 +139,7 @@ export class AddDogComponent implements OnInit {
       const surrenderDate = formData.surrender_date;
       if (surrenderDate) {
         const dateObj = new Date(surrenderDate);
-        formData.surrender_date = dateObj.toISOString().split('T')[0]; 
+        formData.surrender_date = dateObj.toISOString().split('T')[0];
       }
       if (formData.name.toLowerCase() === 'uga' && formData.breeds.includes('Bulldog')) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Name cannot be Uga with breed Bulldog.' });

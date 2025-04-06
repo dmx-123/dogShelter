@@ -20,7 +20,7 @@ export class AddAdoptionApplicationComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       first_name: new FormControl({ value: '', disabled: true }, Validators.required),
       last_name: new FormControl({ value: '', disabled: true }),
-      phone_number: new FormControl({ value: '', disabled: true }, Validators.required),
+      phone_number: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(15), Validators.pattern(/^[0-9]*$/)]),
       household_size: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.min(1)]),
       street: new FormControl({ value: '', disabled: true }, Validators.required),
       city: new FormControl({ value: '', disabled: true }, Validators.required),

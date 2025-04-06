@@ -33,7 +33,7 @@
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-3 field">
                 <mat-label>Age when Surrendered</mat-label>
-                <input matInput type="number" formControlName="age" required="true" >
+                <input matInput type="number" formControlName="age" required="true">
                 <div *ngIf="dogForm.get('age')?.hasError('required')" class="error-message">
                     Age is required.
                 </div>
@@ -53,7 +53,7 @@
                     required="true">
                     <mat-select-trigger>
                         {{ selectedBreedsDisplay }}
-                      </mat-select-trigger>
+                    </mat-select-trigger>
                     <mat-option *ngFor="let breed of breedsList" [value]="breed" [disabled]="
                       (isMixedOrUnknownSelected && !['Mixed', 'Unknown'].includes(breed)) || 
                       (selectedMixed && breed === 'Unknown') || 
@@ -85,16 +85,15 @@
         <div>
             <mat-form-field appearance="fill" class="col-sm-8">
                 <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description"   cdkTextareaAutosize
-                cdkAutosizeMinRows="4"
-                cdkAutosizeMaxRows="10"></textarea>
+                <textarea matInput formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="4"
+                    cdkAutosizeMaxRows="10"></textarea>
             </mat-form-field>
         </div>
 
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-4 field">
                 <mat-label>Surrender Date</mat-label>
-                <input matInput [matDatepicker]="picker"  formControlName="surrender_date" [max]="today" readonly />
+                <input matInput [matDatepicker]="picker" formControlName="surrender_date" [max]="today" readonly />
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -110,12 +109,15 @@
                 </mat-error>
                 <mat-error *ngIf="dogForm.get('surrenderer_phone')?.hasError('maxlength')">
                     Phone number cannot exceed 15 characters.
-                  </mat-error>
+                </mat-error>
+                <mat-error *ngIf="dogForm.get('surrenderer_phone')?.hasError('pattern')">
+                    Phone number must be in the format of digits only.
+                 </mat-error>
             </mat-form-field>
             <mat-checkbox formControlName="surrendered_by_animal_control">
                 Surrendered by Animal Control
             </mat-checkbox>
-          
+
         </div>
     </div>
 </form>
