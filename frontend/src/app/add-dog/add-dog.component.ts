@@ -134,7 +134,11 @@ export class AddDogComponent implements OnInit {
   onSubmit(): void {
     if (this.dogForm.valid) {
       const formData = this.dogForm.value;
-
+      const surrenderDate = formData.surrender_date;
+      if (surrenderDate) {
+        const dateObj = new Date(surrenderDate);
+        formData.surrender_date = dateObj.toISOString().split('T')[0]; 
+      }
       if (formData.name.toLowerCase() === 'uga' && formData.breeds.includes('Bulldog')) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Name cannot be Uga with breed Bulldog.' });
         return;
@@ -166,5 +170,13 @@ export class AddDogComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/dog-dashboard']);
+  }
+
+  formatDate(dateInput: string | Date): string {
+    const date = new Date(dateInput);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

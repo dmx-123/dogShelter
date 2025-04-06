@@ -1,3 +1,13 @@
+.page-name {
+    font-size: x-large;
+    width: 100%;
+}
+
+.button {
+    display: flex;
+    float: right !important;
+}
+
 .month-row {
     background-color: #f1f1f1;
     font-size: 16px;

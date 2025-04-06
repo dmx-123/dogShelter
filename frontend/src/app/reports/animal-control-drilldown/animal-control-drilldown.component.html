@@ -1,4 +1,4 @@
-<h2 style="margin-left: 15px;">Details for {{ data.month }} - {{ data.type | titlecase }}</h2>
+<h2 style="margin-left: 15px;">Details for {{ data.month }} - {{ getTypeLabel() }}</h2>
 <div class="table-container">
     <mat-table [dataSource]="data.rows" class="mat-elevation-z0">
         <ng-container *ngFor="let col of getColumns()" [matColumnDef]="col">
