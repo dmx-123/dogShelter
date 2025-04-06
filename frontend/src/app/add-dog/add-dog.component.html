@@ -24,6 +24,9 @@
                     <mat-option value="Female">Female</mat-option>
                     <mat-option value="Unknown">Unknown</mat-option>
                 </mat-select>
+                <mat-error *ngIf="dogForm.get('sex')?.hasError('required')">
+                    Sex is required.
+                </mat-error>
             </mat-form-field>
         </div>
 
