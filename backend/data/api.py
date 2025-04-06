@@ -67,6 +67,8 @@ def view_shelter_availability(email):
 def view_dog(email, dogID):
     dog = db.get_dog(dogID)
     expenses = db.get_expense_by_category(dogID)
+    if "." in dog['surrenderer_phone']:
+        dog['surrenderer_phone'] = dog['surrenderer_phone'].split(".")[0]
     return jsonify({"data": {"dog": dog, "expense": expenses}}), 200
 
 @dog_blueprint.route('/<int:dogID>', methods=['POST'])
