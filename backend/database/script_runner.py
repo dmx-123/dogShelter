@@ -633,7 +633,7 @@ def animal_control_report():
                     WHERE n < 7
                 ),
                 dog_expenses AS (
-                    SELECT dogID, SUM(amount) AS total_expense
+                    SELECT dogID, ROUND(SUM(amount), 2) AS total_expense
                     FROM Expense
                     GROUP BY dogID
                 )
