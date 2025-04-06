@@ -94,7 +94,7 @@
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-4 field">
                 <mat-label>Surrender Date</mat-label>
-                <input matInput [matDatepicker]="picker"  formControlName="surrender_date" [max]="today" />
+                <input matInput [matDatepicker]="picker"  formControlName="surrender_date" [max]="today" readonly />
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
