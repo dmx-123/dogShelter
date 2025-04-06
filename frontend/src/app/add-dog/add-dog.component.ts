@@ -60,9 +60,11 @@ export class AddDogComponent implements OnInit {
     this.dogForm.get('surrendered_by_animal_control')?.valueChanges.subscribe((isFromAnimalControl) => {
       const phoneControl = this.dogForm.get('surrenderer_phone');
       if (isFromAnimalControl) {
-        phoneControl?.setValidators([Validators.required]);
+        phoneControl?.clearValidators();
+        phoneControl?.setValidators([Validators.maxLength(15), Validators.required]);
       } else {
         phoneControl?.clearValidators();
+        phoneControl?.setValidators([Validators.maxLength(15)]);
       }
       phoneControl?.updateValueAndValidity();
     });
