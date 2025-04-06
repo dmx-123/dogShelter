@@ -584,7 +584,6 @@ def volunteer_lookup(name: str):
                 WHERE 
                     (LOWER(first_name) LIKE CONCAT('%', LOWER(%s), '%')
                     OR LOWER(last_name) LIKE CONCAT('%', LOWER(%s), '%'))
-                    AND email NOT IN (SELECT email FROM ExecutiveDirector)
                 ORDER BY last_name ASC, first_name ASC;
             """
     cursor.execute(query, (name, name, ))
@@ -608,7 +607,7 @@ def volunteer_birthday_report(year: int, month: int):
                         ELSE 'No'
                     END AS milestone_birthday
                 FROM User
-                WHERE MONTH(birthdate) = %s AND email NOT IN (SELECT email FROM ExecutiveDirector)
+                WHERE MONTH(birthdate) = %s
                 ORDER BY last_name ASC, first_name ASC;
             """
     cursor.execute(query, (year, month, ))
