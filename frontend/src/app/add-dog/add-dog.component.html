@@ -13,6 +13,9 @@
             <mat-form-field appearance="fill" class="col-sm-3 field">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="name" required="true">
+                <mat-error *ngIf="dogForm.get('name')?.hasError('required')">
+                    Dog name is required.
+                </mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill" class="col-sm-2 field">
                 <mat-label>Sex</mat-label>
@@ -27,14 +30,13 @@
         <div class="row">
             <mat-form-field appearance="fill" class="col-sm-3 field">
                 <mat-label>Age when Surrendered</mat-label>
-                <input matInput type="number" formControlName="age" required="true">
+                <input matInput type="number" formControlName="age" required="true" >
                 <div *ngIf="dogForm.get('age')?.hasError('required') && dogForm.get('age')?.touched" class="error-message">
                     Age is required.
                 </div>
                 <div *ngIf="dogForm.get('age')?.hasError('min') && dogForm.get('age')?.touched" class="error-message">
                     Age must be greater than or equal to 1.
                 </div>
-                
             </mat-form-field>
             <mat-checkbox color="primary" formControlName="alteration_status" class="col-sm-4">
                 Altered
@@ -56,6 +58,9 @@
                         {{ breed }}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="dogForm.get('breeds')?.hasError('required')">
+                    Dog breed is required.
+                </mat-error>
             </mat-form-field>
         </div>
 
