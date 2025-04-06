@@ -37,7 +37,7 @@ export class SearchEligibleAdopterComponent implements OnInit {
       }
     });
     this.searchForm = this.fb.group({
-      last_name: ['', Validators.required]
+      last_name: ['']
     });
 
     this.adoptionForm = this.fb.group({
