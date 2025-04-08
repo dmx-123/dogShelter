@@ -34,7 +34,7 @@ import { MonthlyAdoptionReportComponent } from './reports/monthly-adoption-repor
 import { ExpenseAnalysisComponent } from './reports/expense-analysis/expense-analysis.component';
 import { VolunteerLookupComponent } from './reports/volunteer-lookup/volunteer-lookup.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DogDetailComponent } from './dog-detaila/dog-details.component';
+import { DogDetailComponent } from './dog-details/dog-details.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { ApprovedApplicationDialogComponent } from './approved-application-dialog/approved-application-dialog.component';
 import { SearchEligibleAdopterComponent } from './search-eligible-adopter/search-eligible-adopter.component';
