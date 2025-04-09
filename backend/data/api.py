@@ -316,8 +316,11 @@ def submit_adoption(email):
     adopter_email = data.get('email')
     adoption_date =  datetime.strptime(data.get('adoption_date'), "%Y-%m-%d").date()
     submit_date = datetime.strptime(data.get('submit_date'), "%Y-%m-%d").date()
+    dog_surrender_date, dog_adoption_date = db.expense_valid_date(dog_id)
     if adoption_date > datetime.today().date():
         return jsonify({"error": "Adoption date cannot be in the future."}), 400  
+    if (dog_surrender_date and adoption_date < dog_surrender_date):
+        return jsonify({"error": "Adoption date cannot be before surrender date."}), 400
     db.submit_adoption(adoption_date, dog_id, adopter_email, submit_date)
     return jsonify(), 200
 
