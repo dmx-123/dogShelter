@@ -7,6 +7,7 @@ import { Dog } from '../model/Dog';
 import { DogDetails } from '../model/DogDetails';
 import { Expense } from '../model/Expense';
 import { ExpenseSummary } from '../model/ExpenseSummary';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-approved-application-dialog',
@@ -22,8 +23,10 @@ export class ApprovedApplicationDialogComponent implements OnInit {
   adoptionFee: number = 0;
   isFeeWaived:boolean = false;
   latestApplication: any;
-  today: Date = new Date();     
-  constructor(public dialogRef: MatDialogRef<ApprovedApplicationDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private service: DogService
+  today: Date = new Date();   
+  minDate: Date | null = null;
+  
+  constructor(public dialogRef: MatDialogRef<ApprovedApplicationDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private service: DogService,private route: ActivatedRoute, private router: Router
   ) {
     this.adoptionForm = this.fb.group({
       adoption_date: new FormControl('', [Validators.required]),
@@ -41,6 +44,9 @@ export class ApprovedApplicationDialogComponent implements OnInit {
       }
     });
     this.adopter = this.data.adopter;
+    const surrenderDate = this.data.minDate;
+    const [year, month, day] = surrenderDate.split('-').map(Number);
+    this.minDate = new Date(year, month - 1, day);
     this.loadLatestApplication();
   }
 

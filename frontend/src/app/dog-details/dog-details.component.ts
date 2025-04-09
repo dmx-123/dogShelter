@@ -222,7 +222,7 @@ export class DogDetailComponent implements OnInit {
   }
 
   addAdoption(): void {
-    this.router.navigate(['/search-eligible-adopter', this.dogID]);
+    this.router.navigate(['/search-eligible-adopter', this.dogID], { state: { surrenderDate: this.dogForm.get('surrender_date')?.value } });
   }
 
   addExpense() {

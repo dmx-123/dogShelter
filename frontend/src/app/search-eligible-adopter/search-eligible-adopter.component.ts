@@ -25,8 +25,14 @@ export class SearchEligibleAdopterComponent implements OnInit {
   adopters: any[] = [];
   selectedAdopter: any | null = null;
   adoptionFee: number = 0;
+  surrenderDateString!: string;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private service: DogService, private messageService: MessageService, private dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private service: DogService, private messageService: MessageService, private dialog: MatDialog) {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation !== null) {
+      this.surrenderDateString = navigation.extras.state ? navigation?.extras.state['surrenderDate'] : null;
+    }
+  }
 
   ngOnInit(): void {
     this.service.currentDog.subscribe(details => {
@@ -66,6 +72,7 @@ export class SearchEligibleAdopterComponent implements OnInit {
       width: '850px',
       data: {
         adopter: adopter,
+        minDate: this.surrenderDateString
       }
     });
 
