@@ -109,7 +109,7 @@ export class DogDetailComponent implements OnInit {
 
             let formattedSurrenderDate = '';
             if (this.dog.surrender_date) {
-              formattedSurrenderDate = formatDate(this.dog.surrender_date, 'yyyy-MM-dd', 'en');
+              formattedSurrenderDate = formatDate(this.dog.surrender_date, 'yyyy-MM-dd', 'en', 'UTC');
             }
 
             this.dogForm.patchValue({
@@ -153,23 +153,23 @@ export class DogDetailComponent implements OnInit {
   setFieldAccessibility(dog: Dog): void {
     if (dog.sex === 'Unknown') {
       this.sexControl?.enable();
-    }else{
+    } else {
       this.sexControl?.disable();
     }
     if (!dog.alteration_status) {
       this.alterationStatusControl?.enable();
-    }else{
+    } else {
       this.alterationStatusControl?.disable();
     }
     if (this.age > 18 && !dog.microchipID) {
       this.microchipIDControl?.enable();
-    }else{
+    } else {
       this.microchipIDControl?.disable();
 
     }
     if (['Unknown', 'Mixed'].includes(dog.breeds)) {
       this.breedControl?.enable();
-    }else{
+    } else {
       this.breedControl?.disable();
     }
     if (dog.microchip_vendor) {
@@ -229,14 +229,6 @@ export class DogDetailComponent implements OnInit {
     this.router.navigate(['/add-expense', this.dogID], { state: { surrenderDate: this.dogForm.get('surrender_date')?.value } });
   }
 
-  // addExpense(): void {
-  //   const surrenderDate =  formatDate(this.dog.surrender_date, 'yyyy-MM-dd', 'en');
-  //   this.router.navigate(['/add-expense', this.dogID], {
-  //     queryParams: { surrenderDate } 
-  //   });
-    
-  // }
-
   onSubmit(): void {
     if (this.dogForm.valid) {
       const requestBody = {
@@ -244,7 +236,7 @@ export class DogDetailComponent implements OnInit {
         alteration_status: this.dogForm.value.alteration_status,
         microchipID: this.dogForm.value.microchipID || null,
         vendor: this.dogForm.value.microchip_vendor || null,
-        breeds: this.dogForm.value.breeds? this.dogForm.value.breeds : null,
+        breeds: this.dogForm.value.breeds ? this.dogForm.value.breeds : null,
       };
       this.service.updateDog(this.dogID, requestBody).subscribe({
         next: response => {
