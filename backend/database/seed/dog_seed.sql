@@ -809,664 +809,333 @@ INSERT INTO Microchip (microchipID, dogID, vendor_name)
 VALUES ('7056675045', 204, 'Banfield TruPaws');
 INSERT INTO Microchip (microchipID, dogID, vendor_name)
 VALUES ('7232576436', 205, 'PetGuardian Chips');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (48, 'Affenpinscher');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (192, 'Affenpinscher');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (23, 'Afghan Hound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (116, 'Airedale Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (70, 'Akbash Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (144, 'Akbash Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (164, 'Akbash Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (54, 'Akita');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (68, 'Alaskan Husky');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (115, 'Alaskan Malamute');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (139, 'American Bulldog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (195, 'American Bulldog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (76, 'American Foxhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (23, 'American Pit Bull Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (107, 'American Water Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (124, 'Aussiedoodle');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (137, 'Australian Cattle Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (113, 'Australian Kelpie');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (48, 'Australian Shepherd');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (52, 'Australian Shepherd');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (37, 'Australian Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (44, 'Australian Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (138, 'Australian Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (30, 'Azawakh');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (87, 'Azawakh');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (162, 'Azawakh');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (103, 'Basenji');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (203, 'Basenji');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (26, 'Basset Bleu de Gascogne');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (43, 'Basset Bleu de Gascogne');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (106, 'Basset Hound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (2, 'Bearded Collie');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (130, 'Beauceron');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (91, 'Bedlington Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (92, 'Bedlington Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (90, 'Belgian Laekenois');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (1, 'Belgian Malinois');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (18, 'Belgian Malinois');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (108, 'Belgian Sheepdog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (180, 'Belgian Sheepdog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (194, 'Belgian Sheepdog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (81, 'Belgian Tervuren');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (152, 'Belgian Tervuren');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (12, 'Berger Picard');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (66, 'Berger Picard');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (169, 'Berger Picard');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (34, 'Bernese Mountain Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (74, 'Bernese Mountain Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (146, 'Bernese Mountain Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (43, 'Bichon Frise');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (169, 'Bichon Frise');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (203, 'Black and Tan Coonhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (1, 'Black Russian Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (55, 'Black Russian Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (142, 'Bloodhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (9, 'Blue Picardy Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (80, 'Bluetick Coonhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (123, 'Bluetick Coonhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (4, 'Boerboel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (204, 'Bolognese');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (16, 'Border Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (92, 'Border Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (159, 'Borzoi');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (98, 'Boston Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (163, 'Boston Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (86, 'Bouvier des Flandres');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (201, 'Boxer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (57, 'Boykin Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (82, 'Boykin Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (2, 'Brussels Griffon');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (122, 'Brussels Griffon');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (140, 'Brussels Griffon');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (179, 'Brussels Griffon');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (132, 'Bull Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (175, 'Bull Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (89, 'Bullmastiff');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (124, 'Cairn Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (7, 'Canaan Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (87, 'Canaan Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (50, 'Cane Corso');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (62, 'Cane Corso');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (149, 'Cane Corso');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (157, 'Cane Corso');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (9, 'Cardigan Welsh Corgi');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (83, 'Cardigan Welsh Corgi');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (145, 'Cardigan Welsh Corgi');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (10, 'Catahoula Leopard Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (22, 'Catahoula Leopard Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (17, 'Caucasian Ovcharka');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (32, 'Cavalier King Charles Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (105, 'Cavalier King Charles Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (119, 'Cavalier King Charles Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (153, 'Cavalier King Charles Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (172, 'Cavalier King Charles Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (144, 'Cavapom');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (151, 'Cavapom');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (172, 'Cavapom');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (110, 'Cavapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (141, 'Cesky Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (73, 'Chesapeake Bay Retriever');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (65, 'Chihuahua');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (102, 'Chihuahua');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (121, 'Chihuahua');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (154, 'Chihuahua');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (133, 'Chinese Shar-Pei');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (180, 'Chinese Shar-Pei');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (32, 'Chinook');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (202, 'Chow Chow');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (85, 'Chug');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (110, 'Chug');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (31, 'Cirneco dell''Etna');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (150, 'Cirneco dell''Etna');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (191, 'Cirneco dell''Etna');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (67, 'Clumber Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (137, 'Clumber Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (125, 'Cockapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (148, 'Cockapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (150, 'Cockapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (51, 'Cocker Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (128, 'Cocker Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (156, 'Cocker Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (15, 'Collie');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (20, 'Collie');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (62, 'Collie');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (13, 'Curly-Coated Retriever');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (194, 'Curly-Coated Retriever');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (42, 'Dachshund');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (131, 'Dalmatian');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (38, 'Dogue de Bordeaux');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (21, 'English Cocker Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (73, 'English Cocker Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (19, 'English Foxhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (79, 'English Foxhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (155, 'English Setter');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (198, 'English Setter');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (81, 'English Springer Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (86, 'English Springer Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (167, 'English Springer Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (177, 'English Springer Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (183, 'English Springer Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (135, 'English Toy Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (8, 'Eurasier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (39, 'Eurasier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (152, 'Field Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (39, 'Finnish Lapphund');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (149, 'Finnish Lapphund');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (150, 'Finnish Lapphund');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (199, 'Finnish Spitz');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (50, 'Fox Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (67, 'Fox Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (112, 'Fox Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (146, 'French Bulldog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (46, 'German Pinscher');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (101, 'German Shepherd Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (103, 'German Shepherd Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (3, 'German Shorthaired Pointer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (64, 'German Shorthaired Pointer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (153, 'German Shorthaired Pointer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (134, 'German Wirehaired Pointer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (200, 'German Wirehaired Pointer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (172, 'Golden Retriever');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (178, 'Golden Retriever');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (197, 'Golden Retriever');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (55, 'Gordon Setter');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (61, 'Gordon Setter');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (100, 'Gordon Setter');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (53, 'Great Dane');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (72, 'Great Dane');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (174, 'Great Pyrenees');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (22, 'Greater Swiss Mountain Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (101, 'Greater Swiss Mountain Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (196, 'Greater Swiss Mountain Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (93, 'Greyhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (136, 'Greyhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (6, 'Ibizan Hound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (187, 'Irish Red and White Setter');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (29, 'Irish Setter');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (179, 'Irish Setter');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (32, 'Irish Water Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (44, 'Irish Water Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (70, 'Irish Water Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (131, 'Irish Water Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (182, 'Irish Water Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (204, 'Irish Water Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (205, 'Irish Wolfhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (22, 'Italian Greyhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (89, 'Japanese Chin');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (99, 'Komondor');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (125, 'Kooikerhondje');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (147, 'Kooikerhondje');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (125, 'Kromfohrlander');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (13, 'Kuvasz');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (20, 'Kuvasz');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (202, 'Kuvasz');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (35, 'Lagotto Romagnolo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (114, 'Lagotto Romagnolo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (121, 'Lagotto Romagnolo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (75, 'Lakeland Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (176, 'Lakeland Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (195, 'Lakeland Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (88, 'Large Munsterlander');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (148, 'Large Munsterlander');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (117, 'Lhasa Apso');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (203, 'Lhasa Apso');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (75, 'Lhasapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (136, 'Lhasapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (174, 'Lhasapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (188, 'Lhasapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (168, 'Longdog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (2, 'Lowchen');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (102, 'Lurcher');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (56, 'Maltese');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (73, 'Maltese');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (9, 'Mastiff');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (79, 'Miniature Bull Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (164, 'Miniature Bull Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (71, 'Miniature Pinscher');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (173, 'Miniature Pinscher');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (161, 'Miniature Schnauzer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (11, 'Mudi');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (126, 'Neapolitan Mastiff');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (202, 'Neapolitan Mastiff');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (14, 'Newfoundland');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (190, 'Norwegian Buhund');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (127, 'Norwegian Elkhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (94, 'Norwegian Lundehund');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (158, 'Norwegian Lundehund');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (110, 'Norwich Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (21, 'Nova Scotia Duck Tolling Retriever');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (141, 'Nova Scotia Duck Tolling Retriever');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (202, 'Nova Scotia Duck Tolling Retriever');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (4, 'Otterhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (146, 'Otterhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (205, 'Otterhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (189, 'Pekeapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (155, 'Pekingese');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (81, 'Pembroke Welsh Corgi');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (96, 'Pembroke Welsh Corgi');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (39, 'Perro de Presa Canario');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (105, 'Perro de Presa Canario');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (33, 'Peruvian Inca Orchid');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (161, 'Peruvian Inca Orchid');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (185, 'Peruvian Inca Orchid');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (45, 'Pharaoh Hound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (165, 'Pharaoh Hound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (148, 'Plott');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (77, 'Pointer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (115, 'Pointer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (173, 'Pomapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (184, 'Pomapoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (58, 'Pomeranian');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (113, 'Pomeranian');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (100, 'Pomsky');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (170, 'Pomsky');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (187, 'Pomsky');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (71, 'Portuguese Podengo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (118, 'Portuguese Podengo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (6, 'Portuguese Water Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (119, 'Pug');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (99, 'Puggle');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (46, 'Pyrenean Shepherd');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (9, 'Rat Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (11, 'Redbone Coonhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (47, 'Redbone Coonhound');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (41, 'Rhodesian Ridgeback');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (95, 'Rottweiler');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (60, 'Russian Toy');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (160, 'Russian Toy');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (96, 'Saint Bernard');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (181, 'Saint Bernard');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (104, 'Saluki');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (129, 'Saluki');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (8, 'Samoyed');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (166, 'Samoyed');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (192, 'Schapendoes');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (24, 'Schipperke');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (74, 'Schipperke');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (143, 'Schipperke');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (97, 'Schnoodle');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (154, 'Scottish Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (129, 'Sealyham Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (162, 'Sealyham Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (37, 'Shetland Sheepdog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (40, 'Shetland Sheepdog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (69, 'Shetland Sheepdog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (164, 'Shetland Sheepdog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (34, 'Shiba Inu');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (109, 'Shiba Inu');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (27, 'Shih Tzu');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (134, 'Shihpoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (86, 'Siberian Husky');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (78, 'Silky Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (25, 'Skye Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (120, 'Skye Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (171, 'Sloughi');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (5, 'Spanish Water Dog');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (16, 'Spinone Italiano');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (122, 'Spinone Italiano');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (157, 'Spinone Italiano');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (169, 'Spinone Italiano');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (19, 'Sprollie');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (59, 'Staffordshire Bull Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (62, 'Staffordshire Bull Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (63, 'Standard Schnauzer');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (93, 'Sussex Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (109, 'Thai Ridgeback');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (101, 'Tibetan Mastiff');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (26, 'Tibetan Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (49, 'Tibetan Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (51, 'Tosa Ken');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (81, 'Tosa Ken');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (52, 'Toy Fox Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (27, 'Toy Poodle');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (36, 'Toy Poodle');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (100, 'Toy Poodle');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (111, 'Toy Poodle');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (118, 'Toy Poodle');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (170, 'Toy Poodle');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (193, 'Weimaraner');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (28, 'Welsh Springer Spaniel');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (123, 'Welsh Terrier');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (105, 'Whippet');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (30, 'Wirehaired Vizsla');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (19, 'Xoloitzcuintli');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (61, 'Xoloitzcuintli');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (84, 'Xoloitzcuintli');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (104, 'Xoloitzcuintli');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (186, 'Xoloitzcuintli');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (62, 'Yorkipoo');
-INSERT INTO DogBreed (dogID, breed_type)
-VALUES (65, 'Yorkipoo');
-
+INSERT INTO DogBreed (dogID, breed_type) VALUES (48, 'Affenpinscher');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (192, 'Affenpinscher');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (23, 'Afghan Hound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (116, 'Airedale Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (70, 'Akbash Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (144, 'Akbash Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (164, 'Akbash Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (54, 'Akita');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (68, 'Alaskan Husky');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (115, 'Alaskan Malamute');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (139, 'American Bulldog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (195, 'American Bulldog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (76, 'American Foxhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (23, 'American Pit Bull Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (107, 'American Water Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (124, 'Aussiedoodle');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (137, 'Australian Cattle Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (113, 'Australian Kelpie');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (48, 'Australian Shepherd');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (52, 'Australian Shepherd');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (37, 'Australian Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (44, 'Australian Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (138, 'Australian Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (30, 'Azawakh');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (87, 'Azawakh');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (162, 'Azawakh');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (103, 'Basenji');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (203, 'Basenji');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (26, 'Basset Bleu de Gascogne');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (43, 'Basset Bleu de Gascogne');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (106, 'Basset Hound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (2, 'Bearded Collie');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (130, 'Beauceron');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (91, 'Bedlington Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (92, 'Bedlington Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (90, 'Belgian Laekenois');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (1, 'Belgian Malinois');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (18, 'Belgian Malinois');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (108, 'Belgian Sheepdog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (180, 'Belgian Sheepdog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (194, 'Belgian Sheepdog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (81, 'Belgian Tervuren');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (152, 'Belgian Tervuren');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (12, 'Berger Picard');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (66, 'Berger Picard');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (169, 'Berger Picard');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (34, 'Bernese Mountain Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (74, 'Bernese Mountain Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (146, 'Bernese Mountain Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (43, 'Bichon Frise');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (169, 'Bichon Frise');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (203, 'Black and Tan Coonhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (1, 'Black Russian Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (55, 'Black Russian Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (142, 'Bloodhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (9, 'Blue Picardy Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (80, 'Bluetick Coonhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (123, 'Bluetick Coonhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (4, 'Boerboel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (204, 'Bolognese');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (16, 'Border Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (92, 'Border Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (159, 'Borzoi');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (98, 'Boston Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (163, 'Boston Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (86, 'Bouvier des Flandres');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (201, 'Boxer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (57, 'Boykin Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (82, 'Boykin Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (2, 'Brussels Griffon');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (122, 'Brussels Griffon');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (140, 'Brussels Griffon');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (179, 'Brussels Griffon');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (132, 'Bull Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (175, 'Bull Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (89, 'Bullmastiff');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (124, 'Cairn Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (7, 'Canaan Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (87, 'Canaan Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (50, 'Cane Corso');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (62, 'Cane Corso');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (149, 'Cane Corso');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (157, 'Cane Corso');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (9, 'Cardigan Welsh Corgi');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (83, 'Cardigan Welsh Corgi');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (145, 'Cardigan Welsh Corgi');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (10, 'Catahoula Leopard Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (22, 'Catahoula Leopard Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (17, 'Caucasian Ovcharka');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (32, 'Cavalier King Charles Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (105, 'Cavalier King Charles Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (119, 'Cavalier King Charles Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (153, 'Cavalier King Charles Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (172, 'Cavalier King Charles Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (144, 'Cavapom');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (151, 'Cavapom');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (172, 'Cavapom');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (110, 'Cavapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (141, 'Cesky Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (73, 'Chesapeake Bay Retriever');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (65, 'Chihuahua');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (102, 'Chihuahua');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (121, 'Chihuahua');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (154, 'Chihuahua');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (133, 'Chinese Shar-Pei');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (180, 'Chinese Shar-Pei');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (32, 'Chinook');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (202, 'Chow Chow');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (85, 'Chug');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (110, 'Chug');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (31, 'Cirneco dell''Etna');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (150, 'Cirneco dell''Etna');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (191, 'Cirneco dell''Etna');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (67, 'Clumber Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (137, 'Clumber Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (125, 'Cockapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (148, 'Cockapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (150, 'Cockapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (51, 'Cocker Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (128, 'Cocker Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (156, 'Cocker Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (15, 'Collie');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (20, 'Collie');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (62, 'Collie');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (13, 'Curly-Coated Retriever');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (194, 'Curly-Coated Retriever');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (42, 'Dachshund');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (131, 'Dalmatian');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (38, 'Dogue de Bordeaux');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (21, 'English Cocker Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (73, 'English Cocker Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (19, 'English Foxhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (79, 'English Foxhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (155, 'English Setter');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (198, 'English Setter');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (81, 'English Springer Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (86, 'English Springer Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (167, 'English Springer Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (177, 'English Springer Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (183, 'English Springer Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (135, 'English Toy Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (8, 'Eurasier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (39, 'Eurasier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (152, 'Field Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (39, 'Finnish Lapphund');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (149, 'Finnish Lapphund');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (150, 'Finnish Lapphund');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (199, 'Finnish Spitz');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (50, 'Fox Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (67, 'Fox Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (112, 'Fox Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (146, 'French Bulldog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (46, 'German Pinscher');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (101, 'German Shepherd Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (103, 'German Shepherd Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (3, 'German Shorthaired Pointer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (64, 'German Shorthaired Pointer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (153, 'German Shorthaired Pointer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (134, 'German Wirehaired Pointer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (200, 'German Wirehaired Pointer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (172, 'Golden Retriever');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (178, 'Golden Retriever');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (197, 'Golden Retriever');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (55, 'Gordon Setter');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (61, 'Gordon Setter');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (100, 'Gordon Setter');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (53, 'Great Dane');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (72, 'Great Dane');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (174, 'Great Pyrenees');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (22, 'Greater Swiss Mountain Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (101, 'Greater Swiss Mountain Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (196, 'Greater Swiss Mountain Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (93, 'Greyhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (136, 'Greyhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (6, 'Ibizan Hound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (187, 'Irish Red and White Setter');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (29, 'Irish Setter');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (179, 'Irish Setter');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (32, 'Irish Water Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (44, 'Irish Water Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (70, 'Irish Water Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (131, 'Irish Water Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (182, 'Irish Water Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (204, 'Irish Water Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (205, 'Irish Wolfhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (22, 'Italian Greyhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (89, 'Japanese Chin');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (99, 'Komondor');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (125, 'Kooikerhondje');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (147, 'Kooikerhondje');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (125, 'Kromfohrlander');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (13, 'Kuvasz');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (20, 'Kuvasz');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (202, 'Kuvasz');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (35, 'Lagotto Romagnolo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (114, 'Lagotto Romagnolo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (121, 'Lagotto Romagnolo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (75, 'Lakeland Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (176, 'Lakeland Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (195, 'Lakeland Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (88, 'Large Munsterlander');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (148, 'Large Munsterlander');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (117, 'Lhasa Apso');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (203, 'Lhasa Apso');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (75, 'Lhasapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (136, 'Lhasapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (174, 'Lhasapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (188, 'Lhasapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (168, 'Longdog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (2, 'Lowchen');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (102, 'Lurcher');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (56, 'Maltese');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (73, 'Maltese');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (9, 'Mastiff');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (79, 'Miniature Bull Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (164, 'Miniature Bull Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (71, 'Miniature Pinscher');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (173, 'Miniature Pinscher');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (161, 'Miniature Schnauzer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (11, 'Mudi');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (126, 'Neapolitan Mastiff');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (202, 'Neapolitan Mastiff');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (14, 'Newfoundland');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (190, 'Norwegian Buhund');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (127, 'Norwegian Elkhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (94, 'Norwegian Lundehund');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (158, 'Norwegian Lundehund');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (110, 'Norwich Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (21, 'Nova Scotia Duck Tolling Retriever');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (141, 'Nova Scotia Duck Tolling Retriever');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (202, 'Nova Scotia Duck Tolling Retriever');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (4, 'Otterhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (146, 'Otterhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (205, 'Otterhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (189, 'Pekeapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (155, 'Pekingese');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (81, 'Pembroke Welsh Corgi');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (96, 'Pembroke Welsh Corgi');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (39, 'Perro de Presa Canario');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (105, 'Perro de Presa Canario');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (33, 'Peruvian Inca Orchid');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (161, 'Peruvian Inca Orchid');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (185, 'Peruvian Inca Orchid');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (45, 'Pharaoh Hound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (165, 'Pharaoh Hound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (148, 'Plott');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (77, 'Pointer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (115, 'Pointer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (173, 'Pomapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (184, 'Pomapoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (58, 'Pomeranian');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (113, 'Pomeranian');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (100, 'Pomsky');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (170, 'Pomsky');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (187, 'Pomsky');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (71, 'Portuguese Podengo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (118, 'Portuguese Podengo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (6, 'Portuguese Water Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (119, 'Pug');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (99, 'Puggle');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (46, 'Pyrenean Shepherd');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (9, 'Rat Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (11, 'Redbone Coonhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (47, 'Redbone Coonhound');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (41, 'Rhodesian Ridgeback');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (95, 'Rottweiler');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (60, 'Russian Toy');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (160, 'Russian Toy');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (96, 'Saint Bernard');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (181, 'Saint Bernard');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (104, 'Saluki');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (129, 'Saluki');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (8, 'Samoyed');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (166, 'Samoyed');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (192, 'Schapendoes');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (24, 'Schipperke');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (74, 'Schipperke');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (143, 'Schipperke');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (97, 'Schnoodle');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (154, 'Scottish Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (129, 'Sealyham Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (162, 'Sealyham Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (37, 'Shetland Sheepdog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (40, 'Shetland Sheepdog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (69, 'Shetland Sheepdog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (164, 'Shetland Sheepdog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (34, 'Shiba Inu');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (109, 'Shiba Inu');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (27, 'Shih Tzu');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (134, 'Shihpoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (86, 'Siberian Husky');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (78, 'Silky Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (25, 'Skye Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (120, 'Skye Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (171, 'Sloughi');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (5, 'Spanish Water Dog');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (16, 'Spinone Italiano');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (122, 'Spinone Italiano');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (157, 'Spinone Italiano');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (169, 'Spinone Italiano');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (19, 'Sprollie');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (59, 'Staffordshire Bull Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (62, 'Staffordshire Bull Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (63, 'Standard Schnauzer');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (93, 'Sussex Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (109, 'Thai Ridgeback');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (101, 'Tibetan Mastiff');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (26, 'Tibetan Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (49, 'Tibetan Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (51, 'Tosa Ken');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (81, 'Tosa Ken');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (52, 'Toy Fox Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (27, 'Toy Poodle');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (36, 'Toy Poodle');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (100, 'Toy Poodle');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (111, 'Toy Poodle');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (118, 'Toy Poodle');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (170, 'Toy Poodle');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (193, 'Weimaraner');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (28, 'Welsh Springer Spaniel');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (123, 'Welsh Terrier');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (105, 'Whippet');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (30, 'Wirehaired Vizsla');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (19, 'Xoloitzcuintli');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (61, 'Xoloitzcuintli');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (84, 'Xoloitzcuintli');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (104, 'Xoloitzcuintli');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (186, 'Xoloitzcuintli');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (62, 'Yorkipoo');
+INSERT INTO DogBreed (dogID, breed_type) VALUES (65, 'Yorkipoo');
