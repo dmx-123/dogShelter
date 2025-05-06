@@ -1,6 +1,6 @@
 # cs6400-2025-01-Team001
 Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
-Tech Stack: Python + Flask + Angular + TypeScript  
+###### Tech Stack: Python + Flask + Angular + TypeScript  
 ## Backend & Database Setup Instructions
 
 ### 1. Install and Start MySQL
