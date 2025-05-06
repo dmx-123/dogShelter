@@ -1,5 +1,5 @@
 # cs6400-2025-01-Team001
-##### Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
+#### Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
 #### Tech Stack: Python + Flask + Angular + TypeScript + MySQL   
 ## Backend & Database Setup Instructions
 
