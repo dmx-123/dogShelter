@@ -1,4 +1,3 @@
-#### Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
 #### Tech Stack: Python + Flask + Angular + TypeScript + MySQL + JWT  
 A system for administrators and volunteers to manage rescue and adoption status of dogs in the shelter. 
 
@@ -32,4 +31,6 @@ Verify the installation: ng version
 3.	Open VS Code or other IDE. Clone our project from:
 https://github.gatech.edu/cs6400-2025-01-spring/cs6400-2025-01-Team001.git
 4.	cd to Frontend folder, run: npm install
-will install all the packages we used and you will find a folder called node_modules created.
+will install all the packages we used and you will find a folder called node_modules created.  
+
+#### Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
