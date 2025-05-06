@@ -1,4 +1,4 @@
-# cs6400-2025-01-Team001
+# cs6400-2025-01-Team001: dogShelter
 
 #### Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
 #### Tech Stack: Python + Flask + Angular + TypeScript + MySQL + JWT  
