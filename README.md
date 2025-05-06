@@ -8,7 +8,7 @@ A system for administrators and volunteers to manage rescue and adoption status 
 `brew install mysql`
 `brew services start mysql`
 
-### 2. Locate init scripts and run with mysql
+### 2. Locate init scripts and run with mysql (import sample data)
 `mysql -u root -p < init.sql`
 Then user_seed.sql must be first loaded, then dog_breeds.sql, expense_category.sql, mirochipVendor.sql, dog_seed.sql, expense_seed.sql, adoption_application_seed.sql.
 
