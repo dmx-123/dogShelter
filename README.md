@@ -35,3 +35,4 @@ https://github.gatech.edu/cs6400-2025-01-spring/cs6400-2025-01-Team001.git
 will install all the packages we used and you will find a folder called node_modules created.  
 
 ### Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
+#### cs6400-2025-01-Team001
