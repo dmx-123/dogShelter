@@ -1,5 +1,5 @@
 # cs6400-2025-01-Team001
-contributors: Hanwen Zhang, Louisa Lee, Mingxin Dong, Huiyue Zhou  
+Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
 ## Backend & Database Setup Instructions
 
 ### 1. Install and Start MySQL
