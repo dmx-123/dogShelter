@@ -1,6 +1,9 @@
 # cs6400-2025-01-Team001
+
 #### Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
-#### Tech Stack: Python + Flask + Angular + TypeScript + MySQL + JWT   
+#### Tech Stack: Python + Flask + Angular + TypeScript + MySQL + JWT  
+A system for administrators and volunteers to manage rescue and adoption status of dogs in the shelter. 
+
 ## Backend & Database Setup Instructions
 
 ### 1. Install and Start MySQL
