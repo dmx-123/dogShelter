@@ -1,3 +1,4 @@
+## dogShelter Project
 #### Tech Stack: Python + Flask + Angular + TypeScript + MySQL + JWT  
 A system for administrators and volunteers to manage rescue and adoption status of dogs in the shelter. 
 
