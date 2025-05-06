@@ -1,4 +1,4 @@
-#### cs6400-2025-01-Team001  
+#### CS6400-2025-01-Team001  
 #### Contributors: Hanwen Zhang, Chu Kwan Louisa Lee, Mingxin Dong, Huiyue Zhou  
 #### Tech Stack: Python + Flask + Angular + TypeScript + MySQL + JWT  
 A system for administrators and volunteers to manage rescue and adoption status of dogs in the shelter. 
